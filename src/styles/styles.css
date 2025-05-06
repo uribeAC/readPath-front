@@ -1,3 +1,10 @@
+:root {
+  --light-color: #f9f7f4;
+  --main-color: #f4f1ea;
+  --brand-color: #84481d;
+  --title-font: "Roboto Slab Variable", serif;
+}
+
 *,
 ::after,
 ::before {
@@ -6,11 +13,14 @@
 
 body {
   margin: 0;
+  font-family: "Inter Variable", sans-serif;
+  background-color: var(--light-color);
 }
 
-.main-container {
-  height: 100vh;
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 0 20px;
+h1 {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
 }

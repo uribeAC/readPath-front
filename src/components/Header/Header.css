@@ -1,0 +1,22 @@
+.main-header {
+  display: flex;
+  justify-content: center;
+  height: 3.75rem;
+  background-color: var(--main-color);
+  box-shadow: 0px 4px 4px #00000040;
+}
+
+.main-header__title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--title-font);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--brand-color);
+}
+
+.main-header__logo {
+  height: 2.375rem;
+  width: 2.375rem;
+}
