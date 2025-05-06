@@ -8,7 +8,7 @@ const Header: React.FC = () => {
         read
         <img
           src="/readPath-logo.svg"
-          alt="logo of an open book with a path between the pages"
+          alt="logo with an open book and a path between the pages"
           className="main-header__logo"
           height={38}
           width={38}

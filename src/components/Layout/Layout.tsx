@@ -1,6 +1,6 @@
 import type React from "react";
-import "./Layout.css";
 import Header from "../Header/Header";
+import "./Layout.css";
 
 const Layout: React.FC = () => {
   return (
