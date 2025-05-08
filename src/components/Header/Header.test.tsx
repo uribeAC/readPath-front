@@ -4,7 +4,7 @@ import Header from "./Header";
 describe("Given the Header component", () => {
   describe("When it renders", () => {
     test("Then it should show 'read Path' inside a level 1 heading", () => {
-      const expectedTitle = /(?=.*^read)(?=.*path$)/i;
+      const expectedTitle = /readPath/i;
 
       render(<Header />);
 
