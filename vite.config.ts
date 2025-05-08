@@ -12,7 +12,7 @@ export default defineConfig({
       reportsDirectory: "./coverage",
       exclude: ["src/main.tsx", "src/vite-env.d.ts", "vite.config.ts"],
       provider: "v8",
-      reporter: ["text", "json", "html"],
+      reporter: ["lcov", "text", "html", "clover", "json"],
       include: ["**/*.ts", "**/*.tsx"],
     },
   },
