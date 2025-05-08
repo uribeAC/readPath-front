@@ -4,7 +4,7 @@ import "./Header.css";
 const Header: React.FC = () => {
   return (
     <header className="main-header">
-      <h1 className="main-header__title">
+      <h1 className="main-header__title" aria-label="readPath">
         read
         <img
           src="/readPath-logo.svg"
