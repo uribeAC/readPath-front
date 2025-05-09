@@ -5,7 +5,7 @@ const NotFoundPage: React.FC = () => {
   return (
     <div className="not-found">
       <img
-        src="/Not-found-page-icon.svg"
+        src="/Not-found-page-icon.webp"
         alt="Book with a magnified glass showing a 404"
         height={154}
         width={169.23}
