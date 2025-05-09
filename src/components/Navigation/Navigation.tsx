@@ -11,9 +11,9 @@ const Navigation: React.FC = () => {
 
   return (
     <nav className="navigation">
-      <NavLink className="navigation__link" to="/">
-        <img src={imageUrl} alt="Go to bookshelf" height={40} width={40} />
-        <h2 className="navigation__text">Bookshelf</h2>
+      <NavLink className="navigation__link" to="/" aria-label="Bookshelf">
+        <img src={imageUrl} alt="Icon of an open book" height={40} width={40} />
+        <span className="navigation__text">Bookshelf</span>
       </NavLink>
     </nav>
   );
