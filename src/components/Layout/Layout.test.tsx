@@ -16,5 +16,17 @@ describe("Given the Layout component", () => {
 
       expect(appTitle).toBeInTheDocument();
     });
+
+    test("Then it should show a 'Bookshelf' link", () => {
+      const expectedLinkName = /bookshelf/i;
+
+      render(<Layout />, { wrapper: MemoryRouter });
+
+      const bookshelfLink = screen.getByRole("link", {
+        name: expectedLinkName,
+      });
+
+      expect(bookshelfLink).toBeInTheDocument();
+    });
   });
 });
