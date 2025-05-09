@@ -1,4 +1,4 @@
-import { transformBooksInfoDtoToBooksInfo } from "../../dto/transformers";
+import { transformBooksInfoDtoToBooksInfo } from "../dto/transformers";
 import type { BookClientStructure, BooksInfo, BooksInfoDto } from "./types";
 
 class BookClient implements BookClientStructure {

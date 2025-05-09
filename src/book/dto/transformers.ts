@@ -1,4 +1,4 @@
-import type { BooksInfo, BooksInfoDto } from "../client/bookClient/types";
+import type { BooksInfo, BooksInfoDto } from "../client/types";
 import type { Book, ReadDates } from "../types";
 
 export const transformBooksInfoDtoToBooksInfo = ({
