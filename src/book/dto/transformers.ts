@@ -1,10 +1,22 @@
 import type { BooksInfo, BooksInfoDto } from "../client/types";
 import type { Book, ReadDates } from "../types";
+import type { BookDto } from "./types";
 
 export const transformBooksInfoDtoToBooksInfo = ({
   books: booksDto,
   totals,
 }: BooksInfoDto): BooksInfo => {
+  const books = transformBooksDtoToBooks(booksDto);
+
+  const booksInfo: BooksInfo = {
+    books,
+    totals,
+  };
+
+  return booksInfo;
+};
+
+export const transformBooksDtoToBooks = (booksDto: BookDto[]): Book[] => {
   const books = booksDto.map<Book>(
     ({ _id, firstPublished, readDates: readDatesDto, ...bookDto }) => {
       let readDates: ReadDates = {};
@@ -44,10 +56,5 @@ export const transformBooksInfoDtoToBooksInfo = ({
     },
   );
 
-  const booksInfo: BooksInfo = {
-    books,
-    totals,
-  };
-
-  return booksInfo;
+  return books;
 };
