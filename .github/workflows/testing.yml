@@ -2,6 +2,9 @@ name: Testing
 
 on: push
 
+env:
+  VITE_API_URL: ${{ vars.VITE_API_URL}}
+
 jobs:
   test:
     name: Tests passes

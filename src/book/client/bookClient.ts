@@ -1,8 +1,8 @@
-import { transformBooksInfoDtoToBooksInfo } from "../../dto/transformers";
+import { transformBooksInfoDtoToBooksInfo } from "../dto/transformers";
 import type { BookClientStructure, BooksInfo, BooksInfoDto } from "./types";
 
 class BookClient implements BookClientStructure {
-  private apiUrl = import.meta.env.VITE_API_URL;
+  private readonly apiUrl = import.meta.env.VITE_API_URL;
 
   public getBooks = async (pageNumber?: number): Promise<BooksInfo> => {
     const fetchUrl = !pageNumber

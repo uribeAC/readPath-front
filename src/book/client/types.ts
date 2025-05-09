@@ -1,5 +1,5 @@
-import type { BookDto } from "../../dto/types";
-import type { Book } from "../../types";
+import type { BookDto } from "../dto/types";
+import type { Book } from "../types";
 
 export interface BookClientStructure {
   getBooks: (pageNumber?: number) => Promise<BooksInfo>;
