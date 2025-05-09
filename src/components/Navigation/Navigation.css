@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  max-width: 500px;
   height: 5rem;
   color: var(--light-color);
   background-color: #45240c;
