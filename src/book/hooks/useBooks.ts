@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import BookClient from "../client/bookClient";
 import { loadBooksActionCreator } from "../slice/bookSlice";
+import BookClient from "../client/bookClient";
 
 const useBooks = () => {
   const books = useAppSelector((state) => state.booksReducer.booksInfo);
