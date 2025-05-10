@@ -7,7 +7,7 @@ const Header: React.FC = () => {
       <h1 className="main-header__title" aria-label="readPath">
         read
         <img
-          src="/readPath-logo.svg"
+          src="/readPath-logo.webp"
           alt="logo with an open book and a path between the pages"
           className="main-header__logo"
           height={38}
