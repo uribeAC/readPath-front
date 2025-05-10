@@ -1,0 +1,49 @@
+.book {
+  display: flex;
+  height: 11.25rem;
+  padding: 25px 0;
+  gap: 15px;
+  border-bottom: 1px solid var(--dark-color);
+}
+
+.book__data {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.book__info {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.book__title {
+  font-family: var(--title-font);
+  font-size: 1.125rem;
+  line-height: 1.125rem;
+  font-weight: 500;
+}
+
+.book__author {
+  font-size: 1rem;
+  line-height: 1rem;
+  font-weight: 400;
+}
+
+.book__info-text {
+  font-size: 0.875rem;
+  line-height: 0.875rem;
+  font-weight: 300;
+}
+
+.book__footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.book__state {
+  display: flex;
+  gap: 12px;
+}
