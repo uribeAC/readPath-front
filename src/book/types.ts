@@ -11,17 +11,22 @@ export interface Book {
   pages: number;
   firstPublished: string;
   state: "read" | "to read";
-  yourRating?: Rating;
+  yourRating?: StarsRating;
   readDates?: ReadDates;
   coverImageUrlSmall: string;
   coverImageUrlBig: string;
   imageAlt: string;
 }
 
-type Rating = 0 | 1 | 2 | 3 | 4 | 5;
+export type StarsRating = 0 | 1 | 2 | 3 | 4 | 5;
 
 export type ReadDates = {
   dateStarted?: string;
   dateFinished?: string;
   readYear?: number;
+};
+
+export type Star = {
+  starUrl: string;
+  starAlt: string;
 };

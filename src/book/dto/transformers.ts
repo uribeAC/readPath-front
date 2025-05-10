@@ -24,10 +24,12 @@ export const transformBooksDtoToBooks = (booksDto: BookDto[]): Book[] => {
       if (readDatesDto) {
         readDates = {
           ...(readDatesDto.dateStarted && {
-            dateStarted: readDatesDto.dateStarted,
+            dateStarted: transformStringToDateString(readDatesDto.dateStarted),
           }),
           ...(readDatesDto.dateFinished && {
-            dateFinished: readDatesDto.dateFinished,
+            dateFinished: transformStringToDateString(
+              readDatesDto.dateFinished,
+            ),
           }),
           ...(readDatesDto.readYear && {
             readYear: readDatesDto.readYear,
@@ -40,14 +42,14 @@ export const transformBooksDtoToBooks = (booksDto: BookDto[]): Book[] => {
       if (Object.keys(readDates).length !== 0) {
         book = {
           id: _id,
-          firstPublished: firstPublished,
+          firstPublished: transformStringToDateString(firstPublished),
           readDates: readDates,
           ...bookDto,
         };
       } else {
         book = {
           id: _id,
-          firstPublished: firstPublished,
+          firstPublished: transformStringToDateString(firstPublished),
           ...bookDto,
         };
       }
@@ -57,4 +59,14 @@ export const transformBooksDtoToBooks = (booksDto: BookDto[]): Book[] => {
   );
 
   return books;
+};
+
+const transformStringToDateString = (date: string): string => {
+  const newDate = new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  return newDate;
 };

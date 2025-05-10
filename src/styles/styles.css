@@ -19,7 +19,8 @@ body {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   margin: 0;
 }
 
@@ -38,4 +39,14 @@ li {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  border: none;
 }
