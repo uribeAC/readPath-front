@@ -1,6 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
+import { Provider } from "react-redux";
 import AppRouter from "./AppRouter";
+import store from "../store/store";
 
 describe("Given the AppRouter component", () => {
   describe("When it renders in path /mangas", () => {
@@ -8,9 +10,11 @@ describe("Given the AppRouter component", () => {
       const expectedPageTitle = /page not found/i;
 
       render(
-        <MemoryRouter initialEntries={["/mangas"]}>
-          <AppRouter />
-        </MemoryRouter>,
+        <Provider store={store}>
+          <MemoryRouter initialEntries={["/mangas"]}>
+            <AppRouter />
+          </MemoryRouter>
+        </Provider>,
       );
 
       const pageTitle = screen.getByRole("heading", {

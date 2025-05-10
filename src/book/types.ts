@@ -9,7 +9,7 @@ export interface Book {
   description: string;
   genres: string[];
   pages: number;
-  firstPublished: Date;
+  firstPublished: string;
   state: "read" | "to read";
   yourRating?: Rating;
   readDates?: ReadDates;
@@ -21,7 +21,7 @@ export interface Book {
 type Rating = 0 | 1 | 2 | 3 | 4 | 5;
 
 export type ReadDates = {
-  dateStarted?: Date;
-  dateFinished?: Date;
+  dateStarted?: string;
+  dateFinished?: string;
   readYear?: number;
 };

@@ -3,7 +3,7 @@ import NotFoundPage from "./NotFoundPage";
 
 describe("Given the NotFoundPage component", () => {
   describe("When it renders", () => {
-    test("Then it should show a'Page not found' inside a heading", () => {
+    test("Then it should show a 'Page not found' inside a heading", () => {
       const expectedPageTitle = /page not found/i;
 
       render(<NotFoundPage />);
