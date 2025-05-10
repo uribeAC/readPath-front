@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import useBooks from "../../hooks/useBooks";
 import "./BooksPage.css";
 import { useSearchParams } from "react-router";
+import Bookshelf from "../../components/Bookshelf/Bookshelf";
 
 const BooksPage: React.FC = () => {
   const { loadBooks, books } = useBooks();
@@ -24,11 +25,7 @@ const BooksPage: React.FC = () => {
           To read: {totals.booksToRead}
         </span>
       </header>
-      <ul className="posts">
-        {pageBooks.map((book) => (
-          <li key={book.id}>{book.title}</li>
-        ))}
-      </ul>
+      <Bookshelf books={pageBooks} />
     </>
   );
 };
