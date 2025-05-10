@@ -1,5 +1,5 @@
 import { http, HttpResponse } from "msw";
-import { mangaFixtures } from "../fixtures/fixtures";
+import { mangaFixtures } from "../fixtures/fixturesDto";
 import type { BooksInfoDto } from "../client/types";
 
 const apiUrl = import.meta.env.VITE_API_URL;

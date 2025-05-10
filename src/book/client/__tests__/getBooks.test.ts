@@ -1,6 +1,6 @@
 import { http, HttpResponse } from "msw";
 import { transformBooksDtoToBooks } from "../../dto/transformers";
-import { mangaFixtures } from "../../fixtures/fixtures";
+import { mangaFixtures } from "../../fixtures/fixturesDto";
 import { server } from "../../mocks/node";
 import BookClient from "../bookClient";
 
