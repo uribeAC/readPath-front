@@ -42,10 +42,11 @@
 .book__footer {
   display: flex;
   justify-content: space-between;
-  align-items: self-end;
+  align-items: center;
 
   @media (width < 400px) {
     flex-direction: column;
+    align-items: flex-start;
     gap: 9px;
   }
 }
