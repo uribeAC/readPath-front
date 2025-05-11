@@ -4,6 +4,7 @@ import useBooks from "../../hooks/useBooks";
 import "./BooksPage.css";
 import { useSearchParams } from "react-router";
 import Bookshelf from "../../components/Bookshelf/Bookshelf";
+import Pagination from "../../../components/Pagination/Pagination";
 
 const BooksPage: React.FC = () => {
   const { loadBooks, books } = useBooks();
@@ -13,6 +14,8 @@ const BooksPage: React.FC = () => {
   const pageNumber = page.get("page") ? Number(page.get("page")) : 1;
 
   useEffect(() => {
+    window.scrollTo({ top: 0 });
+
     loadBooks(pageNumber);
   }, [loadBooks, pageNumber]);
 
@@ -26,6 +29,7 @@ const BooksPage: React.FC = () => {
         </span>
       </header>
       <Bookshelf books={pageBooks} />
+      <Pagination currentPage={pageNumber} booksTotal={totals.books} />
     </>
   );
 };
