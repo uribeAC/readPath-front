@@ -28,10 +28,15 @@ const Rating: React.FC<RatingProps> = ({ rating }) => {
   });
 
   return (
-    <ul className="rating" aria-label={`${rating} star rating`}>
+    <ul className="star-rating" aria-label={`${rating} star rating`}>
       {imageStars.map((imageStar, index) => (
-        <li key={index}>
-          <img src={imageStar.starUrl} alt={imageStar.starAlt} />
+        <li key={ratingStars[index]} className="star">
+          <img
+            src={imageStar.starUrl}
+            alt={imageStar.starAlt}
+            width={15}
+            height={15}
+          />
         </li>
       ))}
     </ul>
