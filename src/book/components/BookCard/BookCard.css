@@ -1,6 +1,6 @@
 .book {
   display: flex;
-  height: 11.25rem;
+  min-height: 11.25rem;
   padding: 25px 0;
   gap: 15px;
   border-bottom: 1px solid var(--dark-color);
@@ -11,6 +11,7 @@
   flex-direction: column;
   width: 100%;
   justify-content: space-between;
+  gap: 9px;
 }
 
 .book__info {
@@ -41,6 +42,12 @@
 .book__footer {
   display: flex;
   justify-content: space-between;
+  align-items: self-end;
+
+  @media (width < 400px) {
+    flex-direction: column;
+    gap: 9px;
+  }
 }
 
 .book__state {

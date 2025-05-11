@@ -20,8 +20,8 @@ const BookCard: React.FC<BookCardProps> = ({
     yourRating,
   },
 }) => {
-  const isRead = state === "read" ? true : false;
-  const isToRead = state === "to read" ? true : false;
+  const isRead = state === "read";
+  const isToRead = state === "to read";
 
   return (
     <article className="book">
