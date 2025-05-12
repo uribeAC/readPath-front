@@ -254,3 +254,51 @@ export const shonenFixturesDto: BookDto[] = [
   onePieceVol1,
   bleachVol1,
 ];
+
+export const dragonBallReadDto: BookDto = {
+  _id: "1234567890dragonball5555",
+  title: "Dragon Ball, Vol. 1",
+  author: "Akira Toriyama",
+  saga: {
+    name: "Dragon Ball",
+    bookNumber: 1,
+  },
+  description:
+    "Follow the adventures of a young monkey-tailed boy named Goku as he embarks on a journey to collect the seven mystical Dragon Balls. Along the way, he meets Bulma, Master Roshi, and other unforgettable characters in the beginning of this legendary manga series.",
+  genres: ["Manga", "Action", "Adventure", "Comedy"],
+  pages: 192,
+  firstPublished: "2003-05-06",
+  state: "read",
+  yourRating: 5,
+  readDates: {
+    dateStarted: "2021-03-15",
+    dateFinished: "2021-03-17",
+    readYear: 2021,
+  },
+  coverImageUrlSmall:
+    "https://images-na.ssl-images-amazon.com/images/I/51Ypye1bxBL._SX331_BO1,204,203,200_.jpg",
+  coverImageUrlBig:
+    "https://images-na.ssl-images-amazon.com/images/I/51Ypye1bxBL.jpg",
+  imageAlt: "Dragon Ball Volume 1 cover featuring young Goku riding a cloud",
+};
+
+export const dragonBallToReadDto: BookDto = {
+  _id: "1234567890dragonball5555",
+  title: "Dragon Ball, Vol. 1",
+  author: "Akira Toriyama",
+  saga: {
+    name: "Dragon Ball",
+    bookNumber: 1,
+  },
+  description:
+    "Follow the adventures of a young monkey-tailed boy named Goku as he embarks on a journey to collect the seven mystical Dragon Balls. Along the way, he meets Bulma, Master Roshi, and other unforgettable characters in the beginning of this legendary manga series.",
+  genres: ["Manga", "Action", "Adventure", "Comedy"],
+  pages: 192,
+  firstPublished: "2003-05-06",
+  state: "to read",
+  coverImageUrlSmall:
+    "https://images-na.ssl-images-amazon.com/images/I/51Ypye1bxBL._SX331_BO1,204,203,200_.jpg",
+  coverImageUrlBig:
+    "https://images-na.ssl-images-amazon.com/images/I/51Ypye1bxBL.jpg",
+  imageAlt: "Dragon Ball Volume 1 cover featuring young Goku riding a cloud",
+};

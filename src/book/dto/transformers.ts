@@ -17,46 +17,11 @@ export const transformBooksInfoDtoToBooksInfo = ({
 };
 
 export const transformBooksDtoToBooks = (booksDto: BookDto[]): Book[] => {
-  const books = booksDto.map<Book>(
-    ({ _id, firstPublished, readDates: readDatesDto, ...bookDto }) => {
-      let readDates: ReadDates = {};
+  const books = booksDto.map<Book>((bookDto) => {
+    const book = transformBookDtoToBook(bookDto);
 
-      if (readDatesDto) {
-        readDates = {
-          ...(readDatesDto.dateStarted && {
-            dateStarted: transformStringToDateString(readDatesDto.dateStarted),
-          }),
-          ...(readDatesDto.dateFinished && {
-            dateFinished: transformStringToDateString(
-              readDatesDto.dateFinished,
-            ),
-          }),
-          ...(readDatesDto.readYear && {
-            readYear: readDatesDto.readYear,
-          }),
-        };
-      }
-
-      let book: Book;
-
-      if (Object.keys(readDates).length !== 0) {
-        book = {
-          id: _id,
-          firstPublished: transformStringToDateString(firstPublished),
-          readDates: readDates,
-          ...bookDto,
-        };
-      } else {
-        book = {
-          id: _id,
-          firstPublished: transformStringToDateString(firstPublished),
-          ...bookDto,
-        };
-      }
-
-      return book;
-    },
-  );
+    return book;
+  });
 
   return books;
 };
@@ -69,4 +34,46 @@ const transformStringToDateString = (date: string): string => {
   });
 
   return newDate;
+};
+
+export const transformBookDtoToBook = ({
+  _id,
+  firstPublished,
+  readDates: readDatesDto,
+  ...bookDto
+}: BookDto): Book => {
+  let readDates: ReadDates = {};
+
+  if (readDatesDto) {
+    readDates = {
+      ...(readDatesDto.dateStarted && {
+        dateStarted: transformStringToDateString(readDatesDto.dateStarted),
+      }),
+      ...(readDatesDto.dateFinished && {
+        dateFinished: transformStringToDateString(readDatesDto.dateFinished),
+      }),
+      ...(readDatesDto.readYear && {
+        readYear: readDatesDto.readYear,
+      }),
+    };
+  }
+
+  let book: Book;
+
+  if (Object.keys(readDates).length !== 0) {
+    book = {
+      id: _id,
+      firstPublished: transformStringToDateString(firstPublished),
+      readDates: readDates,
+      ...bookDto,
+    };
+  } else {
+    book = {
+      id: _id,
+      firstPublished: transformStringToDateString(firstPublished),
+      ...bookDto,
+    };
+  }
+
+  return book;
 };
