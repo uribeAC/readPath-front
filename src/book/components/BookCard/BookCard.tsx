@@ -6,6 +6,7 @@ import "./BookCard.css";
 
 interface BookCardProps {
   book: Book;
+  index: number;
 }
 
 const BookCard: React.FC<BookCardProps> = ({
@@ -19,13 +20,24 @@ const BookCard: React.FC<BookCardProps> = ({
     state,
     yourRating,
   },
+  index,
 }) => {
   const isRead = state === "read";
   const isToRead = state === "to read";
 
+  const loadingType = index <= 3 ? "eager" : "lazy";
+  const priorityType = index <= 3 ? "high" : "low";
+
   return (
     <article className="book">
-      <img src={coverImageUrlSmall} alt={imageAlt} width={86.32} height={130} />
+      <img
+        src={coverImageUrlSmall}
+        alt={imageAlt}
+        width={86}
+        height={130}
+        loading={loadingType}
+        fetchPriority={priorityType}
+      />
       <div className="book__data">
         <div className="book__info">
           <h3 className="book__title">{title}</h3>
