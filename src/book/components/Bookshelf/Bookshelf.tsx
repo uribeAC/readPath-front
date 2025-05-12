@@ -10,9 +10,9 @@ interface BookshelfProps {
 const Bookshelf: React.FC<BookshelfProps> = ({ books }) => {
   return (
     <ul className="bookshelf">
-      {books.map((book) => (
+      {books.map((book, index) => (
         <li key={book.id}>
-          <BookCard book={book} />
+          <BookCard book={book} index={index} />
         </li>
       ))}
     </ul>

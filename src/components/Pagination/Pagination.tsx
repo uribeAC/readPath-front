@@ -16,7 +16,6 @@ const Pagination: React.FC<PaginationProps> = ({ booksTotal, currentPage }) => {
   const firstPageClass = currentPage > 1 ? "" : hiddenClass;
   const lastPageClass = currentPage < pagesTotal ? "" : hiddenClass;
 
-  console.log(currentPage > 1);
   return (
     <nav className="paginator">
       <Link
