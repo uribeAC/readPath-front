@@ -1,6 +1,12 @@
 import { http, HttpResponse } from "msw";
-import { mangaFixtures } from "../fixtures/fixturesDto";
+import {
+  dragonBallReadDto,
+  dragonBallToReadDto,
+  mangaFixtures,
+} from "../fixtures/fixturesDto";
 import type { BooksInfoDto } from "../client/types";
+import { dragonBallRead, dragonBallToRead } from "../fixtures/fixtures";
+import type { BookDto } from "../dto/types";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -32,5 +38,13 @@ export const handlers = [
         booksToRead: 5,
       },
     });
+  }),
+
+  http.patch(`${apiUrl}/books/mark-as-read/${dragonBallToRead.id}`, () => {
+    return HttpResponse.json<{ book: BookDto }>({ book: dragonBallReadDto });
+  }),
+
+  http.patch(`${apiUrl}/books/mark-as-toread/${dragonBallRead.id}`, () => {
+    return HttpResponse.json<{ book: BookDto }>({ book: dragonBallToReadDto });
   }),
 ];

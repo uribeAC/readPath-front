@@ -43,7 +43,7 @@ class BookClient implements BookClientStructure {
     });
 
     if (!response.ok) {
-      throw new Error("Error fetching books");
+      throw new Error(`Error marking book as ${actionState}`);
     }
 
     const { book } = (await response.json()) as ResponseBookDto;
