@@ -9,6 +9,14 @@ const Layout: React.FC = () => {
     <div className="main-container">
       <Header />
       <Navigation />
+      <img
+        src="https://i.ibb.co/ycxKm5GY/lifesteal-195.webp"
+        alt="{imageAlt}"
+        width={86}
+        height={130}
+        loading="eager"
+        fetchPriority="high"
+      />
       <main className="page-container">
         <Outlet />
       </main>
