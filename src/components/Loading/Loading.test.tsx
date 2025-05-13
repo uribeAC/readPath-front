@@ -13,7 +13,7 @@ describe("Given the Loading component", () => {
       expect(loadingTitle).toBeInTheDocument();
     });
 
-    test("Then it should show an image of Women on top of a flying book", () => {
+    test("Then it should show an image of a women on top of a flying book", () => {
       const expectedImageAlt = "Women on top of a flying book";
 
       render(<Loading />);
