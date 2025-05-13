@@ -3,11 +3,14 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   changeBookStateActionCreator,
   loadBooksActionCreator,
+  startLoading,
+  startSlowLoading,
 } from "../slice/bookSlice";
 import BookClient from "../client/bookClient";
 
 const useBooks = () => {
   const books = useAppSelector((state) => state.books.booksInfo);
+  const isLoading = useAppSelector((state) => state.books.isLoading);
 
   const dispatch = useAppDispatch();
 
@@ -15,8 +18,15 @@ const useBooks = () => {
 
   const loadBooks = useCallback(
     async (pageNumber?: number): Promise<void> => {
+      dispatch(startLoading());
+
+      const timeout = setTimeout(() => {
+        dispatch(startSlowLoading());
+      }, 500);
+
       const booksInfo = await bookClient.getBooks(pageNumber);
 
+      clearTimeout(timeout);
       const action = loadBooksActionCreator(booksInfo);
 
       dispatch(action);
@@ -44,6 +54,7 @@ const useBooks = () => {
     books,
     loadBooks,
     updateBook,
+    isLoading,
   };
 };
 

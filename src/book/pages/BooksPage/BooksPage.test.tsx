@@ -6,7 +6,7 @@ import { MemoryRouter } from "react-router";
 
 describe("Given the BooksPage component", () => {
   describe("When it renders", () => {
-    test("Then it should show 'Bookshelf' inside a heading", () => {
+    test("Then it should show 'Bookshelf' inside a heading", async () => {
       const expectedPageTitle = /bookshelf/i;
 
       render(
@@ -16,7 +16,7 @@ describe("Given the BooksPage component", () => {
         { wrapper: MemoryRouter },
       );
 
-      const pageTitle = screen.getByRole("heading", {
+      const pageTitle = await screen.findByRole("heading", {
         name: expectedPageTitle,
       });
 

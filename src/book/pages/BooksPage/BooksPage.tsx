@@ -5,9 +5,10 @@ import "./BooksPage.css";
 import { useSearchParams } from "react-router";
 import Bookshelf from "../../components/Bookshelf/Bookshelf";
 import Pagination from "../../../components/Pagination/Pagination";
+import Loading from "../../../components/Loading/Loading";
 
 const BooksPage: React.FC = () => {
-  const { loadBooks, books } = useBooks();
+  const { loadBooks, books, isLoading } = useBooks();
   const { books: pageBooks, totals } = books;
 
   const [page] = useSearchParams();
@@ -18,6 +19,14 @@ const BooksPage: React.FC = () => {
 
     loadBooks(pageNumber);
   }, [loadBooks, pageNumber]);
+
+  if (isLoading === "true") {
+    return <></>;
+  }
+
+  if (isLoading === "true-slow") {
+    return <Loading />;
+  }
 
   return (
     <>

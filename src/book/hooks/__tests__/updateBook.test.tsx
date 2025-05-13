@@ -19,6 +19,7 @@ describe("Given the updateBook function", () => {
               booksToRead: 1,
             },
           },
+          isLoading: "false",
         },
       };
 
