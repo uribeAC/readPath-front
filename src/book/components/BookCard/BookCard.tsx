@@ -53,12 +53,17 @@ const BookCard: React.FC<BookCardProps> = ({
         </div>
         <footer className="book__footer">
           <div className="book__state">
-            <Button action={() => updateBook("read", id)} isSelected={isRead}>
+            <Button
+              action={() => updateBook("read", id)}
+              isSelected={isRead}
+              isDisabled={isRead}
+            >
               read
             </Button>
             <Button
               action={() => updateBook("toread", id)}
               isSelected={isToRead}
+              isDisabled={isToRead}
             >
               to read
             </Button>
