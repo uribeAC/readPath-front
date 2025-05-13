@@ -10,7 +10,7 @@ describe("Given the Button component", () => {
   describe("When it receives 'Buy Manga' and an action", () => {
     test("Then it should show a 'Buy Manga' button", () => {
       render(
-        <Button action={() => {}} isSelected={true}>
+        <Button action={() => {}} isSelected={true} isDisabled={false}>
           {expectedButtonText}
         </Button>,
       );
@@ -27,7 +27,7 @@ describe("Given the Button component", () => {
         const action = vitest.fn();
 
         render(
-          <Button action={action} isSelected={true}>
+          <Button action={action} isSelected={true} isDisabled={false}>
             {expectedButtonText}
           </Button>,
         );
