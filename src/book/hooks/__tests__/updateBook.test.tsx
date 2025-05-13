@@ -1,10 +1,10 @@
 import { Provider } from "react-redux";
+import React, { act } from "react";
 import { renderHook } from "@testing-library/react";
+import type { BookState } from "../../slice/bookSlice";
+import setupStore from "../../../store/setupStore";
 import useBooks from "../useBooks";
 import { dragonBallRead, dragonBallToRead } from "../../fixtures/fixtures";
-import React, { act } from "react";
-import setupStore from "../../../store/setupStore";
-import type { BookState } from "../../slice/bookSlice";
 
 describe("Given the updateBook function", () => {
   describe("When it's called with Dragon Ball book id marked as 'to read' and an action state of 'read'", () => {

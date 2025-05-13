@@ -1,9 +1,9 @@
 import type React from "react";
 import type { Book } from "../../types";
 import Button from "../../../components/Button/Button.tsx";
+import useBooks from "../../hooks/useBooks.ts";
 import Rating from "../Rating/Rating.tsx";
 import "./BookCard.css";
-import useBooks from "../../hooks/useBooks.ts";
 
 interface BookCardProps {
   book: Book;

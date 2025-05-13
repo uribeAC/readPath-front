@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import { narutoBook } from "../../fixtures/fixtures";
-import BookCard from "./BookCard";
 import { Provider } from "react-redux";
+import { narutoBook } from "../../fixtures/fixtures";
 import store from "../../../store/store";
+import BookCard from "./BookCard";
 
 describe("Given the BookCard component", () => {
   describe("When it receives Naruto Vol. 1 book", () => {
