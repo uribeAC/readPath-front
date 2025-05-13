@@ -1,6 +1,9 @@
 import { useCallback, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { loadBooksActionCreator } from "../slice/bookSlice";
+import {
+  changeBookStateActionCreator,
+  loadBooksActionCreator,
+} from "../slice/bookSlice";
 import BookClient from "../client/bookClient";
 
 const useBooks = () => {
@@ -21,9 +24,26 @@ const useBooks = () => {
     [bookClient, dispatch],
   );
 
+  const updateBook = async (
+    actionState: "read" | "toread",
+    bookId: string,
+  ): Promise<void> => {
+    const updatedBook = await bookClient.changeBookState(actionState, bookId);
+
+    const actionInfo = {
+      updatedBook,
+      actionState,
+    };
+
+    const action = changeBookStateActionCreator(actionInfo);
+
+    dispatch(action);
+  };
+
   return {
     books,
     loadBooks,
+    updateBook,
   };
 };
 
