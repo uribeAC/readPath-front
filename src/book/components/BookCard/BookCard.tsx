@@ -1,6 +1,7 @@
 import type React from "react";
 import type { Book } from "../../types";
 import Button from "../../../components/Button/Button.tsx";
+import useBooks from "../../hooks/useBooks.ts";
 import Rating from "../Rating/Rating.tsx";
 import "./BookCard.css";
 
@@ -11,6 +12,7 @@ interface BookCardProps {
 
 const BookCard: React.FC<BookCardProps> = ({
   book: {
+    id,
     title,
     author,
     pages,
@@ -22,6 +24,8 @@ const BookCard: React.FC<BookCardProps> = ({
   },
   index,
 }) => {
+  const { updateBook } = useBooks();
+
   const isRead = state === "read";
   const isToRead = state === "to read";
 
@@ -49,10 +53,18 @@ const BookCard: React.FC<BookCardProps> = ({
         </div>
         <footer className="book__footer">
           <div className="book__state">
-            <Button action={() => {}} isSelected={isRead}>
+            <Button
+              action={() => updateBook("read", id)}
+              isSelected={isRead}
+              isDisabled={isRead}
+            >
               read
             </Button>
-            <Button action={() => {}} isSelected={isToRead}>
+            <Button
+              action={() => updateBook("toread", id)}
+              isSelected={isToRead}
+              isDisabled={isToRead}
+            >
               to read
             </Button>
           </div>

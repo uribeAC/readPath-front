@@ -234,21 +234,6 @@ const demonSlayerVol1: BookDto = {
   state: "to read",
 };
 
-export const mangaFixtures: BookDto[] = [
-  narutoVol1,
-  onePieceVol1,
-  attackOnTitanVol1,
-  deathNoteVol1,
-  fullmetalAlchemistVol1,
-  bleachVol1,
-  chainsawManVol1,
-  tokyoGhoulVol1,
-  myHeroAcademiaVol1,
-  spyXFamilyVol1,
-  vinlandSagaVol1,
-  demonSlayerVol1,
-];
-
 export const shonenFixturesDto: BookDto[] = [
   narutoVol1,
   onePieceVol1,
@@ -302,3 +287,19 @@ export const dragonBallToReadDto: BookDto = {
     "https://images-na.ssl-images-amazon.com/images/I/51Ypye1bxBL.jpg",
   imageAlt: "Dragon Ball Volume 1 cover featuring young Goku riding a cloud",
 };
+
+export const mangaFixtures: BookDto[] = [
+  narutoVol1,
+  onePieceVol1,
+  attackOnTitanVol1,
+  deathNoteVol1,
+  fullmetalAlchemistVol1,
+  bleachVol1,
+  chainsawManVol1,
+  tokyoGhoulVol1,
+  myHeroAcademiaVol1,
+  spyXFamilyVol1,
+  vinlandSagaVol1,
+  demonSlayerVol1,
+  dragonBallToReadDto,
+];
