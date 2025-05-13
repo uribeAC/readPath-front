@@ -1,0 +1,28 @@
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.loading__text {
+  font-family: var(--title-font);
+  font-size: 1.375rem;
+  font-weight: 400;
+}
+
+.loading__text--animation {
+  letter-spacing: 1px;
+  clip-path: inset(0 3ch 0 0);
+  animation: l4 2s steps(4) infinite;
+}
+
+.loading__text--underline {
+  text-decoration: underline;
+}
+
+@keyframes l4 {
+  to {
+    clip-path: inset(0 -1ch 0 0);
+  }
+}
