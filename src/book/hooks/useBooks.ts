@@ -7,7 +7,7 @@ import {
 import BookClient from "../client/bookClient";
 
 const useBooks = () => {
-  const books = useAppSelector((state) => state.booksReducer.booksInfo);
+  const books = useAppSelector((state) => state.books.booksInfo);
 
   const dispatch = useAppDispatch();
 
