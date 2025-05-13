@@ -2,7 +2,10 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { BooksInfo } from "../client/types";
 import type { Book } from "../types";
 
-export type BookState = { booksInfo: BooksInfo };
+export type BookState = {
+  booksInfo: BooksInfo;
+  isLoading: "true" | "true-slow" | "false";
+};
 
 const initialState: BookState = {
   booksInfo: {
@@ -13,16 +16,24 @@ const initialState: BookState = {
       booksToRead: 0,
     },
   },
+  isLoading: "false",
 };
 
 const bookSlice = createSlice({
   name: "books",
   initialState,
   reducers: {
+    startLoading: (currentState): void => {
+      currentState.isLoading = "true";
+    },
+    startSlowLoading: (currentState): void => {
+      currentState.isLoading = "true-slow";
+    },
     loadBooks: (currentState, action: PayloadAction<BooksInfo>): BookState => {
       return {
         ...currentState,
         booksInfo: action.payload,
+        isLoading: "false",
       };
     },
     changeBookState: (
@@ -51,6 +62,7 @@ const bookSlice = createSlice({
                 : totals.booksToRead - 1,
           },
         },
+        isLoading: "false",
       };
     },
   },
@@ -61,4 +73,6 @@ export const booksReducer = bookSlice.reducer;
 export const {
   loadBooks: loadBooksActionCreator,
   changeBookState: changeBookStateActionCreator,
+  startLoading,
+  startSlowLoading,
 } = bookSlice.actions;
