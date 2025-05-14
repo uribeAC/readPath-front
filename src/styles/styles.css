@@ -50,3 +50,20 @@ button {
   padding: 0;
   border: none;
 }
+
+input {
+  font: inherit;
+  color: inherit;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+textarea {
+  border: none;
+  color: inherit;
+  resize: none;
+  font: inherit;
+  background: none;
+}

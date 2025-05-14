@@ -1,0 +1,59 @@
+.book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px 0;
+  color: var(--dark-color);
+}
+
+.book-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.book-form__text {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.book-form__control {
+  border: 1px solid var(--dark-color);
+  background-color: var(--main-color);
+  padding: 7px;
+  font-size: 1rem;
+
+  &:focus {
+    transition: 0.5s;
+    outline: 1px solid var(--brand-color);
+  }
+
+  &:active {
+    transition: 0.1s;
+    scale: 1.01;
+  }
+}
+
+.book-form__control--hidden {
+  display: none;
+}
+
+.book-form__states {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.book-form__state {
+  width: 100%;
+  padding: 7px 10px;
+  font-size: 1rem;
+  color: var(--dark-color);
+  border: 1px solid var(--dark-color);
+  border-radius: 5px;
+  text-align: center;
+}
+
+.button--form {
+  align-self: flex-end;
+}
