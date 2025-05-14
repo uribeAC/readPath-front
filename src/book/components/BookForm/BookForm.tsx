@@ -200,20 +200,23 @@ const BookForm: React.FC = () => {
           ))}
         </select>
         {selectedGenres.length !== 0 && (
-          <ul className="genres">
-            {selectedGenres.map((genre) => (
-              <li key={genre} className="genre">
-                {genre}
-                <button
-                  type="button"
-                  className="genre__delete"
-                  onClick={() => deleteGenre(genre)}
-                >
-                  X
-                </button>
-              </li>
-            ))}
-          </ul>
+          <div>
+            <h3 className="book-form__text--explanation">Genres selected:</h3>
+            <ul className="genres">
+              {selectedGenres.map((genre) => (
+                <li key={genre} className="genre">
+                  {genre}
+                  <button
+                    type="button"
+                    className="genre__delete"
+                    onClick={() => deleteGenre(genre)}
+                  >
+                    X
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
       </div>
       <div className="book-form__group">
