@@ -12,6 +12,7 @@ const Loading: React.FC = () => {
         alt="Women on top of a flying book"
         width={500}
         height={500}
+        className="loading__image"
       />
       <span className="loading__text loading__text--underline">
         Your bookshelf is getting sorted.
