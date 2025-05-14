@@ -1,0 +1,92 @@
+.book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px 0;
+  color: var(--dark-color);
+}
+
+.book-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.book-form__group--hidden {
+  display: none;
+}
+
+.book-form__text {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.book-form__text--explanation {
+  font-size: 0.75rem;
+}
+
+.book-form__text--state {
+  display: inline-block;
+  padding: 7px 10px;
+  width: 100%;
+  height: 100%;
+  line-height: 100%;
+  cursor: pointer;
+}
+
+.book-form__control {
+  border: 1px solid var(--dark-color);
+  background-color: var(--main-color);
+  padding: 7px;
+  font-size: 1rem;
+
+  &:focus {
+    transition: 0.5s;
+    outline: 1px solid var(--brand-color);
+  }
+
+  &:active {
+    transition: 0.1s;
+    scale: 1.01;
+  }
+}
+
+.book-form__control--hidden {
+  display: none;
+}
+
+.book-form__states {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.button--reset {
+  width: 100%;
+  padding: 0px;
+}
+
+.button--form {
+  align-self: flex-end;
+}
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.genre {
+  display: flex;
+  gap: 10px;
+  padding: 5px 10px;
+  background-color: var(--main-color);
+  border: 1px solid var(--dark-color);
+}
+
+.genre__delete {
+  padding: 0 5px;
+  border-radius: 5px;
+  color: var(--main-color);
+  background-color: var(--dark-color);
+}
