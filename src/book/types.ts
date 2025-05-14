@@ -18,6 +18,22 @@ export interface Book {
   imageAlt: string;
 }
 
+export type BookFormData = Omit<
+  Book,
+  | "id"
+  | "saga"
+  | "genres"
+  | "yourRating"
+  | "coverImageUrlBig"
+  | "coverImageUrlSmall"
+  | "imageAlt"
+> & {
+  saga?: string;
+  coverImageUrl: string;
+  genres: string;
+  yourRating?: string;
+};
+
 export type StarsRating = 0 | 1 | 2 | 3 | 4 | 5;
 
 export type ReadDates = {

@@ -1,6 +1,8 @@
 import type React from "react";
-import "./BookForm.css";
 import Button from "../../../components/Button/Button";
+import type { BookFormData } from "../../types";
+import "./BookForm.css";
+import { useState } from "react";
 
 const BookForm: React.FC = () => {
   const bookGenres = [
@@ -33,7 +35,81 @@ const BookForm: React.FC = () => {
     "Humor",
     "Short Stories",
   ];
-  const selectedGenres: string[] = [];
+
+  const initialBookData: BookFormData = {
+    title: "",
+    author: "",
+    description: "",
+    saga: "",
+    coverImageUrl: "",
+    genres: "",
+    firstPublished: "",
+    pages: 0,
+    state: "to read",
+    readDates: {
+      dateFinished: "",
+      dateStarted: "",
+      readYear: 0,
+    },
+    yourRating: "",
+  };
+
+  const [bookData, setBookData] = useState<BookFormData>(initialBookData);
+  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+
+  const isRead = bookData.state === "read";
+  const isToRead = bookData.state === "to read";
+
+  const formToReadClass = isToRead ? " book-form__group--hidden" : "";
+
+  const changeBookData = (
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const newValue = event.target.value;
+
+    setBookData((bookData) => ({
+      ...bookData,
+      [event.target.id]: newValue,
+    }));
+  };
+
+  const changeBookState = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.id as "read" | "to read";
+
+    setBookData((bookData) => ({
+      ...bookData,
+      state: newValue,
+    }));
+  };
+
+  const changeMultilpleGenres = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const newValue = event.target.value;
+
+    setSelectedGenres((selectedGenres) => [...selectedGenres, newValue]);
+
+    setBookData((bookData) => ({
+      ...bookData,
+      genres: newValue,
+    }));
+  };
+
+  const deleteGenre = (genre: string) => {
+    setSelectedGenres((selectedGenres) =>
+      selectedGenres.filter((selectedGenre) => selectedGenre !== genre),
+    );
+
+    if (selectedGenres.length === 1) {
+      setBookData((bookData) => ({
+        ...bookData,
+        genres: "",
+      }));
+    }
+  };
 
   return (
     <form action="" className="book-form">
@@ -41,7 +117,14 @@ const BookForm: React.FC = () => {
         <label htmlFor="title" className="book-form__text">
           Title:
         </label>
-        <input type="text" id="title" className="book-form__control" required />
+        <input
+          type="text"
+          id="title"
+          className="book-form__control"
+          value={bookData.title}
+          onChange={changeBookData}
+          required
+        />
       </div>
       <div className="book-form__group">
         <label htmlFor="author" className="book-form__text">
@@ -51,6 +134,8 @@ const BookForm: React.FC = () => {
           type="text"
           id="author"
           className="book-form__control"
+          value={bookData.author}
+          onChange={changeBookData}
           required
         />
       </div>
@@ -62,23 +147,39 @@ const BookForm: React.FC = () => {
           rows={5}
           id="description"
           className="book-form__control"
+          value={bookData.description}
+          onChange={changeBookData}
           required
         />
       </div>
       <div className="book-form__group">
-        <label htmlFor="saga" className="book-form__text">
-          Saga:
-        </label>
-        <input type="text" id="saga" className="book-form__control" />
+        <div>
+          <label htmlFor="saga" className="book-form__text">
+            Saga:
+          </label>
+          <span className="book-form__text--explanation">
+            {" "}
+            (saga name, book number) *optional
+          </span>
+        </div>
+        <input
+          type="text"
+          id="saga"
+          className="book-form__control"
+          value={bookData.saga}
+          onChange={changeBookData}
+        />
       </div>
       <div className="book-form__group">
-        <label htmlFor="cover-image-url" className="book-form__text">
+        <label htmlFor="coverImageUrl" className="book-form__text">
           Cover image url:
         </label>
         <input
           type="url"
-          id="cover-image-url"
+          id="coverImageUrl"
           className="book-form__control"
+          value={bookData.coverImageUrl}
+          onChange={changeBookData}
           required
         />
       </div>
@@ -86,8 +187,14 @@ const BookForm: React.FC = () => {
         <label htmlFor="genres" className="book-form__text">
           Genres:
         </label>
-        <select id="genres" className="book-form__control" required>
-          <option></option>
+        <select
+          id="genres"
+          className="book-form__control"
+          value={bookData.genres}
+          onChange={changeMultilpleGenres}
+          required
+        >
+          <option disabled></option>
           {bookGenres.map((genre) => (
             <option key={genre}>{genre}</option>
           ))}
@@ -97,64 +204,98 @@ const BookForm: React.FC = () => {
             {selectedGenres.map((genre) => (
               <li key={genre} className="genre">
                 {genre}
+                <button
+                  type="button"
+                  className="genre__delete"
+                  onClick={() => deleteGenre(genre)}
+                >
+                  X
+                </button>
               </li>
             ))}
           </ul>
         )}
       </div>
       <div className="book-form__group">
-        <label htmlFor="first-published" className="book-form__text">
+        <label htmlFor="firstPublished" className="book-form__text">
           First published:
         </label>
         <input
           type="date"
-          id="first-published"
+          id="firstPublished"
           className="book-form__control"
+          value={bookData.firstPublished}
+          onChange={changeBookData}
           required
         />
       </div>
       <div className="book-form__group">
-        <label htmlFor="total-pages" className="book-form__text">
+        <label htmlFor="pages" className="book-form__text">
           Total pages:
         </label>
         <input
           type="number"
-          id="total-pages"
+          id="pages"
           className="book-form__control"
+          value={bookData.pages}
+          onChange={changeBookData}
           required
         />
       </div>
       <div className="book-form__group">
         <h3 className="book-form__text">State:</h3>
         <div className="book-form__states">
-          <div className="book-form__state">
-            <label htmlFor="read" className="book-form__text">
+          <Button
+            action={() => {}}
+            isDisabled={isRead}
+            isSelected={isRead}
+            classModifierName="reset"
+          >
+            <label
+              htmlFor="read"
+              className="book-form__text book-form__text--state"
+            >
               Read
             </label>
             <input
               type="checkbox"
               id="read"
               className="book-form__control book-form__control--hidden"
+              value={bookData.state}
+              onChange={changeBookState}
               required
             />
-          </div>
-          <div className="book-form__state">
-            <label htmlFor="to-read" className="book-form__text">
+          </Button>
+          <Button
+            action={() => {}}
+            isDisabled={isToRead}
+            isSelected={isToRead}
+            classModifierName="reset"
+          >
+            <label
+              htmlFor="to read"
+              className="book-form__text book-form__text--state"
+            >
               To read
             </label>
             <input
               type="checkbox"
-              id="to-read"
+              id="to read"
               className="book-form__control book-form__control--hidden"
+              value={bookData.state}
+              onChange={changeBookState}
               required
             />
-          </div>
+          </Button>
         </div>
       </div>
-      <div className="book-form__group">
-        <label htmlFor="date-started" className="book-form__text">
-          Date started:
-        </label>
+      <div className={`book-form__group${formToReadClass}`}>
+        <div>
+          <label htmlFor="date-started" className="book-form__text">
+            Date started:
+          </label>
+          <span className="book-form__text--explanation"> (optional)</span>
+        </div>
         <input
           type="date"
           id="date-started"
@@ -162,10 +303,13 @@ const BookForm: React.FC = () => {
           required
         />
       </div>
-      <div className="book-form__group">
-        <label htmlFor="date-finished" className="book-form__text">
-          Date finished:
-        </label>
+      <div className={`book-form__group${formToReadClass}`}>
+        <div>
+          <label htmlFor="date-finished" className="book-form__text">
+            Date finished:
+          </label>
+          <span className="book-form__text--explanation"> (optional)</span>
+        </div>
         <input
           type="date"
           id="date-finished"
@@ -173,10 +317,16 @@ const BookForm: React.FC = () => {
           required
         />
       </div>
-      <div className="book-form__group">
-        <label htmlFor="your-rating" className="book-form__text">
-          Your rating:
-        </label>
+      <div className={`book-form__group${formToReadClass}`}>
+        <div>
+          <label htmlFor="your-rating" className="book-form__text">
+            Your rating:
+          </label>
+          <span className="book-form__text--explanation">
+            {" "}
+            (0 to 5) *optional
+          </span>
+        </div>
         <input
           type="number"
           id="your-rating"
