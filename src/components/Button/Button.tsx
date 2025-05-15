@@ -1,4 +1,4 @@
-import React, { type ComponentProps } from "react";
+import React, { type ComponentProps, type PropsWithChildren } from "react";
 import "./Button.css";
 
 type AllButtonProps = ComponentProps<"button">;
@@ -10,11 +10,12 @@ interface ButtonProps extends AllButtonProps {
   action: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({
+const Button: React.FC<PropsWithChildren<ButtonProps>> = ({
   classModifierName,
   isSelected,
   isDisabled,
   action,
+  children,
   ...buttonProps
 }) => {
   const stateClassModifier = isSelected ? " button--selected" : "";
@@ -30,7 +31,9 @@ const Button: React.FC<ButtonProps> = ({
       onClick={action}
       disabled={isDisabled}
       {...buttonProps}
-    ></button>
+    >
+      {children}
+    </button>
   );
 };
 
