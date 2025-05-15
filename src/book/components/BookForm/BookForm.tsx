@@ -57,8 +57,13 @@ const BookForm: React.FC = () => {
   const [bookData, setBookData] = useState<BookFormData>(initialBookData);
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
 
-  const isRead = bookData.state === "read";
   const isToRead = bookData.state === "to read";
+
+  const stateReadClassModifier =
+    bookData.state === "read" ? " book-form__button--selected" : "";
+
+  const stateToReadClassModifier =
+    bookData.state === "to read" ? " book-form__button--selected" : "";
 
   const formToReadClass = isToRead ? " book-form__group--hidden" : "";
 
@@ -103,7 +108,7 @@ const BookForm: React.FC = () => {
       selectedGenres.filter((selectedGenre) => selectedGenre !== genre),
     );
 
-    if (selectedGenres.length === 1) {
+    if (selectedGenres.length <= 1) {
       setBookData((bookData) => ({
         ...bookData,
         genres: "",
@@ -200,20 +205,23 @@ const BookForm: React.FC = () => {
           ))}
         </select>
         {selectedGenres.length !== 0 && (
-          <ul className="genres">
-            {selectedGenres.map((genre) => (
-              <li key={genre} className="genre">
-                {genre}
-                <button
-                  type="button"
-                  className="genre__delete"
-                  onClick={() => deleteGenre(genre)}
-                >
-                  X
-                </button>
-              </li>
-            ))}
-          </ul>
+          <div>
+            <h3 className="book-form__text--explanation">Genres selected:</h3>
+            <ul className="genres">
+              {selectedGenres.map((genre) => (
+                <li key={genre} className="genre">
+                  {genre}
+                  <button
+                    type="button"
+                    className="genre__delete"
+                    onClick={() => deleteGenre(genre)}
+                  >
+                    X
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
       </div>
       <div className="book-form__group">
@@ -245,48 +253,35 @@ const BookForm: React.FC = () => {
       <div className="book-form__group">
         <h3 className="book-form__text">State:</h3>
         <div className="book-form__states">
-          <Button
-            action={() => {}}
-            isDisabled={isRead}
-            isSelected={isRead}
-            classModifierName="reset"
+          <input
+            type="checkbox"
+            id="read"
+            className="book-form__control book-form__control--hidden"
+            value={bookData.state}
+            onChange={changeBookState}
+            required
+          />
+          <label
+            htmlFor="read"
+            className={`book-form__text book-form__button${stateReadClassModifier}`}
           >
-            <label
-              htmlFor="read"
-              className="book-form__text book-form__text--state"
-            >
-              Read
-            </label>
-            <input
-              type="checkbox"
-              id="read"
-              className="book-form__control book-form__control--hidden"
-              value={bookData.state}
-              onChange={changeBookState}
-              required
-            />
-          </Button>
-          <Button
-            action={() => {}}
-            isDisabled={isToRead}
-            isSelected={isToRead}
-            classModifierName="reset"
+            Read
+          </label>
+
+          <input
+            type="checkbox"
+            id="to read"
+            className="book-form__control book-form__control--hidden"
+            value={bookData.state}
+            onChange={changeBookState}
+            required
+          />
+          <label
+            htmlFor="to read"
+            className={`book-form__text book-form__button${stateToReadClassModifier}`}
           >
-            <label
-              htmlFor="to read"
-              className="book-form__text book-form__text--state"
-            >
-              To read
-            </label>
-            <input
-              type="checkbox"
-              id="to read"
-              className="book-form__control book-form__control--hidden"
-              value={bookData.state}
-              onChange={changeBookState}
-              required
-            />
-          </Button>
+            To read
+          </label>
         </div>
       </div>
       <div className={`book-form__group${formToReadClass}`}>
