@@ -58,7 +58,7 @@ class BookClient implements BookClientStructure {
     const response = await fetch(`${this.apiUrl}/books`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(bookData),
+      body: JSON.stringify({ book: bookData }),
     });
 
     if (!response.ok) {

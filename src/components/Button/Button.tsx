@@ -7,6 +7,7 @@ interface ButtonProps extends AllButtonProps {
   classModifierName?: string;
   isSelected: boolean;
   isDisabled: boolean;
+  buttonType?: "button" | "submit";
   action: () => void;
 }
 
@@ -14,6 +15,7 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = ({
   classModifierName,
   isSelected,
   isDisabled,
+  buttonType = "button",
   action,
   children,
   ...buttonProps
@@ -26,7 +28,7 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = ({
 
   return (
     <button
-      type="button"
+      type={buttonType}
       className={`button${stateClassModifier}${classModifier}${disabledClass}`}
       onClick={action}
       disabled={isDisabled}
