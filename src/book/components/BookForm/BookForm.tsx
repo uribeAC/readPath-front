@@ -6,6 +6,7 @@ import { useState } from "react";
 import { bookGenres } from "../../data/genres";
 import useBooks from "../../hooks/useBooks";
 import { transfromBookFormDataToBookSendData } from "../../dto/transformers";
+import { useNavigate } from "react-router";
 
 const BookForm: React.FC = () => {
   const { createBook } = useBooks();
@@ -110,24 +111,43 @@ const BookForm: React.FC = () => {
     bookData.pages !== 0 &&
     bookData.title !== "";
 
+  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [titleErrorMessage, setTitleErrorMessage] = useState<string>("");
+
   const onSubmitForm = async (
     event: React.FormEvent<HTMLFormElement>,
   ): Promise<void> => {
     event.preventDefault();
+    setErrorMessage("");
+    setTitleErrorMessage("");
 
     const toSendBook = transfromBookFormDataToBookSendData(
       bookData,
       selectedGenres,
     );
-    await createBook(toSendBook);
+
+    try {
+      await createBook(toSendBook);
+
+      navigate("/");
+    } catch {
+      setErrorMessage("Error adding new book");
+      setTitleErrorMessage("This book title is already in your bookshelf");
+    }
   };
 
   return (
     <form onSubmit={onSubmitForm} className="book-form">
       <div className="book-form__group">
-        <label htmlFor="title" className="book-form__text">
-          Title:
-        </label>
+        <div className="book-form__texts">
+          <label htmlFor="title" className="book-form__text">
+            Title:
+          </label>
+          {titleErrorMessage && (
+            <span className="book-form__error">{titleErrorMessage}</span>
+          )}
+        </div>
         <input
           type="text"
           id="title"
@@ -164,7 +184,7 @@ const BookForm: React.FC = () => {
         />
       </div>
       <div className="book-form__group">
-        <div>
+        <div className="book-form__texts">
           <label htmlFor="saga" className="book-form__text">
             Saga:
           </label>
@@ -211,7 +231,7 @@ const BookForm: React.FC = () => {
           ))}
         </select>
         {selectedGenres.length !== 0 && (
-          <div>
+          <div className="genres__wrapper">
             <h3 className="book-form__text--explanation">Genres selected:</h3>
             <ul className="genres">
               {selectedGenres.map((genre) => (
@@ -319,7 +339,7 @@ const BookForm: React.FC = () => {
         />
       </div>
       <div className={`book-form__group${formToReadClass}`}>
-        <div>
+        <div className="book-form__texts">
           <label htmlFor="yourRating" className="book-form__text">
             Your rating:
           </label>
@@ -339,7 +359,11 @@ const BookForm: React.FC = () => {
           max={5}
         />
       </div>
-
+      {errorMessage && (
+        <span className="book-form__error book-form__error--bottom">
+          {errorMessage}
+        </span>
+      )}
       <Button
         buttonType="submit"
         action={() => {}}
