@@ -85,7 +85,14 @@ export const transformBookDtoToBook = ({
 };
 
 export const transfromBookFormDataToBookSendData = (
-  { coverImageUrl, title, saga, yourRating, ...bookData }: BookFormData,
+  {
+    coverImageUrl,
+    title,
+    saga,
+    yourRating,
+    readDates,
+    ...bookData
+  }: BookFormData,
   selectedGenres: string[],
 ): BookSendData => {
   const sagaInfo: string[] = saga ? saga.split(",") : [];
@@ -98,6 +105,14 @@ export const transfromBookFormDataToBookSendData = (
     bookNumber: Number(sagaNumber),
   };
 
+  const cleanReadDates: ReadDates = {
+    ...(readDates!.dateStarted && { dateStarted: readDates!.dateStarted }),
+    ...(readDates!.dateFinished && { dateFinished: readDates!.dateFinished }),
+    ...(readDates!.dateFinished && {
+      readYear: new Date(readDates!.dateFinished).getFullYear(),
+    }),
+  };
+
   const starRating = Math.round(Number(yourRating)) as StarsRating;
 
   const sendBook: BookSendData = {
@@ -107,6 +122,9 @@ export const transfromBookFormDataToBookSendData = (
     coverImageUrlSmall: coverImageUrl,
     imageAlt: `${title} book cover`,
     genres: selectedGenres,
+    ...(Object.keys(cleanReadDates).length > 0 && {
+      readDates: cleanReadDates,
+    }),
     ...(saga && { saga: bookSaga }),
     ...(yourRating && { yourRating: starRating }),
   };
