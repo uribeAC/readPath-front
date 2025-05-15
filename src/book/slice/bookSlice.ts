@@ -78,10 +78,10 @@ const bookSlice = createSlice({
           totals: { books: booksTotal, booksRead, booksToRead },
         },
       },
-      {
-        payload: { newBook, state },
-      }: PayloadAction<{ newBook: Book; state: string }>,
+      { payload: { newBook } }: PayloadAction<{ newBook: Book }>,
     ): BookState => {
+      const state = newBook.state;
+
       return {
         booksInfo: {
           books: [...books, newBook],

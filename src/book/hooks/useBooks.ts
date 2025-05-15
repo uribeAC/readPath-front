@@ -55,12 +55,7 @@ const useBooks = () => {
   const createBook = async (bookData: BookSendData): Promise<void> => {
     const newBook = await bookClient.addBook(bookData);
 
-    const actionInfo = {
-      newBook,
-      state: newBook.state,
-    };
-
-    const action = addBookActionCreator(actionInfo);
+    const action = addBookActionCreator({ newBook });
 
     dispatch(action);
   };
