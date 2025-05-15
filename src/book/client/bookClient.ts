@@ -2,7 +2,8 @@ import {
   transformBookDtoToBook,
   transformBooksInfoDtoToBooksInfo,
 } from "../dto/transformers";
-import type { Book } from "../types";
+import type { BookDto } from "../dto/types";
+import type { Book, BookSendData } from "../types";
 import type {
   BookClientStructure,
   BooksInfo,
@@ -51,6 +52,24 @@ class BookClient implements BookClientStructure {
     const updatedBook = transformBookDtoToBook(book);
 
     return updatedBook;
+  };
+
+  public addBook = async (bookData: BookSendData): Promise<Book> => {
+    const response = await fetch(`${this.apiUrl}/books`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(bookData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Error adding new book");
+    }
+
+    const { book: newBookDto } = (await response.json()) as { book: BookDto };
+
+    const newBook = transformBookDtoToBook(newBookDto);
+
+    return newBook;
   };
 }
 

@@ -29,10 +29,16 @@ const bookSlice = createSlice({
     startSlowLoading: (currentState): void => {
       currentState.isLoading = "true-slow";
     },
-    loadBooks: (currentState, action: PayloadAction<BooksInfo>): BookState => {
+    loadBooks: (
+      currentState,
+      { payload: { books, totals } }: PayloadAction<BooksInfo>,
+    ): BookState => {
       return {
         ...currentState,
-        booksInfo: action.payload,
+        booksInfo: {
+          books: [...books],
+          totals,
+        },
         isLoading: "false",
       };
     },
@@ -65,6 +71,30 @@ const bookSlice = createSlice({
         isLoading: "false",
       };
     },
+    addBook: (
+      {
+        booksInfo: {
+          books,
+          totals: { books: booksTotal, booksRead, booksToRead },
+        },
+      },
+      { payload: { newBook } }: PayloadAction<{ newBook: Book }>,
+    ): BookState => {
+      const state = newBook.state;
+
+      return {
+        booksInfo: {
+          books: [...books, newBook],
+          totals: {
+            books: booksTotal + 1,
+            booksRead: state === "read" ? booksRead + 1 : booksRead - 1,
+            booksToRead:
+              state === "to read" ? booksToRead + 1 : booksToRead - 1,
+          },
+        },
+        isLoading: "false",
+      };
+    },
   },
 });
 
@@ -73,6 +103,7 @@ export const booksReducer = bookSlice.reducer;
 export const {
   loadBooks: loadBooksActionCreator,
   changeBookState: changeBookStateActionCreator,
+  addBook: addBookActionCreator,
   startLoading,
   startSlowLoading,
 } = bookSlice.actions;
