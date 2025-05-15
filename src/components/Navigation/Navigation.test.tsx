@@ -25,5 +25,27 @@ describe("Given the Navigation component", () => {
 
       expect(bookshelfIcon).toBeInTheDocument();
     });
+
+    test("Then it should show a 'Add book' link", () => {
+      const expectedLinkName = /add book/i;
+
+      render(<Navigation />, { wrapper: MemoryRouter });
+
+      const addBookLink = screen.getByRole("link", {
+        name: expectedLinkName,
+      });
+
+      expect(addBookLink).toBeInTheDocument();
+    });
+
+    test("Then it should show an icon of writting a book", () => {
+      const expectedImageAlt = /icon of writting a book/i;
+
+      render(<Navigation />, { wrapper: MemoryRouter });
+
+      const addBookIcon = screen.getByAltText(expectedImageAlt);
+
+      expect(addBookIcon).toBeInTheDocument();
+    });
   });
 });
