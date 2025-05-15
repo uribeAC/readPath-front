@@ -47,4 +47,10 @@ export const handlers = [
   http.patch(`${apiUrl}/books/mark-as-toread/${dragonBallRead.id}`, () => {
     return HttpResponse.json<{ book: BookDto }>({ book: dragonBallToReadDto });
   }),
+
+  http.post(`${apiUrl}/books`, () => {
+    return HttpResponse.json<{ book: BookDto }>({
+      book: dragonBallReadDto,
+    });
+  }),
 ];
