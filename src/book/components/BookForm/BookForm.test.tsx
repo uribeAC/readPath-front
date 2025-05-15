@@ -26,7 +26,7 @@ describe("Given the BookForm component", () => {
       expect(toReadCheckbox).toBeInTheDocument();
     });
 
-    test("Then it should show a 'Genres' options select", () => {
+    test("Then it should show a 'Genres' options select ", () => {
       const expectedLabel = /genres/i;
 
       render(<BookForm />);
@@ -34,6 +34,18 @@ describe("Given the BookForm component", () => {
       const genresSelect = screen.getByLabelText(expectedLabel);
 
       expect(genresSelect).toBeInTheDocument();
+    });
+
+    test("Then it should not show 'Genres selected:' inside a heading ", () => {
+      const expectedTitle = /genres selected/i;
+
+      render(<BookForm />);
+
+      const genresSelectedTitle = screen.queryByRole("heading", {
+        name: expectedTitle,
+      });
+
+      expect(genresSelectedTitle).not.toBeInTheDocument();
     });
 
     describe("And the user types 'Dragon Ball Vol. 1' in 'Title' text box", () => {
@@ -131,6 +143,53 @@ describe("Given the BookForm component", () => {
           expect(fiction).toBeInTheDocument();
           expect(nonFiction).not.toBeInTheDocument();
         });
+
+        describe("And the user clicks the 'X' button of 'Fiction' selected genre", () => {
+          test("Then it should not show any genre in options select'", async () => {
+            const genresSelected = /genres selected/i;
+            const fictionGenre = "Fiction";
+            const expectedLabel = /genres/i;
+
+            render(<BookForm />);
+
+            const genresSelect = screen.getByLabelText(expectedLabel);
+
+            await user.selectOptions(genresSelect, fictionGenre);
+
+            const selectedGenresTitle = screen.getByRole("heading", {
+              name: genresSelected,
+            });
+            const selectedGenresGroup = selectedGenresTitle.closest("div")!;
+
+            const fiction = within(selectedGenresGroup).getByText(fictionGenre);
+
+            expect(fiction).toBeInTheDocument();
+
+            const fictionGroup = fiction.closest("li")!;
+
+            const fictionDeleteButton = within(fictionGroup).getByRole(
+              "button",
+              { name: "X" },
+            );
+
+            await user.click(fictionDeleteButton);
+
+            expect(fiction).not.toBeInTheDocument();
+            expect(genresSelect).toHaveValue("");
+          });
+        });
+      });
+    });
+
+    describe("And the user clicks the 'read' button", () => {
+      test("Then it should show 'read' as the check state", async () => {
+        render(<BookForm />);
+
+        const readCheckbox = screen.getByLabelText("Read");
+
+        await user.click(readCheckbox);
+
+        expect(readCheckbox).toBeChecked();
       });
     });
   });
