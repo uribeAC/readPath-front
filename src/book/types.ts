@@ -18,6 +18,8 @@ export interface Book {
   imageAlt: string;
 }
 
+export type BookSendData = Omit<Book, "id">;
+
 export type BookFormData = Omit<
   Book,
   | "id"

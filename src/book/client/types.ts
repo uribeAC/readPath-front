@@ -1,5 +1,5 @@
 import type { BookDto } from "../dto/types";
-import type { Book } from "../types";
+import type { Book, BookSendData } from "../types";
 
 export interface BookClientStructure {
   getBooks: (pageNumber?: number) => Promise<BooksInfo>;
@@ -7,6 +7,7 @@ export interface BookClientStructure {
     actionState: "read" | "toread",
     bookId: string,
   ) => Promise<Book>;
+  addBook: (bookData: BookSendData) => Promise<Book>;
 }
 
 export type BooksInfo = {
