@@ -1,6 +1,6 @@
 import type { BookDto } from "../dto/types";
 
-const narutoVol1: BookDto = {
+export const narutoVol1: BookDto = {
   _id: "1",
   title: "Naruto Vol. 1",
   author: "Masashi Kishimoto",
@@ -22,7 +22,7 @@ const narutoVol1: BookDto = {
   },
 };
 
-const onePieceVol1: BookDto = {
+export const onePieceVol1: BookDto = {
   _id: "2",
   title: "One Piece Vol. 1",
   author: "Eiichiro Oda",
@@ -35,7 +35,7 @@ const onePieceVol1: BookDto = {
   coverImageUrlSmall: "https://example.com/onepiece1-small.jpg",
   coverImageUrlBig: "https://example.com/onepiece1-big.jpg",
   imageAlt: "One Piece Volume 1 Cover",
-  state: "read",
+  state: "to read",
   yourRating: 5,
   readDates: {
     dateStarted: "2020-08-01",

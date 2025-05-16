@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
@@ -60,6 +60,65 @@ describe("Given the Layout component", () => {
 
       expect(narutoTitle).toBeInTheDocument();
       expect(spyFamilyTitle).toBeInTheDocument();
+    });
+
+    describe("And the user click's the to read button of Naruto Vol. 1", () => {
+      test("Then it should show the to read button disabled", async () => {
+        const expectedNarutoTitle = /naruto vol. 1/i;
+
+        const expectedToReadButton = /^to read/i;
+
+        render(
+          <Provider store={store}>
+            <MemoryRouter initialEntries={["/books"]}>
+              <Layout />
+              <AppTestRouter />
+            </MemoryRouter>
+          </Provider>,
+        );
+
+        const narutoTitle = await screen.findByRole("heading", {
+          name: expectedNarutoTitle,
+        });
+        const narutoCard = narutoTitle.closest("article");
+
+        const toReadButton = within(narutoCard!).getByRole("button", {
+          name: expectedToReadButton,
+        });
+
+        await user.click(toReadButton);
+
+        expect(toReadButton).toBeDisabled();
+      });
+    });
+
+    describe("And the user click's the read button of One Piece Vol. 1", () => {
+      test("Then it should show the read button disabled", async () => {
+        const expectedOnePieceTitle = /one piece vol. 1/i;
+        const expectedReadButton = /^read/i;
+
+        render(
+          <Provider store={store}>
+            <MemoryRouter initialEntries={["/books"]}>
+              <Layout />
+              <AppTestRouter />
+            </MemoryRouter>
+          </Provider>,
+        );
+
+        const onePieceTitle = await screen.findByRole("heading", {
+          name: expectedOnePieceTitle,
+        });
+        const onePieceCard = onePieceTitle.closest("article");
+
+        const readButton = within(onePieceCard!).getByRole("button", {
+          name: expectedReadButton,
+        });
+
+        await user.click(readButton);
+
+        expect(readButton).toBeDisabled();
+      });
     });
 
     describe("And the user clicks the link '>' with label 'Next page'", () => {
@@ -165,5 +224,76 @@ describe("Given the Layout component", () => {
         expect(vinlandTitle).not.toBeInTheDocument();
       });
     });
+  });
+
+  describe("When it renders in path /add book", () => {
+    test("Then it should show 'Add a new book' inside a heading", async () => {
+      const expectedTitleRegex = /add a new book/i;
+
+      render(
+        <Provider store={store}>
+          <MemoryRouter initialEntries={["/add-book"]}>
+            <Layout />
+            <AppTestRouter />
+          </MemoryRouter>
+        </Provider>,
+      );
+
+      const pageTitle = await screen.findByRole("heading", {
+        name: expectedTitleRegex,
+      });
+
+      expect(pageTitle).toBeInTheDocument();
+    });
+
+    describe("And the user fills the form and submits the book", () => {
+      test("Then it should show the 'Bookshelf' inside a heading", async () => {
+        render(
+          <Provider store={store}>
+            <MemoryRouter initialEntries={["/add-book"]}>
+              <Layout />
+              <AppTestRouter />
+            </MemoryRouter>
+          </Provider>,
+        );
+
+        const titleTextBox = await screen.findByLabelText(/title:/i);
+        const authorTextBox = await screen.findByLabelText(/author:/i);
+        const descriptionTextBox =
+          await screen.findByLabelText(/description:/i);
+        const coverImageTextBox =
+          await screen.findByLabelText(/cover image url:/i);
+        const genresSelect = await screen.findByLabelText(/genres:/i);
+        const publishedTextBox =
+          await screen.findByLabelText(/first published:/i);
+        const pagesTextBox = await screen.findByLabelText(/total pages:/i);
+        const stateCheckbox = await screen.findByRole("checkbox", {
+          name: /^read/i,
+        });
+
+        await user.type(titleTextBox, "Dragon Ball, Vol. 1");
+        await user.type(authorTextBox, "Akira Toriyama");
+        await user.type(
+          descriptionTextBox,
+          "Follow the adventures of a young monkey-tailed boy named Goku",
+        );
+        await user.type(coverImageTextBox, "https://images-na.jpg");
+        await user.selectOptions(genresSelect, "Adventure");
+        await user.type(publishedTextBox, "2003-05-06");
+        await user.type(pagesTextBox, "192");
+        await user.click(stateCheckbox);
+
+        const submitButton = await screen.findByRole("button", {
+          name: /add book/i,
+        });
+        await user.click(submitButton);
+        screen.debug();
+
+        const expectedPageTitle = /bookshelf/i;
+        const pageTitle = await screen.findByText(expectedPageTitle);
+
+        expect(pageTitle).toBeInTheDocument();
+      });
+    }, 10000);
   });
 });
