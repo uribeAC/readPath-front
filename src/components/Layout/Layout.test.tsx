@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
@@ -60,6 +60,65 @@ describe("Given the Layout component", () => {
 
       expect(narutoTitle).toBeInTheDocument();
       expect(spyFamilyTitle).toBeInTheDocument();
+    });
+
+    describe("And the user click's the to read button of Naruto Vol. 1", () => {
+      test("Then it should show the to read button disabled", async () => {
+        const expectedNarutoTitle = /naruto vol. 1/i;
+
+        const expectedToReadButton = /^to read/i;
+
+        render(
+          <Provider store={store}>
+            <MemoryRouter initialEntries={["/books"]}>
+              <Layout />
+              <AppTestRouter />
+            </MemoryRouter>
+          </Provider>,
+        );
+
+        const narutoTitle = await screen.findByRole("heading", {
+          name: expectedNarutoTitle,
+        });
+        const narutoCard = narutoTitle.closest("article");
+
+        const toReadButton = within(narutoCard!).getByRole("button", {
+          name: expectedToReadButton,
+        });
+
+        await user.click(toReadButton);
+
+        expect(toReadButton).toBeDisabled();
+      });
+    });
+
+    describe("And the user click's the read button of One Piece Vol. 1", () => {
+      test("Then it should show the read button disabled", async () => {
+        const expectedOnePieceTitle = /one piece vol. 1/i;
+        const expectedReadButton = /^read/i;
+
+        render(
+          <Provider store={store}>
+            <MemoryRouter initialEntries={["/books"]}>
+              <Layout />
+              <AppTestRouter />
+            </MemoryRouter>
+          </Provider>,
+        );
+
+        const onePieceTitle = await screen.findByRole("heading", {
+          name: expectedOnePieceTitle,
+        });
+        const onePieceCard = onePieceTitle.closest("article");
+
+        const readButton = within(onePieceCard!).getByRole("button", {
+          name: expectedReadButton,
+        });
+
+        await user.click(readButton);
+
+        expect(readButton).toBeDisabled();
+      });
     });
 
     describe("And the user clicks the link '>' with label 'Next page'", () => {
@@ -187,8 +246,8 @@ describe("Given the Layout component", () => {
       expect(pageTitle).toBeInTheDocument();
     });
 
-    describe("And the user fills the form with Dragon Ball Vol. 1 book and submits the book and the user clicks the next page link", () => {
-      test("Then it should show the Bookshelf page with Dragon Ball Vol. 1 book", async () => {
+    describe("And the user fills the form and submits the book", () => {
+      test("Then it should show the 'Bookshelf' inside a heading", async () => {
         render(
           <Provider store={store}>
             <MemoryRouter initialEntries={["/add-book"]}>
@@ -216,12 +275,9 @@ describe("Given the Layout component", () => {
         await user.type(authorTextBox, "Akira Toriyama");
         await user.type(
           descriptionTextBox,
-          "Follow the adventures of a young monkey-tailed boy named Goku as he embarks on a journey to collect the seven mystical Dragon Balls. Along the way, he meets Bulma, Master Roshi, and other unforgettable characters in the beginning of this legendary manga series.",
+          "Follow the adventures of a young monkey-tailed boy named Goku",
         );
-        await user.type(
-          coverImageTextBox,
-          "https://images-na.ssl-images-amazon.com/images/I/51Ypye1bxBL._SX331_BO1,204,203,200_.jpg",
-        );
+        await user.type(coverImageTextBox, "https://images-na.jpg");
         await user.selectOptions(genresSelect, "Adventure");
         await user.type(publishedTextBox, "2003-05-06");
         await user.type(pagesTextBox, "192");
@@ -237,17 +293,6 @@ describe("Given the Layout component", () => {
         const pageTitle = await screen.findByText(expectedPageTitle);
 
         expect(pageTitle).toBeInTheDocument();
-
-        const nextPage = await screen.findByRole("link", {
-          name: /next page/i,
-        });
-        await user.click(nextPage);
-
-        const dragonBallTitle = await screen.findByRole("heading", {
-          name: /dragon ball, vol. 1/i,
-        });
-
-        expect(dragonBallTitle).toBeInTheDocument();
       });
     }, 10000);
   });

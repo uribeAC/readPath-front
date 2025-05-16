@@ -3,6 +3,8 @@ import {
   dragonBallReadDto,
   dragonBallToReadDto,
   mangaFixtures,
+  narutoVol1,
+  onePieceVol1,
 } from "../fixtures/fixturesDto";
 import type { BooksInfoDto } from "../client/types";
 import { dragonBallRead, dragonBallToRead } from "../fixtures/fixtures";
@@ -46,6 +48,18 @@ export const handlers = [
 
   http.patch(`${apiUrl}/books/mark-as-toread/${dragonBallRead.id}`, () => {
     return HttpResponse.json<{ book: BookDto }>({ book: dragonBallToReadDto });
+  }),
+
+  http.patch(`${apiUrl}/books/mark-as-toread/${narutoVol1._id}`, () => {
+    return HttpResponse.json<{ book: BookDto }>({
+      book: { ...narutoVol1, state: "to read" },
+    });
+  }),
+
+  http.patch(`${apiUrl}/books/mark-as-read/${onePieceVol1._id}`, () => {
+    return HttpResponse.json<{ book: BookDto }>({
+      book: { ...onePieceVol1, state: "read" },
+    });
   }),
 
   http.post(`${apiUrl}/books`, () => {
