@@ -1,8 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
-import { Provider } from "react-redux";
+import ContextProvider from "../../../test-utils/ContextProvider";
 import AddBookPage from "./AddBookPage";
-import store from "../../../store/store";
 
 describe("Given the AddBookPage component", () => {
   describe("When it renders", () => {
@@ -10,10 +8,9 @@ describe("Given the AddBookPage component", () => {
       const expectedTitleRegex = /add a new book/i;
 
       render(
-        <Provider store={store}>
+        <ContextProvider>
           <AddBookPage />
-        </Provider>,
-        { wrapper: MemoryRouter },
+        </ContextProvider>,
       );
 
       const pageTitle = screen.getByRole("heading", {

@@ -1,8 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter } from "react-router";
-import { Provider } from "react-redux";
-import store from "../../../store/store";
+import ContextProvider from "../../../test-utils/ContextProvider";
 import BookForm from "./BookForm";
 
 const user = userEvent.setup();
@@ -19,12 +17,10 @@ describe("Given the BookForm component", () => {
       const expectedLabel = /title/i;
 
       render(
-        <Provider store={store}>
+        <ContextProvider>
           <BookForm action={action} />
-        </Provider>,
-        { wrapper: MemoryRouter },
+        </ContextProvider>,
       );
-
       const titleTextBox = screen.getByLabelText(expectedLabel);
 
       expect(titleTextBox).toBeInTheDocument();
@@ -34,10 +30,9 @@ describe("Given the BookForm component", () => {
       const expectedLabel = /to read/i;
 
       render(
-        <Provider store={store}>
+        <ContextProvider>
           <BookForm action={action} />
-        </Provider>,
-        { wrapper: MemoryRouter },
+        </ContextProvider>,
       );
 
       const toReadCheckbox = screen.getByLabelText(expectedLabel);
@@ -49,10 +44,9 @@ describe("Given the BookForm component", () => {
       const expectedLabel = /genres/i;
 
       render(
-        <Provider store={store}>
+        <ContextProvider>
           <BookForm action={action} />
-        </Provider>,
-        { wrapper: MemoryRouter },
+        </ContextProvider>,
       );
 
       const genresSelect = screen.getByLabelText(expectedLabel);
@@ -64,12 +58,10 @@ describe("Given the BookForm component", () => {
       const expectedTitle = /genres selected/i;
 
       render(
-        <Provider store={store}>
+        <ContextProvider>
           <BookForm action={action} />
-        </Provider>,
-        { wrapper: MemoryRouter },
+        </ContextProvider>,
       );
-
       const genresSelectedTitle = screen.queryByRole("heading", {
         name: expectedTitle,
       });
@@ -81,10 +73,9 @@ describe("Given the BookForm component", () => {
       const expectedButtonRegex = /add book/i;
 
       render(
-        <Provider store={store}>
+        <ContextProvider>
           <BookForm action={action} />
-        </Provider>,
-        { wrapper: MemoryRouter },
+        </ContextProvider>,
       );
 
       const submitButton = screen.getByRole("button", {
@@ -101,10 +92,9 @@ describe("Given the BookForm component", () => {
         const expectedLabel = /title/i;
 
         render(
-          <Provider store={store}>
+          <ContextProvider>
             <BookForm action={action} />
-          </Provider>,
-          { wrapper: MemoryRouter },
+          </ContextProvider>,
         );
 
         const titleTextBox = screen.getByLabelText(expectedLabel);
@@ -121,10 +111,9 @@ describe("Given the BookForm component", () => {
         const expectedLabel = /genres/i;
 
         render(
-          <Provider store={store}>
+          <ContextProvider>
             <BookForm action={action} />
-          </Provider>,
-          { wrapper: MemoryRouter },
+          </ContextProvider>,
         );
 
         const genresSelect = screen.getByLabelText(expectedLabel);
@@ -143,10 +132,9 @@ describe("Given the BookForm component", () => {
         const expectedLabel = /genres/i;
 
         render(
-          <Provider store={store}>
+          <ContextProvider>
             <BookForm action={action} />
-          </Provider>,
-          { wrapper: MemoryRouter },
+          </ContextProvider>,
         );
 
         const genresSelect = screen.getByLabelText(expectedLabel);
@@ -175,10 +163,9 @@ describe("Given the BookForm component", () => {
           const expectedLabel = /genres/i;
 
           render(
-            <Provider store={store}>
+            <ContextProvider>
               <BookForm action={action} />
-            </Provider>,
-            { wrapper: MemoryRouter },
+            </ContextProvider>,
           );
 
           const genresSelect = screen.getByLabelText(expectedLabel);
@@ -218,10 +205,9 @@ describe("Given the BookForm component", () => {
             const expectedLabel = /genres/i;
 
             render(
-              <Provider store={store}>
+              <ContextProvider>
                 <BookForm action={action} />
-              </Provider>,
-              { wrapper: MemoryRouter },
+              </ContextProvider>,
             );
 
             const genresSelect = screen.getByLabelText(expectedLabel);
@@ -256,10 +242,9 @@ describe("Given the BookForm component", () => {
     describe("And the user clicks the 'read' button", () => {
       test("Then it should show 'read' as the check state", async () => {
         render(
-          <Provider store={store}>
+          <ContextProvider>
             <BookForm action={action} />
-          </Provider>,
-          { wrapper: MemoryRouter },
+          </ContextProvider>,
         );
 
         const readCheckbox = screen.getByLabelText("Read");
@@ -273,10 +258,9 @@ describe("Given the BookForm component", () => {
     describe("And the user fills the form and clicks on 'Add book' button", () => {
       test("Then it should show 'Add book' button enabled and it should call the button action", async () => {
         render(
-          <Provider store={store}>
+          <ContextProvider>
             <BookForm action={action} />
-          </Provider>,
-          { wrapper: MemoryRouter },
+          </ContextProvider>,
         );
 
         const titleTextBox = screen.getByLabelText(/title:/i);

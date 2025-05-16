@@ -3,8 +3,8 @@ import { Outlet } from "react-router";
 import Modal from "../Modal/Modal";
 import Header from "../Header/Header";
 import Navigation from "../Navigation/Navigation";
-import "./Layout.css";
 import useModal from "../../hooks/useModal";
+import "./Layout.css";
 
 const Layout: React.FC = () => {
   const {
