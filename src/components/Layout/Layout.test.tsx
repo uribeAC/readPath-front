@@ -14,7 +14,13 @@ describe("Given the Layout component", () => {
     test("Then it should show 'read Path' inside a level 1 heading", () => {
       const expectedTitle = /readPath/i;
 
-      render(<Layout />, { wrapper: MemoryRouter });
+      render(
+        <Provider store={store}>
+          <MemoryRouter>
+            <Layout />
+          </MemoryRouter>
+        </Provider>,
+      );
 
       const appTitle = screen.getByRole("heading", {
         name: expectedTitle,
@@ -27,7 +33,13 @@ describe("Given the Layout component", () => {
     test("Then it should show a 'Bookshelf' link", () => {
       const expectedLinkName = /bookshelf/i;
 
-      render(<Layout />, { wrapper: MemoryRouter });
+      render(
+        <Provider store={store}>
+          <MemoryRouter>
+            <Layout />
+          </MemoryRouter>
+        </Provider>,
+      );
 
       const bookshelfLink = screen.getByRole("link", {
         name: expectedLinkName,
@@ -287,12 +299,11 @@ describe("Given the Layout component", () => {
           name: /add book/i,
         });
         await user.click(submitButton);
-        screen.debug();
 
-        const expectedPageTitle = /bookshelf/i;
-        const pageTitle = await screen.findByText(expectedPageTitle);
+        const expectedMessage = /book added to bookshelf/i;
+        const modalMessage = await screen.findByText(expectedMessage);
 
-        expect(pageTitle).toBeInTheDocument();
+        expect(modalMessage).toBeInTheDocument();
       });
     }, 10000);
   });

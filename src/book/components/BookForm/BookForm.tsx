@@ -5,6 +5,7 @@ import Button from "../../../components/Button/Button";
 import type { BookFormData, BookSendData } from "../../types";
 import { bookGenres } from "../../data/genres";
 import { transfromBookFormDataToBookSendData } from "../../dto/transformers";
+import useModal from "../../../hooks/useModal";
 import "./BookForm.css";
 
 interface BookFormProps {
@@ -12,6 +13,8 @@ interface BookFormProps {
 }
 
 const BookForm: React.FC<BookFormProps> = ({ action }) => {
+  const { showModal } = useModal();
+
   const initialBookData: BookFormData = {
     title: "",
     author: "",
@@ -132,6 +135,7 @@ const BookForm: React.FC<BookFormProps> = ({ action }) => {
       await action(toSendBook);
 
       navigate("/books");
+      showModal("Book added to bookshelf", false);
     } catch {
       setErrorMessage("Error adding new book");
       setTitleErrorMessage("This book title is already in your bookshelf");
