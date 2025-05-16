@@ -1,10 +1,8 @@
 import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
 import userEvent from "@testing-library/user-event";
-import { Provider } from "react-redux";
-import Layout from "./Layout";
-import store from "../../store/store";
+import ContextProvider from "../../test-utils/ContextProvider";
 import AppTestRouter from "../../router/AppTestRouter";
+import Layout from "./Layout";
 
 const user = userEvent.setup();
 window.scrollTo = vitest.fn();
@@ -15,11 +13,9 @@ describe("Given the Layout component", () => {
       const expectedTitle = /readPath/i;
 
       render(
-        <Provider store={store}>
-          <MemoryRouter>
-            <Layout />
-          </MemoryRouter>
-        </Provider>,
+        <ContextProvider>
+          <Layout />
+        </ContextProvider>,
       );
 
       const appTitle = screen.getByRole("heading", {
@@ -34,11 +30,9 @@ describe("Given the Layout component", () => {
       const expectedLinkName = /bookshelf/i;
 
       render(
-        <Provider store={store}>
-          <MemoryRouter>
-            <Layout />
-          </MemoryRouter>
-        </Provider>,
+        <ContextProvider>
+          <Layout />
+        </ContextProvider>,
       );
 
       const bookshelfLink = screen.getByRole("link", {
@@ -55,12 +49,10 @@ describe("Given the Layout component", () => {
       const expectedSpyFamilyTitle = /spy x family vol. 1/i;
 
       render(
-        <Provider store={store}>
-          <MemoryRouter initialEntries={["/books"]}>
-            <Layout />
-            <AppTestRouter />
-          </MemoryRouter>
-        </Provider>,
+        <ContextProvider initialEntries={["/books"]}>
+          <Layout />
+          <AppTestRouter />
+        </ContextProvider>,
       );
 
       const narutoTitle = await screen.findByRole("heading", {
@@ -77,16 +69,13 @@ describe("Given the Layout component", () => {
     describe("And the user click's the to read button of Naruto Vol. 1", () => {
       test("Then it should show the to read button disabled", async () => {
         const expectedNarutoTitle = /naruto vol. 1/i;
-
         const expectedToReadButton = /^to read/i;
 
         render(
-          <Provider store={store}>
-            <MemoryRouter initialEntries={["/books"]}>
-              <Layout />
-              <AppTestRouter />
-            </MemoryRouter>
-          </Provider>,
+          <ContextProvider initialEntries={["/books"]}>
+            <Layout />
+            <AppTestRouter />
+          </ContextProvider>,
         );
 
         const narutoTitle = await screen.findByRole("heading", {
@@ -110,12 +99,10 @@ describe("Given the Layout component", () => {
         const expectedReadButton = /^read/i;
 
         render(
-          <Provider store={store}>
-            <MemoryRouter initialEntries={["/books"]}>
-              <Layout />
-              <AppTestRouter />
-            </MemoryRouter>
-          </Provider>,
+          <ContextProvider initialEntries={["/books"]}>
+            <Layout />
+            <AppTestRouter />
+          </ContextProvider>,
         );
 
         const onePieceTitle = await screen.findByRole("heading", {
@@ -140,12 +127,10 @@ describe("Given the Layout component", () => {
         const expectedDemonTitle = /demon slayer: kimetsu no yaiba vol. 1/i;
 
         render(
-          <Provider store={store}>
-            <MemoryRouter initialEntries={["/books"]}>
-              <Layout />
-              <AppTestRouter />
-            </MemoryRouter>
-          </Provider>,
+          <ContextProvider initialEntries={["/books"]}>
+            <Layout />
+            <AppTestRouter />
+          </ContextProvider>,
         );
 
         const narutoTitle = await screen.findByRole("heading", {
@@ -179,12 +164,10 @@ describe("Given the Layout component", () => {
       const expectedDemonTitle = /demon slayer: kimetsu no yaiba vol. 1/i;
 
       render(
-        <Provider store={store}>
-          <MemoryRouter initialEntries={["/books?page=2"]}>
-            <Layout />
-            <AppTestRouter />
-          </MemoryRouter>
-        </Provider>,
+        <ContextProvider initialEntries={["/books?page=2"]}>
+          <Layout />
+          <AppTestRouter />
+        </ContextProvider>,
       );
 
       const vinlandTitle = await screen.findByRole("heading", {
@@ -205,12 +188,10 @@ describe("Given the Layout component", () => {
         const expectedVinlandTitle = /vinland saga vol. 1/i;
 
         render(
-          <Provider store={store}>
-            <MemoryRouter initialEntries={["/books?page=2"]}>
-              <Layout />
-              <AppTestRouter />
-            </MemoryRouter>
-          </Provider>,
+          <ContextProvider initialEntries={["/books?page=2"]}>
+            <Layout />
+            <AppTestRouter />
+          </ContextProvider>,
         );
 
         const vinlandTitle = await screen.findByRole("heading", {
@@ -243,12 +224,10 @@ describe("Given the Layout component", () => {
       const expectedTitleRegex = /add a new book/i;
 
       render(
-        <Provider store={store}>
-          <MemoryRouter initialEntries={["/add-book"]}>
-            <Layout />
-            <AppTestRouter />
-          </MemoryRouter>
-        </Provider>,
+        <ContextProvider initialEntries={["/add-book"]}>
+          <Layout />
+          <AppTestRouter />
+        </ContextProvider>,
       );
 
       const pageTitle = await screen.findByRole("heading", {
@@ -261,12 +240,10 @@ describe("Given the Layout component", () => {
     describe("And the user fills the form and submits the book", () => {
       test("Then it should show the 'Bookshelf' inside a heading", async () => {
         render(
-          <Provider store={store}>
-            <MemoryRouter initialEntries={["/add-book"]}>
-              <Layout />
-              <AppTestRouter />
-            </MemoryRouter>
-          </Provider>,
+          <ContextProvider initialEntries={["/add-book"]}>
+            <Layout />
+            <AppTestRouter />
+          </ContextProvider>,
         );
 
         const titleTextBox = await screen.findByLabelText(/title:/i);
