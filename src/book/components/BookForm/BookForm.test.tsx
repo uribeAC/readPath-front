@@ -9,12 +9,18 @@ const user = userEvent.setup();
 
 describe("Given the BookForm component", () => {
   describe("When it renders", () => {
+    const action = vitest.fn();
+
+    beforeEach(() => {
+      action.mockClear();
+    });
+
     test("Then it should show a 'Title' text box", () => {
       const expectedLabel = /title/i;
 
       render(
         <Provider store={store}>
-          <BookForm />
+          <BookForm action={action} />
         </Provider>,
         { wrapper: MemoryRouter },
       );
@@ -29,7 +35,7 @@ describe("Given the BookForm component", () => {
 
       render(
         <Provider store={store}>
-          <BookForm />
+          <BookForm action={action} />
         </Provider>,
         { wrapper: MemoryRouter },
       );
@@ -44,7 +50,7 @@ describe("Given the BookForm component", () => {
 
       render(
         <Provider store={store}>
-          <BookForm />
+          <BookForm action={action} />
         </Provider>,
         { wrapper: MemoryRouter },
       );
@@ -59,7 +65,7 @@ describe("Given the BookForm component", () => {
 
       render(
         <Provider store={store}>
-          <BookForm />
+          <BookForm action={action} />
         </Provider>,
         { wrapper: MemoryRouter },
       );
@@ -71,6 +77,24 @@ describe("Given the BookForm component", () => {
       expect(genresSelectedTitle).not.toBeInTheDocument();
     });
 
+    test("Then it should show a 'Add book' inside a disabled button", () => {
+      const expectedButtonRegex = /add book/i;
+
+      render(
+        <Provider store={store}>
+          <BookForm action={action} />
+        </Provider>,
+        { wrapper: MemoryRouter },
+      );
+
+      const submitButton = screen.getByRole("button", {
+        name: expectedButtonRegex,
+      });
+
+      expect(submitButton).toBeInTheDocument();
+      expect(submitButton).toBeDisabled();
+    });
+
     describe("And the user types 'Dragon Ball Vol. 1' in 'Title' text box", () => {
       test("Then it should show 'Dragon Ball Vol. 1' in 'Title' text box", async () => {
         const bookTitle = "Dragon Ball Vol. 1";
@@ -78,7 +102,7 @@ describe("Given the BookForm component", () => {
 
         render(
           <Provider store={store}>
-            <BookForm />
+            <BookForm action={action} />
           </Provider>,
           { wrapper: MemoryRouter },
         );
@@ -91,14 +115,14 @@ describe("Given the BookForm component", () => {
       });
     });
 
-    describe("And the use selects 'Fantasy' in 'Genres' options select", () => {
+    describe("And the user selects 'Fantasy' in 'Genres' options select", () => {
       test("Then it should show 'Fantasy' in 'Genres' options select", async () => {
         const genre = "Fantasy";
         const expectedLabel = /genres/i;
 
         render(
           <Provider store={store}>
-            <BookForm />
+            <BookForm action={action} />
           </Provider>,
           { wrapper: MemoryRouter },
         );
@@ -120,7 +144,7 @@ describe("Given the BookForm component", () => {
 
         render(
           <Provider store={store}>
-            <BookForm />
+            <BookForm action={action} />
           </Provider>,
           { wrapper: MemoryRouter },
         );
@@ -152,7 +176,7 @@ describe("Given the BookForm component", () => {
 
           render(
             <Provider store={store}>
-              <BookForm />
+              <BookForm action={action} />
             </Provider>,
             { wrapper: MemoryRouter },
           );
@@ -195,7 +219,7 @@ describe("Given the BookForm component", () => {
 
             render(
               <Provider store={store}>
-                <BookForm />
+                <BookForm action={action} />
               </Provider>,
               { wrapper: MemoryRouter },
             );
@@ -233,7 +257,7 @@ describe("Given the BookForm component", () => {
       test("Then it should show 'read' as the check state", async () => {
         render(
           <Provider store={store}>
-            <BookForm />
+            <BookForm action={action} />
           </Provider>,
           { wrapper: MemoryRouter },
         );
@@ -245,5 +269,57 @@ describe("Given the BookForm component", () => {
         expect(readCheckbox).toBeChecked();
       });
     });
+
+    describe("And the user fills the form and clicks on 'Add book' button", () => {
+      test("Then it should show 'Add book' button enabled and it should call the button action", async () => {
+        render(
+          <Provider store={store}>
+            <BookForm action={action} />
+          </Provider>,
+          { wrapper: MemoryRouter },
+        );
+
+        const titleTextBox = screen.getByLabelText(/title:/i);
+        const authorTextBox = screen.getByLabelText(/author:/i);
+        const descriptionTextBox = screen.getByLabelText(/description:/i);
+        const sagaTextBox = screen.getByLabelText(/saga:/i);
+        const coverImageTextBox = screen.getByLabelText(/cover image url:/i);
+        const genresSelect = screen.getByLabelText(/genres:/i);
+        const publishedTextBox = screen.getByLabelText(/first published:/i);
+        const pagesTextBox = screen.getByLabelText(/total pages:/i);
+        const stateCheckbox = screen.getByLabelText(/^read/i);
+        const dateStartedTextBox = screen.getByLabelText(/date started:/i);
+        const dateFinishedTextBox = screen.getByLabelText(/date finished:/i);
+        const ratingTextBox = screen.getByLabelText(/your rating/i);
+
+        await user.type(titleTextBox, "Coraline");
+        await user.type(authorTextBox, "Neil Gaiman");
+        await user.type(
+          descriptionTextBox,
+          "In Coraline's family's new flat are twenty-one windows and fourteen doors. Thirteen of the doors open and close. ",
+        );
+        await user.type(sagaTextBox, "Coraline world, 1");
+        await user.type(
+          coverImageTextBox,
+          "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1722023643i/202086824.jpg",
+        );
+        await user.selectOptions(genresSelect, "Fantasy");
+        await user.selectOptions(genresSelect, "Horror");
+        await user.type(publishedTextBox, "2002-07-02");
+        await user.type(pagesTextBox, "300");
+        await user.click(stateCheckbox);
+        await user.type(dateStartedTextBox, "2002-07-02");
+        await user.type(dateFinishedTextBox, "2002-07-02");
+        await user.type(ratingTextBox, "5");
+
+        const submitButton = screen.getByRole("button", { name: /add book/i });
+
+        expect(submitButton).toBeEnabled();
+
+        await user.click(submitButton);
+
+        expect(action).toHaveBeenCalled();
+      });
+    }, 10000);
   });
 });

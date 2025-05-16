@@ -1,16 +1,17 @@
 import type React from "react";
-import Button from "../../../components/Button/Button";
-import type { BookFormData } from "../../types";
-import "./BookForm.css";
 import { useState } from "react";
-import { bookGenres } from "../../data/genres";
-import useBooks from "../../hooks/useBooks";
-import { transfromBookFormDataToBookSendData } from "../../dto/transformers";
 import { useNavigate } from "react-router";
+import Button from "../../../components/Button/Button";
+import type { BookFormData, BookSendData } from "../../types";
+import { bookGenres } from "../../data/genres";
+import { transfromBookFormDataToBookSendData } from "../../dto/transformers";
+import "./BookForm.css";
 
-const BookForm: React.FC = () => {
-  const { createBook } = useBooks();
+interface BookFormProps {
+  action: (bookData: BookSendData) => Promise<void>;
+}
 
+const BookForm: React.FC<BookFormProps> = ({ action }) => {
   const initialBookData: BookFormData = {
     title: "",
     author: "",
@@ -128,7 +129,7 @@ const BookForm: React.FC = () => {
     );
 
     try {
-      await createBook(toSendBook);
+      await action(toSendBook);
 
       navigate("/");
     } catch {
