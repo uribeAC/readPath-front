@@ -19,9 +19,9 @@ const useModal = () => {
   };
 
   const hideModal = () => {
-    const hideMoal = hideModalActionCreator();
+    const hideModal = hideModalActionCreator();
 
-    dispatch(hideMoal);
+    dispatch(hideModal);
   };
 
   return {

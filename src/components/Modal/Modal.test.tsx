@@ -35,7 +35,7 @@ describe("Given the Modal component", () => {
       test("Then it should call the received action", async () => {
         const iconAlt = /close modal/i;
 
-        render(<Modal action={action} isError={false} text={modalText} />);
+        render(<Modal action={action} isError={true} text={modalText} />);
 
         const modalButton = screen.getByRole("button", { name: iconAlt });
 

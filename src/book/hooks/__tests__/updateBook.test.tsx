@@ -5,11 +5,12 @@ import type { BookState } from "../../slice/bookSlice";
 import setupStore from "../../../store/setupStore";
 import useBooks from "../useBooks";
 import { dragonBallRead, dragonBallToRead } from "../../fixtures/fixtures";
+import type { ModalState } from "../../../types";
 
 describe("Given the updateBook function", () => {
   describe("When it's called with Dragon Ball book id marked as 'to read' and an action state of 'read'", () => {
     test("Then it should update the book Dragon Ball marked as 'read' in booksInfo", async () => {
-      const initialState: { books: BookState } = {
+      const initialState: { books: BookState; modal: ModalState } = {
         books: {
           booksInfo: {
             books: [dragonBallToRead],
@@ -20,6 +21,11 @@ describe("Given the updateBook function", () => {
             },
           },
           isLoading: "false",
+        },
+        modal: {
+          isError: false,
+          isModalActive: false,
+          modalText: "",
         },
       };
 
