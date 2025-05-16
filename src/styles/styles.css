@@ -68,3 +68,8 @@ textarea {
   font: inherit;
   background: none;
 }
+
+dialog {
+  border: none;
+  padding: 0;
+}
