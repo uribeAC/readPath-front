@@ -19,8 +19,8 @@ const Modal: React.FC<ModalProps> = ({ action, text, isError }) => {
         aria-label="cerrar modal"
       />
       <main className={`modal__content${errorClass}`}>
-        <h2 className="modal__text">{text}</h2>
-        <button className="modal__close">
+        <span className="modal__text">{text}</span>
+        <button className="modal__close" onClick={action}>
           <img
             src="/Remove-Bold.svg"
             alt="close modal"
