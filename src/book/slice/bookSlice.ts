@@ -95,6 +95,31 @@ const bookSlice = createSlice({
         isLoading: "false",
       };
     },
+    deleteBook: (
+      {
+        booksInfo: {
+          books,
+          totals: { books: booksTotal, booksRead, booksToRead },
+        },
+      },
+      {
+        payload: {
+          deletedBook: { id, state },
+        },
+      }: PayloadAction<{ deletedBook: Book }>,
+    ): BookState => {
+      return {
+        booksInfo: {
+          books: books.filter((book) => book.id !== id),
+          totals: {
+            books: booksTotal - 1,
+            booksRead: state === "read" ? booksRead - 1 : booksRead,
+            booksToRead: state === "to read" ? booksToRead - 1 : booksToRead,
+          },
+        },
+        isLoading: "false",
+      };
+    },
   },
 });
 
@@ -104,6 +129,7 @@ export const {
   loadBooks: loadBooksActionCreator,
   changeBookState: changeBookStateActionCreator,
   addBook: addBookActionCreator,
+  deleteBook: deleteBookActionCreator,
   startLoading,
   startSlowLoading,
 } = bookSlice.actions;
