@@ -71,6 +71,27 @@ class BookClient implements BookClientStructure {
 
     return newBook;
   };
+
+  deleteBook = async (bookId: string): Promise<Book> => {
+    const fetchUrl = `${this.apiUrl}/books/${bookId}`;
+
+    const response = await fetch(fetchUrl, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      throw new Error("Error deleting book");
+    }
+
+    const { book: deletedBookDto } = (await response.json()) as {
+      book: BookDto;
+    };
+
+    const deletedBook = transformBookDtoToBook(deletedBookDto);
+
+    return deletedBook;
+  };
 }
 
 export default BookClient;

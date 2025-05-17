@@ -36,6 +36,7 @@ const Rating: React.FC<RatingProps> = ({ rating }) => {
             alt={imageStar.starAlt}
             width={15}
             height={15}
+            aria-hidden={true}
           />
         </li>
       ))}

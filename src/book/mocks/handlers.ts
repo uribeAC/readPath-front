@@ -67,4 +67,10 @@ export const handlers = [
       book: dragonBallReadDto,
     });
   }),
+
+  http.delete(`${apiUrl}/books/${narutoVol1._id}`, () => {
+    return HttpResponse.json<{ book: BookDto }>({
+      book: narutoVol1,
+    });
+  }),
 ];
