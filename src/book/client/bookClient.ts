@@ -81,7 +81,7 @@ class BookClient implements BookClientStructure {
     });
 
     if (!response.ok) {
-      throw new Error("Error adding deleting book");
+      throw new Error("Error deleting book");
     }
 
     const { book: deletedBookDto } = (await response.json()) as {
