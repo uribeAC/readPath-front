@@ -1,11 +1,11 @@
 import { renderHook } from "@testing-library/react";
 import { Provider } from "react-redux";
+import { act } from "react";
 import setupStore from "../../../store/setupStore";
 import type { ModalState } from "../../../types";
 import { narutoBook } from "../../fixtures/fixtures";
 import type { BookState } from "../../slice/bookSlice";
 import useBooks from "../useBooks";
-import { act } from "react";
 
 describe("Given the removeBook function", () => {
   describe("When it's called with Naruto Vol. 1 book id", () => {

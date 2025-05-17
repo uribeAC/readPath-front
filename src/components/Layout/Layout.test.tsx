@@ -181,6 +181,85 @@ describe("Given the Layout component", () => {
       expect(demonTitle).toBeInTheDocument();
     });
 
+    describe("And the user clicks the 'delete button' of Vinland Saga book", () => {
+      test("Then it should show the message 'Book deleted from bookshelf'", async () => {
+        const expectedVinlandTitle = /vinland saga vol. 1/i;
+        const expectedButtonLabel = /delete book/i;
+        const expectedModalMessage = /book deleted from bookshelf/i;
+
+        render(
+          <ContextProvider initialEntries={["/books?page=2"]}>
+            <Layout />
+            <AppTestRouter />
+          </ContextProvider>,
+        );
+
+        const vinlandTitle = await screen.findByRole("heading", {
+          name: expectedVinlandTitle,
+        });
+
+        expect(vinlandTitle).toBeInTheDocument();
+
+        const vinlandCard = vinlandTitle.closest("article")!;
+
+        const deleteButton = await within(vinlandCard).findByRole("button", {
+          name: expectedButtonLabel,
+        });
+        await user.click(deleteButton);
+
+        const modal = await screen.findByText(expectedModalMessage);
+
+        expect(modal).toBeInTheDocument();
+      });
+
+      describe("And the user clicks the 'close modal' button of the 'Book deleted from bookshelf' message", () => {
+        test("Then it should not show Vinland Saga book title inside a heading anymore", async () => {
+          const expectedVinlandTitle = /vinland saga vol. 1/i;
+          const expectedButtonLabel = /delete book/i;
+          const expectedModalMessage = /book deleted from bookshelf/i;
+          const expectedModalButton = /close modal/i;
+
+          render(
+            <ContextProvider initialEntries={["/books?page=2"]}>
+              <Layout />
+              <AppTestRouter />
+            </ContextProvider>,
+          );
+
+          const vinlandTitle = await screen.findByRole("heading", {
+            name: expectedVinlandTitle,
+          });
+
+          expect(vinlandTitle).toBeInTheDocument();
+
+          const vinlandCard = vinlandTitle.closest("article")!;
+
+          const deleteButton = await within(vinlandCard).findByRole("button", {
+            name: expectedButtonLabel,
+          });
+          await user.click(deleteButton);
+
+          const modalMessage = await screen.findByText(expectedModalMessage);
+
+          expect(modalMessage).toBeInTheDocument();
+
+          const modal = modalMessage.closest("main")!;
+
+          const closeModalButton = await within(modal).getByRole("button", {
+            name: expectedModalButton,
+          });
+
+          await user.click(closeModalButton);
+
+          const vinlandDeletedTitle = await screen.queryByRole("heading", {
+            name: expectedVinlandTitle,
+          });
+
+          expect(vinlandDeletedTitle).not.toBeInTheDocument();
+        });
+      });
+    });
+
     describe("And the user clicks the link '<' with label 'Previous page'", () => {
       test("Then it should show Naruto Vol. 1 and Spy X Family Vol. 1 book titles inside a heading", async () => {
         const expectedNarutoTitle = /naruto vol. 1/i;

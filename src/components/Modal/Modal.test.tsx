@@ -31,7 +31,7 @@ describe("Given the Modal component", () => {
       expect(modalButton).toBeInTheDocument();
     });
 
-    describe("And the user clicks the 'close button'", () => {
+    describe("And the user clicks the 'close modal' button", () => {
       test("Then it should call the received action", async () => {
         const iconAlt = /close modal/i;
 

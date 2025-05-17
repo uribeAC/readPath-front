@@ -45,5 +45,21 @@ describe("Given the BookCard component", () => {
 
       expect(ratingStars).toBeInTheDocument();
     });
+
+    test("Then it should show a delete book button", () => {
+      const expectedButtonLabel = /delete book/i;
+
+      render(
+        <Provider store={store}>
+          <BookCard book={narutoBook} index={1} />
+        </Provider>,
+      );
+
+      const deleteButton = screen.getByRole("button", {
+        name: expectedButtonLabel,
+      });
+
+      expect(deleteButton).toBeInTheDocument();
+    });
   });
 });

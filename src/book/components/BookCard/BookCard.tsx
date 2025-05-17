@@ -4,6 +4,7 @@ import Button from "../../../components/Button/Button.tsx";
 import useBooks from "../../hooks/useBooks.ts";
 import Rating from "../Rating/Rating.tsx";
 import "./BookCard.css";
+import useModal from "../../../hooks/useModal.ts";
 
 interface BookCardProps {
   book: Book;
@@ -24,13 +25,19 @@ const BookCard: React.FC<BookCardProps> = ({
   },
   index,
 }) => {
-  const { updateBook } = useBooks();
+  const { updateBook, removeBook } = useBooks();
+  const { showModal } = useModal();
 
   const isRead = state === "read";
   const isToRead = state === "to read";
 
   const loadingType = index <= 3 ? "eager" : "lazy";
   const priorityType = index <= 3 ? "high" : "low";
+
+  const deleteAction = (bookId: string) => {
+    removeBook(bookId);
+    showModal("Book deleted from bookshelf", false);
+  };
 
   return (
     <article className="book">
@@ -42,34 +49,47 @@ const BookCard: React.FC<BookCardProps> = ({
         loading={loadingType}
         fetchPriority={priorityType}
       />
-      <div className="book__data">
-        <div className="book__info">
-          <h3 className="book__title">{title}</h3>
-          <span className="book__author">By {author}</span>
-          <span className="book__info-text">{pages} pages</span>
-          <span className="book__info-text">
-            First published {firstPublished}
-          </span>
-        </div>
-        <footer className="book__footer">
-          <div className="book__state">
-            <Button
-              action={() => updateBook("read", id)}
-              isSelected={isRead}
-              isDisabled={isRead}
-            >
-              read
-            </Button>
-            <Button
-              action={() => updateBook("toread", id)}
-              isSelected={isToRead}
-              isDisabled={isToRead}
-            >
-              to read
-            </Button>
+      <div className="book__display">
+        <div className="book__data">
+          <div className="book__info">
+            <h3 className="book__title">{title}</h3>
+            <span className="book__author">By {author}</span>
+            <span className="book__info-text">{pages} pages</span>
+            <span className="book__info-text">
+              First published {firstPublished}
+            </span>
           </div>
-          {yourRating && <Rating rating={yourRating} />}
-        </footer>
+          <footer className="book__footer">
+            <div className="book__state">
+              <Button
+                action={() => updateBook("read", id)}
+                isSelected={isRead}
+                isDisabled={isRead}
+              >
+                read
+              </Button>
+              <Button
+                action={() => updateBook("toread", id)}
+                isSelected={isToRead}
+                isDisabled={isToRead}
+              >
+                to read
+              </Button>
+            </div>
+            {yourRating && <Rating rating={yourRating} />}
+          </footer>
+        </div>
+        <div className="book__buttons">
+          <button onClick={() => deleteAction(id)}>
+            <img
+              src="/Remove-Bold.svg"
+              alt="delete book"
+              width={24}
+              height={24}
+              className="book__button"
+            />
+          </button>
+        </div>
       </div>
     </article>
   );
