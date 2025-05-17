@@ -2,7 +2,6 @@ import {
   transformBookDtoToBook,
   transformBooksInfoDtoToBooksInfo,
 } from "../dto/transformers";
-import type { BookDto } from "../dto/types";
 import type { Book, BookSendData } from "../types";
 import type {
   BookClientStructure,
@@ -30,6 +29,22 @@ class BookClient implements BookClientStructure {
     const booksInfo = transformBooksInfoDtoToBooksInfo(booksInfoDto);
 
     return booksInfo;
+  };
+
+  public getBookById = async (bookId: string): Promise<Book> => {
+    const fetchUrl = `${this.apiUrl}/books/${bookId}`;
+
+    const response = await fetch(fetchUrl);
+
+    if (!response.ok) {
+      throw new Error("Error fetching book");
+    }
+
+    const { book: bookDto } = (await response.json()) as ResponseBookDto;
+
+    const book = transformBookDtoToBook(bookDto);
+
+    return book;
   };
 
   public changeBookState = async (
@@ -65,14 +80,14 @@ class BookClient implements BookClientStructure {
       throw new Error("Error adding new book");
     }
 
-    const { book: newBookDto } = (await response.json()) as { book: BookDto };
+    const { book: newBookDto } = (await response.json()) as ResponseBookDto;
 
     const newBook = transformBookDtoToBook(newBookDto);
 
     return newBook;
   };
 
-  deleteBook = async (bookId: string): Promise<Book> => {
+  public deleteBook = async (bookId: string): Promise<Book> => {
     const fetchUrl = `${this.apiUrl}/books/${bookId}`;
 
     const response = await fetch(fetchUrl, {
@@ -84,9 +99,7 @@ class BookClient implements BookClientStructure {
       throw new Error("Error deleting book");
     }
 
-    const { book: deletedBookDto } = (await response.json()) as {
-      book: BookDto;
-    };
+    const { book: deletedBookDto } = (await response.json()) as ResponseBookDto;
 
     const deletedBook = transformBookDtoToBook(deletedBookDto);
 
