@@ -43,6 +43,12 @@ export const handlers = [
     });
   }),
 
+  http.get(`${apiUrl}/books/${narutoVol1._id}`, () => {
+    return HttpResponse.json<{ book: BookDto }>({
+      book: narutoVol1,
+    });
+  }),
+
   http.patch(`${apiUrl}/books/mark-as-read/${dragonBallToRead.id}`, () => {
     return HttpResponse.json<{ book: BookDto }>({ book: dragonBallReadDto });
   }),
