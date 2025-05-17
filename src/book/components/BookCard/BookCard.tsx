@@ -49,45 +49,47 @@ const BookCard: React.FC<BookCardProps> = ({
         loading={loadingType}
         fetchPriority={priorityType}
       />
-      <div className="book__data">
-        <div className="book__info">
-          <h3 className="book__title">{title}</h3>
-          <span className="book__author">By {author}</span>
-          <span className="book__info-text">{pages} pages</span>
-          <span className="book__info-text">
-            First published {firstPublished}
-          </span>
-        </div>
-        <footer className="book__footer">
-          <div className="book__state">
-            <Button
-              action={() => updateBook("read", id)}
-              isSelected={isRead}
-              isDisabled={isRead}
-            >
-              read
-            </Button>
-            <Button
-              action={() => updateBook("toread", id)}
-              isSelected={isToRead}
-              isDisabled={isToRead}
-            >
-              to read
-            </Button>
+      <div className="book__display">
+        <div className="book__data">
+          <div className="book__info">
+            <h3 className="book__title">{title}</h3>
+            <span className="book__author">By {author}</span>
+            <span className="book__info-text">{pages} pages</span>
+            <span className="book__info-text">
+              First published {firstPublished}
+            </span>
           </div>
-          {yourRating && <Rating rating={yourRating} />}
-        </footer>
-      </div>
-      <div className="book__buttons">
-        <button onClick={() => deleteAction(id)}>
-          <img
-            src="/Remove-Bold.svg"
-            alt="delete book"
-            width={24}
-            height={24}
-            className="book__button"
-          />
-        </button>
+          <footer className="book__footer">
+            <div className="book__state">
+              <Button
+                action={() => updateBook("read", id)}
+                isSelected={isRead}
+                isDisabled={isRead}
+              >
+                read
+              </Button>
+              <Button
+                action={() => updateBook("toread", id)}
+                isSelected={isToRead}
+                isDisabled={isToRead}
+              >
+                to read
+              </Button>
+            </div>
+            {yourRating && <Rating rating={yourRating} />}
+          </footer>
+        </div>
+        <div className="book__buttons">
+          <button onClick={() => deleteAction(id)}>
+            <img
+              src="/Remove-Bold.svg"
+              alt="delete book"
+              width={24}
+              height={24}
+              className="book__button"
+            />
+          </button>
+        </div>
       </div>
     </article>
   );
