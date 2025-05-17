@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   addBookActionCreator,
   changeBookStateActionCreator,
+  deleteBookActionCreator,
   loadBooksActionCreator,
   startLoading,
   startSlowLoading,
@@ -60,11 +61,20 @@ const useBooks = () => {
     dispatch(action);
   };
 
+  const removeBook = async (bookId: string): Promise<void> => {
+    const deletedBook = await bookClient.deleteBook(bookId);
+
+    const action = deleteBookActionCreator({ deletedBook });
+
+    dispatch(action);
+  };
+
   return {
     books,
     loadBooks,
     updateBook,
     createBook,
+    removeBook,
     isLoading,
   };
 };
