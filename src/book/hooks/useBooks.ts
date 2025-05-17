@@ -4,6 +4,7 @@ import {
   addBookActionCreator,
   changeBookStateActionCreator,
   deleteBookActionCreator,
+  loadBookByIdActionCreator,
   loadBooksActionCreator,
   startLoading,
   startSlowLoading,
@@ -36,6 +37,14 @@ const useBooks = () => {
     },
     [bookClient, dispatch],
   );
+
+  const loadBookById = async (bookId: string): Promise<void> => {
+    const book = await bookClient.getBookById(bookId);
+
+    const action = loadBookByIdActionCreator({ book });
+
+    dispatch(action);
+  };
 
   const updateBook = async (
     actionState: "read" | "toread",
@@ -72,6 +81,7 @@ const useBooks = () => {
   return {
     books,
     loadBooks,
+    loadBookById,
     updateBook,
     createBook,
     removeBook,

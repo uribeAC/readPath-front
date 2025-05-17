@@ -42,6 +42,18 @@ const bookSlice = createSlice({
         isLoading: "false",
       };
     },
+    loadBookById: (
+      { booksInfo: { totals } },
+      { payload: { book } }: PayloadAction<{ book: Book }>,
+    ): BookState => {
+      return {
+        booksInfo: {
+          books: [book],
+          totals,
+        },
+        isLoading: "false",
+      };
+    },
     changeBookState: (
       { booksInfo: { books, totals } },
       {
@@ -127,6 +139,7 @@ export const booksReducer = bookSlice.reducer;
 
 export const {
   loadBooks: loadBooksActionCreator,
+  loadBookById: loadBookByIdActionCreator,
   changeBookState: changeBookStateActionCreator,
   addBook: addBookActionCreator,
   deleteBook: deleteBookActionCreator,
