@@ -3,6 +3,7 @@ import type { Book, BookSendData } from "../types";
 
 export interface BookClientStructure {
   getBooks: (pageNumber?: number) => Promise<BooksInfo>;
+  getBookById: (bookId: string) => Promise<Book>;
   changeBookState: (
     actionState: "read" | "toread",
     bookId: string,

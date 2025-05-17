@@ -3,8 +3,8 @@ import type { Book } from "../../types";
 import Button from "../../../components/Button/Button.tsx";
 import useBooks from "../../hooks/useBooks.ts";
 import Rating from "../Rating/Rating.tsx";
-import "./BookCard.css";
 import useModal from "../../../hooks/useModal.ts";
+import "./BookCard.css";
 
 interface BookCardProps {
   book: Book;
