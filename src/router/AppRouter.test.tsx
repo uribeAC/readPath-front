@@ -1,23 +1,19 @@
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
-import { Provider } from "react-redux";
 import AppRouter from "./AppRouter";
-import store from "../store/store";
+import ContextProvider from "../test-utils/ContextProvider";
 
 describe("Given the AppRouter component", () => {
   describe("When it renders in path /mangas", () => {
-    test("Then it should show 'Page not found' inside a heading", () => {
+    test("Then it should show 'Page not found' inside a heading", async () => {
       const expectedPageTitle = /page not found/i;
 
       render(
-        <Provider store={store}>
-          <MemoryRouter initialEntries={["/mangas"]}>
-            <AppRouter />
-          </MemoryRouter>
-        </Provider>,
+        <ContextProvider initialEntries={["/mangas"]}>
+          <AppRouter />
+        </ContextProvider>,
       );
 
-      const pageTitle = screen.getByRole("heading", {
+      const pageTitle = await screen.findByRole("heading", {
         name: expectedPageTitle,
       });
 

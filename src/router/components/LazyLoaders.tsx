@@ -1,0 +1,13 @@
+import { lazy } from "react";
+
+export const LazyNotFoundPage = lazy(
+  () => import("../../pages/NotFoundPage/NotFoundPage"),
+);
+
+export const LazyBooksPage = lazy(
+  () => import("../../book/pages/BooksPage/BooksPage"),
+);
+
+export const LazyAddBookPage = lazy(
+  () => import("../../book/pages/AddBookPage/AddBookPage"),
+);

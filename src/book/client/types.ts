@@ -8,6 +8,7 @@ export interface BookClientStructure {
     bookId: string,
   ) => Promise<Book>;
   addBook: (bookData: BookSendData) => Promise<Book>;
+  deleteBook: (bookId: string) => Promise<Book>;
 }
 
 export type BooksInfo = {
