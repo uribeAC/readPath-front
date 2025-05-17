@@ -5,6 +5,7 @@ import {
   mangaFixtures,
   narutoVol1,
   onePieceVol1,
+  vinlandSagaVol1,
 } from "../fixtures/fixturesDto";
 import type { BooksInfoDto } from "../client/types";
 import { dragonBallRead, dragonBallToRead } from "../fixtures/fixtures";
@@ -71,6 +72,12 @@ export const handlers = [
   http.delete(`${apiUrl}/books/${narutoVol1._id}`, () => {
     return HttpResponse.json<{ book: BookDto }>({
       book: narutoVol1,
+    });
+  }),
+
+  http.delete(`${apiUrl}/books/${vinlandSagaVol1._id}`, () => {
+    return HttpResponse.json<{ book: BookDto }>({
+      book: vinlandSagaVol1,
     });
   }),
 ];

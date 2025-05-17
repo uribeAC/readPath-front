@@ -202,7 +202,7 @@ const spyXFamilyVol1: BookDto = {
   state: "to read",
 };
 
-const vinlandSagaVol1: BookDto = {
+export const vinlandSagaVol1: BookDto = {
   _id: "11",
   title: "Vinland Saga Vol. 1",
   author: "Makoto Yukimura",
