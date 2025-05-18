@@ -1,12 +1,12 @@
 import type React from "react";
-import useBooks from "../../hooks/useBooks";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import Loading from "../../../components/Loading/Loading";
-import "./BookDetailPage.css";
 import { transformDescriptionDtoToDescriptionPreview } from "../../dto/transformers";
 import Button from "../../../components/Button/Button";
 import Rating from "../../components/Rating/Rating";
+import useBooks from "../../hooks/useBooks";
+import "./BookDetailPage.css";
 
 const BookDetailPage: React.FC = () => {
   const { loadBookById, books, isLoading, updateBook } = useBooks();
@@ -16,7 +16,7 @@ const BookDetailPage: React.FC = () => {
 
   const book = loadBooks[0];
 
-  const [isDescriptionExpanded, setIsDescriptionExpaned] =
+  const [isDescriptionExpanded, setIsDescriptionExpanded] =
     useState<boolean>(false);
 
   useEffect(() => {
@@ -54,10 +54,10 @@ const BookDetailPage: React.FC = () => {
 
   const isRead = state === "read";
   const isToRead = state === "to read";
-  const hasReadDates = readDates?.dateFinished || readDates?.dateStarted;
+  const hasReadDates = readDates?.dateFinished ?? readDates?.dateStarted;
 
   const toogleDescription = () => {
-    setIsDescriptionExpaned((isDescriptionExpanded) => !isDescriptionExpanded);
+    setIsDescriptionExpanded((isDescriptionExpanded) => !isDescriptionExpanded);
   };
 
   const descriptionView = isDescriptionExpanded ? "View less" : "View more";
