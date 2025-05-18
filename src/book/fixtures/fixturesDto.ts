@@ -6,7 +6,7 @@ export const narutoVol1: BookDto = {
   author: "Masashi Kishimoto",
   saga: { name: "Naruto", bookNumber: 1 },
   description:
-    "Naruto Uzumaki dreams of becoming the greatest ninja in the village, but he harbors a powerful secret.",
+    "Naruto Uzumaki dreams of becoming the greatest ninja in the village, but he harbors a powerful secret.\n\nShunned by the villagers for the demon fox sealed within him, Naruto acts out in a desperate bid for attention and recognition. Yet despite his loneliness, he never gives up on his dream to earn the respect of everyone around him.\n\nWhen he joins the ninja academy and is placed on a team with the brooding Sasuke and the sharp-tongued Sakura under their teacher Kakashi, Naruto begins to learn the value of teamwork, perseverance, and loyalty in a world where danger lurks behind every mission.",
   genres: ["Action", "Adventure", "Shounen"],
   pages: 187,
   firstPublished: "1999-03-01",
