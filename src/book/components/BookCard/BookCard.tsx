@@ -1,11 +1,11 @@
 import type React from "react";
+import { Link } from "react-router";
 import type { Book } from "../../types";
 import Button from "../../../components/Button/Button.tsx";
 import useBooks from "../../hooks/useBooks.ts";
 import Rating from "../Rating/Rating.tsx";
 import useModal from "../../../hooks/useModal.ts";
 import "./BookCard.css";
-import { Link } from "react-router";
 
 interface BookCardProps {
   book: Book;

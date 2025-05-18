@@ -233,7 +233,7 @@ describe("Given the BookForm component", () => {
             await user.click(fictionDeleteButton);
 
             expect(fiction).not.toBeInTheDocument();
-            expect(genresSelect).toHaveValue("");
+            expect(genresSelect).toHaveValue("Choose genres");
           });
         });
       });
