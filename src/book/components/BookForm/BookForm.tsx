@@ -72,11 +72,17 @@ const BookForm: React.FC<BookFormProps> = ({ action }) => {
   };
 
   const changeBookState = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.id as "read" | "to read";
+    let newValue = event.target.id;
+
+    if (newValue === "toread") {
+      newValue = "to read";
+    }
+
+    const value = newValue as "read" | "to read";
 
     setBookData((bookData) => ({
       ...bookData,
-      state: newValue,
+      state: value,
     }));
   };
 
@@ -230,7 +236,7 @@ const BookForm: React.FC<BookFormProps> = ({ action }) => {
           onChange={changeMultilpleGenres}
           required
         >
-          <option disabled></option>
+          <option hidden>Choose genres</option>
           {bookGenres.map((genre) => (
             <option key={genre}>{genre}</option>
           ))}
@@ -300,13 +306,13 @@ const BookForm: React.FC<BookFormProps> = ({ action }) => {
 
           <input
             type="checkbox"
-            id="to read"
+            id="toread"
             className="book-form__control book-form__control--hidden"
             value={bookData.state}
             onChange={changeBookState}
           />
           <label
-            htmlFor="to read"
+            htmlFor="toread"
             className={`book-form__text book-form__button${stateToReadClassModifier}`}
           >
             To read
