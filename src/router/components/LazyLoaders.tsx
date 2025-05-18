@@ -11,3 +11,7 @@ export const LazyBooksPage = lazy(
 export const LazyAddBookPage = lazy(
   () => import("../../book/pages/AddBookPage/AddBookPage"),
 );
+
+export const LazyBookDetailPage = lazy(
+  () => import("../../book/pages/BookDetailPage/BookDetailPage"),
+);

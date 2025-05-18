@@ -42,6 +42,15 @@ const transformStringToDateString = (date: string): string => {
   return newDate;
 };
 
+export const transformDescriptionDtoToDescriptionPreview = (
+  description: string,
+): string => {
+  const paragraphs = description.split("\n\n");
+  const previewDescription = paragraphs.splice(0, 2).join("\n\n");
+
+  return previewDescription;
+};
+
 export const transformBookDtoToBook = ({
   _id,
   firstPublished,
