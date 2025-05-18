@@ -1,8 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
 import { shonenFixtures } from "../../fixtures/fixtures";
-import store from "../../../store/store";
 import Bookshelf from "./Bookshelf";
+import ContextProvider from "../../../test-utils/ContextProvider";
 
 describe("Given the Bookshelf component", () => {
   describe("When it receives Naruto, One Piece and Bleach Vol. 1 books", () => {
@@ -12,9 +11,9 @@ describe("Given the Bookshelf component", () => {
       const expectedBleachTitle = /bleach vol. 1/i;
 
       render(
-        <Provider store={store}>
+        <ContextProvider>
           <Bookshelf books={shonenFixtures} />,
-        </Provider>,
+        </ContextProvider>,
       );
 
       const narutoTitle = screen.getByRole("heading", {
