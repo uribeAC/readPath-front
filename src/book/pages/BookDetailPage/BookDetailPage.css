@@ -1,0 +1,89 @@
+.book-detail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 135px 20px 0 20px;
+  margin-top: 124px;
+  margin-bottom: 25px;
+  color: var(--dark-color);
+  border: 1px solid var(--dark-color);
+  border-radius: 5px;
+}
+
+.book-detail__cover {
+  position: absolute;
+  top: -123px;
+}
+
+.book-detail__group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 7px;
+  padding: 25px 0;
+  border-bottom: 1px solid var(--dark-color);
+}
+
+.book-detail__group--first {
+  padding: 0 0 25px 0;
+}
+
+.book-detail__group--last {
+  border-bottom: none;
+  gap: 12px;
+}
+
+.book-detail__title {
+  font-family: var(--title-font);
+  font-size: 1.25rem;
+  font-weight: 400;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.book-detail__text {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.book-detail__text--description {
+  white-space: pre-line;
+}
+
+.book-detail__text--button {
+  text-decoration: underline;
+}
+
+.book-detail__author {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.book-detail__group-title {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.book-detail__genres {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px 10px;
+}
+
+.book-detail__state {
+  display: flex;
+  gap: 12px;
+}
+
+.book-detail__dates {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 1rem;
+  font-weight: 300;
+}
