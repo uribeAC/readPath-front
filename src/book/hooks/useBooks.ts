@@ -38,13 +38,23 @@ const useBooks = () => {
     [bookClient, dispatch],
   );
 
-  const loadBookById = async (bookId: string): Promise<void> => {
-    const book = await bookClient.getBookById(bookId);
+  const loadBookById = useCallback(
+    async (bookId: string): Promise<void> => {
+      dispatch(startLoading());
 
-    const action = loadBookByIdActionCreator({ book });
+      const timeout = setTimeout(() => {
+        dispatch(startSlowLoading());
+      }, 500);
 
-    dispatch(action);
-  };
+      const book = await bookClient.getBookById(bookId);
+
+      clearTimeout(timeout);
+      const action = loadBookByIdActionCreator({ book });
+
+      dispatch(action);
+    },
+    [bookClient, dispatch],
+  );
 
   const updateBook = async (
     actionState: "read" | "toread",

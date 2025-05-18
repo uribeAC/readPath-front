@@ -23,8 +23,11 @@ const bookSlice = createSlice({
   name: "books",
   initialState,
   reducers: {
-    startLoading: (currentState): void => {
-      currentState.isLoading = "true";
+    startLoading: (currentState): BookState => {
+      return {
+        ...currentState,
+        isLoading: "true",
+      };
     },
     startSlowLoading: (currentState): void => {
       currentState.isLoading = "true-slow";
@@ -43,13 +46,14 @@ const bookSlice = createSlice({
       };
     },
     loadBookById: (
-      { booksInfo: { totals } },
+      currentState,
       { payload: { book } }: PayloadAction<{ book: Book }>,
     ): BookState => {
       return {
+        ...currentState,
         booksInfo: {
           books: [book],
-          totals,
+          totals: currentState.booksInfo.totals,
         },
         isLoading: "false",
       };
