@@ -1,6 +1,7 @@
 import type React from "react";
 import BookForm from "../../components/BookForm/BookForm";
 import useBooks from "../../hooks/useBooks";
+import "./AddBookPage.css";
 
 const AddBookPage: React.FC = () => {
   const { createBook } = useBooks();
