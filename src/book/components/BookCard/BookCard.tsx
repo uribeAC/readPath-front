@@ -5,6 +5,7 @@ import useBooks from "../../hooks/useBooks.ts";
 import Rating from "../Rating/Rating.tsx";
 import useModal from "../../../hooks/useModal.ts";
 import "./BookCard.css";
+import { Link } from "react-router";
 
 interface BookCardProps {
   book: Book;
@@ -89,6 +90,15 @@ const BookCard: React.FC<BookCardProps> = ({
               className="book__button"
             />
           </button>
+          <Link to={`/book/${id}`}>
+            <img
+              src="/Information.svg"
+              alt="see book details"
+              width={24}
+              height={24}
+              className="book__button"
+            />
+          </Link>
         </div>
       </div>
     </article>

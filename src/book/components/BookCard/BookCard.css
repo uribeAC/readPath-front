@@ -66,6 +66,12 @@
   gap: 12px;
 }
 
+.book__buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .book__button {
   max-width: none;
 }
