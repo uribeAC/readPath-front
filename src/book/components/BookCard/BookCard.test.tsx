@@ -1,8 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
 import { narutoBook } from "../../fixtures/fixtures";
-import store from "../../../store/store";
 import BookCard from "./BookCard";
+import ContextProvider from "../../../test-utils/ContextProvider";
 
 describe("Given the BookCard component", () => {
   describe("When it receives Naruto Vol. 1 book", () => {
@@ -10,9 +9,9 @@ describe("Given the BookCard component", () => {
       const expectedTitle = /naruto vol. 1/i;
 
       render(
-        <Provider store={store}>
+        <ContextProvider>
           <BookCard book={narutoBook} index={1} />
-        </Provider>,
+        </ContextProvider>,
       );
 
       const bookTitle = screen.getByRole("heading", { name: expectedTitle });
@@ -22,9 +21,9 @@ describe("Given the BookCard component", () => {
 
     test("Then it should show an image of Naruto Volume 1 Cover", () => {
       render(
-        <Provider store={store}>
+        <ContextProvider>
           <BookCard book={narutoBook} index={1} />
-        </Provider>,
+        </ContextProvider>,
       );
 
       const bookImage = screen.getByAltText(narutoBook.imageAlt);
@@ -36,9 +35,9 @@ describe("Given the BookCard component", () => {
       const expectedLabel = /4 star rating/i;
 
       render(
-        <Provider store={store}>
+        <ContextProvider>
           <BookCard book={narutoBook} index={1} />
-        </Provider>,
+        </ContextProvider>,
       );
 
       const ratingStars = screen.getByLabelText(expectedLabel);
@@ -50,9 +49,9 @@ describe("Given the BookCard component", () => {
       const expectedButtonLabel = /delete book/i;
 
       render(
-        <Provider store={store}>
+        <ContextProvider>
           <BookCard book={narutoBook} index={1} />
-        </Provider>,
+        </ContextProvider>,
       );
 
       const deleteButton = screen.getByRole("button", {
