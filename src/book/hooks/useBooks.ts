@@ -91,6 +91,8 @@ const useBooks = () => {
     try {
       const newBook = await bookClient.addBook(bookData);
 
+      showModal("Book added to bookshelf", false);
+
       const action = addBookActionCreator({ newBook });
 
       dispatch(action);
@@ -102,6 +104,8 @@ const useBooks = () => {
   const removeBook = async (bookId: string): Promise<void> => {
     try {
       const deletedBook = await bookClient.deleteBook(bookId);
+
+      showModal("Book deleted from bookshelf", false);
 
       const action = deleteBookActionCreator({ deletedBook });
 

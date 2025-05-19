@@ -19,7 +19,7 @@
 
   &:focus {
     font-weight: bold;
-    border: 1px solid #000;
+    outline: 2px solid var(--brand-color);
   }
 }
 
