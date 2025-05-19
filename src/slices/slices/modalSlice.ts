@@ -13,11 +13,10 @@ const modalSlice = createSlice({
   initialState,
   reducers: {
     showModal: (
-      currentState,
+      _currentState,
       { payload: { modalText, isError } }: PayloadAction<ModalActiveState>,
     ): ModalState => {
       return {
-        ...currentState,
         isModalActive: true,
         isError,
         modalText,
