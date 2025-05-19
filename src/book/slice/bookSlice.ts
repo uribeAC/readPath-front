@@ -21,6 +21,18 @@ const bookSlice = createSlice({
   name: "books",
   initialState,
   reducers: {
+    clearBooks: (): BookState => {
+      return {
+        booksInfo: {
+          books: [],
+          totals: {
+            books: 0,
+            booksRead: 0,
+            booksToRead: 0,
+          },
+        },
+      };
+    },
     loadBooks: (
       currentState,
       { payload: { books, totals } }: PayloadAction<BooksInfo>,
@@ -126,6 +138,7 @@ const bookSlice = createSlice({
 export const booksReducer = bookSlice.reducer;
 
 export const {
+  clearBooks: clearBooksActionCreator,
   loadBooks: loadBooksActionCreator,
   loadBookById: loadBookByIdActionCreator,
   changeBookState: changeBookStateActionCreator,
