@@ -55,6 +55,8 @@ const useBooks = () => {
 
   const loadBookById = useCallback(
     async (bookId: string): Promise<void> => {
+      clearBooks();
+
       const loadingDelay = setTimeout(() => {
         startLoading();
       }, 200);
@@ -73,7 +75,7 @@ const useBooks = () => {
 
       stopLoading();
     },
-    [bookClient, dispatch, startLoading, stopLoading, showModal],
+    [bookClient, dispatch, startLoading, stopLoading, showModal, clearBooks],
   );
 
   const updateBook = async (

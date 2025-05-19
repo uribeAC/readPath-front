@@ -381,6 +381,6 @@ describe("Given the Layout component", () => {
 
         expect(modalMessage).toBeInTheDocument();
       });
-    }, 10000);
+    }, 7000);
   });
 });

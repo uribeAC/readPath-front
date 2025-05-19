@@ -6,6 +6,10 @@
   justify-content: center;
   align-items: center;
   background-color: #000000d9;
+
+  &::backdrop {
+    background-color: #000000d9;
+  }
 }
 
 .modal__background-button {
