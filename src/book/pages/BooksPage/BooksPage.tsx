@@ -21,12 +21,16 @@ const BooksPage: React.FC = () => {
   }, [loadBooks, pageNumber]);
 
   if (isLoading === "true") {
+    setTimeout(() => {
+      return <Loading />;
+    }, 200);
+
     return <></>;
   }
 
-  if (isLoading === "true-slow") {
+  /* if (isLoading === "true-slow") {
     return <Loading />;
-  }
+  } */
 
   return (
     <>

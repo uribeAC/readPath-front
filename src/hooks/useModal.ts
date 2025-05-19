@@ -1,7 +1,7 @@
 import {
   hideModalActionCreator,
   showModalActionCreator,
-} from "../slice/modalSlice";
+} from "../slices/slices/modalSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 const useModal = () => {
