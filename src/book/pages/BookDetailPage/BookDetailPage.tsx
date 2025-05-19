@@ -71,7 +71,7 @@ const BookDetailPage: React.FC = () => {
     const isLongDescription = description !== previewDescription;
 
     return (
-      <div className="book-detail__background">
+      <main className="page-container">
         <article className="book-detail">
           <img
             className="book-detail__cover"
@@ -146,7 +146,7 @@ const BookDetailPage: React.FC = () => {
             )}
           </div>
         </article>
-      </div>
+      </main>
     );
   }
 

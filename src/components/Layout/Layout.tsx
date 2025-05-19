@@ -16,9 +16,7 @@ const Layout: React.FC = () => {
     <div className="main-container">
       <Header />
       <Navigation />
-      <main className={"page-container"}>
-        <Outlet />
-      </main>
+      <Outlet />
       {isModalActive && (
         <Modal action={hideModal} isError={isError} text={modalText} />
       )}

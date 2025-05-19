@@ -30,7 +30,7 @@ const BooksPage: React.FC = () => {
 
   if (pageBooks.length > 0) {
     return (
-      <>
+      <main className="page-container">
         <header className="page-header">
           <h2 className="page-header__title">Bookshelf</h2>
           <span className="page-header__counter">
@@ -40,7 +40,7 @@ const BooksPage: React.FC = () => {
         </header>
         <Bookshelf books={pageBooks} />
         <Pagination currentPage={pageNumber} booksTotal={totals.books} />
-      </>
+      </main>
     );
   }
 
