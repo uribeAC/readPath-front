@@ -27,6 +27,11 @@
     transform: scale(1.1);
     transition: 0.3s;
   }
+
+  &:focus {
+    font-weight: bold;
+    outline: 2px solid var(--brand-color);
+  }
 }
 
 .paginator__link--hidden {

@@ -20,6 +20,11 @@
   gap: 5px;
   width: 100%;
   font-weight: 400;
+
+  &:focus {
+    font-weight: bold;
+    border-bottom: 2px solid var(--light-color);
+  }
 }
 
 .navigation__text {

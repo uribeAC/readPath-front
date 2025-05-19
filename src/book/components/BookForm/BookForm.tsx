@@ -121,6 +121,8 @@ const BookForm: React.FC<BookFormProps> = ({ action }) => {
     bookData.pages !== 0 &&
     bookData.title !== "";
 
+  const formClass = isFormValid ? "form" : "form-disabled";
+
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [titleErrorMessage, setTitleErrorMessage] = useState<string>("");
@@ -380,7 +382,7 @@ const BookForm: React.FC<BookFormProps> = ({ action }) => {
         action={() => {}}
         isSelected={true}
         isDisabled={!isFormValid}
-        classModifierName="form"
+        classModifierName={formClass}
       >
         add book
       </Button>

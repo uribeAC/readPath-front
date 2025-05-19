@@ -81,22 +81,22 @@ const BookCard: React.FC<BookCardProps> = ({
           </footer>
         </div>
         <div className="book__buttons">
-          <button onClick={() => deleteAction(id)}>
+          <button onClick={() => deleteAction(id)} className="book__button">
             <img
               src="/Remove-Bold.svg"
               alt="delete book"
               width={24}
               height={24}
-              className="book__button"
+              className="book__icon"
             />
           </button>
-          <Link to={`/book/${id}`}>
+          <Link to={`/book/${id}`} className="book__button">
             <img
               src="/Information.svg"
               alt="see book details"
               width={24}
               height={24}
-              className="book__button"
+              className="book__icon"
             />
           </Link>
         </div>
