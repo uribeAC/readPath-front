@@ -71,7 +71,7 @@ const BookDetailPage: React.FC = () => {
     const isLongDescription = description !== previewDescription;
 
     return (
-      <main className="page-container">
+      <main className="page-container page-container--background">
         <article className="book-detail">
           <img
             className="book-detail__cover"

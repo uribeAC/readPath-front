@@ -1,5 +1,8 @@
 .page-container {
   height: 100%;
+}
+
+.page-container--background {
   background: linear-gradient(
     180deg,
     rgba(249, 247, 244, 1) 0%,
