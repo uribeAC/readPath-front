@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   addBookActionCreator,
   changeBookStateActionCreator,
+  clearBooksActionCreator,
   deleteBookActionCreator,
   loadBookByIdActionCreator,
   loadBooksActionCreator,
@@ -21,8 +22,16 @@ const useBooks = () => {
 
   const bookClient = useMemo(() => new BookClient(), []);
 
+  const clearBooks = useCallback(() => {
+    const clearAction = clearBooksActionCreator();
+
+    dispatch(clearAction);
+  }, [dispatch]);
+
   const loadBooks = useCallback(
     async (pageNumber?: number): Promise<void> => {
+      clearBooks();
+
       const loadingDelay = setTimeout(() => {
         startLoading();
       }, 200);
@@ -41,7 +50,7 @@ const useBooks = () => {
 
       stopLoading();
     },
-    [bookClient, dispatch, startLoading, stopLoading, showModal],
+    [bookClient, dispatch, startLoading, stopLoading, showModal, clearBooks],
   );
 
   const loadBookById = useCallback(
@@ -101,7 +110,7 @@ const useBooks = () => {
     }
   };
 
-  const removeBook = async (bookId: string): Promise<void> => {
+  const removeBook = async (bookId: string, page?: number): Promise<void> => {
     try {
       const deletedBook = await bookClient.deleteBook(bookId);
 
@@ -110,6 +119,7 @@ const useBooks = () => {
       const action = deleteBookActionCreator({ deletedBook });
 
       dispatch(action);
+      loadBooks(page);
     } catch {
       showModal(`Error removing book from your bookshelf`, true);
     }

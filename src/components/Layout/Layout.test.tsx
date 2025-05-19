@@ -1,8 +1,12 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ContextProvider from "../../test-utils/ContextProvider";
+import { http, HttpResponse } from "msw";
+import { server } from "../../book/mocks/node";
 import AppTestRouter from "../../router/AppTestRouter";
 import Layout from "./Layout";
+import type { BooksInfoDto } from "../../book/client/types";
+import { demonSlayerVol1 } from "../../book/fixtures/fixturesDto";
 
 const user = userEvent.setup();
 window.scrollTo = vitest.fn();
@@ -214,6 +218,8 @@ describe("Given the Layout component", () => {
 
       describe("And the user clicks the 'close modal' button of the 'Book deleted from bookshelf' message", () => {
         test("Then it should not show Vinland Saga book title inside a heading anymore", async () => {
+          const apiUrl = import.meta.env.VITE_API_URL;
+
           const expectedVinlandTitle = /vinland saga vol. 1/i;
           const expectedButtonLabel = /delete book/i;
           const expectedModalMessage = /book deleted from bookshelf/i;
@@ -237,6 +243,20 @@ describe("Given the Layout component", () => {
           const deleteButton = await within(vinlandCard).findByRole("button", {
             name: expectedButtonLabel,
           });
+
+          server.use(
+            http.get(`${apiUrl}/books`, () => {
+              return HttpResponse.json<BooksInfoDto>({
+                books: [demonSlayerVol1],
+                totals: {
+                  books: 12,
+                  booksRead: 7,
+                  booksToRead: 5,
+                },
+              });
+            }),
+          );
+
           await user.click(deleteButton);
 
           const modalMessage = await screen.findByText(expectedModalMessage);

@@ -218,7 +218,7 @@ export const vinlandSagaVol1: BookDto = {
   state: "to read",
 };
 
-const demonSlayerVol1: BookDto = {
+export const demonSlayerVol1: BookDto = {
   _id: "12",
   title: "Demon Slayer: Kimetsu no Yaiba Vol. 1",
   author: "Koyoharu Gotouge",

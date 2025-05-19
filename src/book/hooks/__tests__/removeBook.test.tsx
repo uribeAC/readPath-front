@@ -1,15 +1,20 @@
 import { renderHook } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { act } from "react";
+import { server } from "../../mocks/node";
+import { http, HttpResponse } from "msw";
 import setupStore from "../../../store/setupStore";
 import type { ModalState } from "../../../types";
 import { narutoBook } from "../../fixtures/fixtures";
+import type { BooksInfoDto } from "../../client/types";
 import type { BookState } from "../../slice/bookSlice";
 import useBooks from "../useBooks";
 
 describe("Given the removeBook function", () => {
   describe("When it's called with Naruto Vol. 1 book id", () => {
     test("Then it should remove the book Naruto Vol. 1 from booksInfo", async () => {
+      const apiUrl = import.meta.env.VITE_API_URL;
+
       const initialState: { books: BookState; modal: ModalState } = {
         books: {
           booksInfo: {
@@ -35,6 +40,19 @@ describe("Given the removeBook function", () => {
       );
 
       const { result } = renderHook(() => useBooks(), { wrapper });
+
+      server.use(
+        http.get(`${apiUrl}/books`, () => {
+          return HttpResponse.json<BooksInfoDto>({
+            books: [],
+            totals: {
+              books: 0,
+              booksRead: 0,
+              booksToRead: 0,
+            },
+          });
+        }),
+      );
 
       await act(() => {
         result.current.removeBook(narutoBook.id);

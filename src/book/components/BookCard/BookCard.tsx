@@ -1,5 +1,5 @@
 import type React from "react";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import type { Book } from "../../types";
 import Button from "../../../components/Button/Button.tsx";
 import useBooks from "../../hooks/useBooks.ts";
@@ -26,6 +26,8 @@ const BookCard: React.FC<BookCardProps> = ({
   index,
 }) => {
   const { updateBook, removeBook } = useBooks();
+  const [page] = useSearchParams();
+  const pageNumber = page.get("page") ? Number(page.get("page")) : 1;
 
   const isRead = state === "read";
   const isToRead = state === "to read";
@@ -74,7 +76,10 @@ const BookCard: React.FC<BookCardProps> = ({
           </footer>
         </div>
         <div className="book__buttons">
-          <button onClick={() => removeBook(id)} className="book__button">
+          <button
+            onClick={() => removeBook(id, pageNumber)}
+            className="book__button"
+          >
             <img
               src="/Remove-Bold.svg"
               alt="delete book"
