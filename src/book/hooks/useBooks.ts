@@ -71,32 +71,44 @@ const useBooks = () => {
     actionState: "read" | "toread",
     bookId: string,
   ): Promise<void> => {
-    const updatedBook = await bookClient.changeBookState(actionState, bookId);
+    try {
+      const updatedBook = await bookClient.changeBookState(actionState, bookId);
 
-    const actionInfo = {
-      updatedBook,
-      actionState,
-    };
+      const actionInfo = {
+        updatedBook,
+        actionState,
+      };
 
-    const action = changeBookStateActionCreator(actionInfo);
+      const action = changeBookStateActionCreator(actionInfo);
 
-    dispatch(action);
+      dispatch(action);
+    } catch {
+      showModal(`Error marking this book as ${actionState}`, true);
+    }
   };
 
   const createBook = async (bookData: BookSendData): Promise<void> => {
-    const newBook = await bookClient.addBook(bookData);
+    try {
+      const newBook = await bookClient.addBook(bookData);
 
-    const action = addBookActionCreator({ newBook });
+      const action = addBookActionCreator({ newBook });
 
-    dispatch(action);
+      dispatch(action);
+    } catch {
+      showModal(`Error new book to your bookshelf`, true);
+    }
   };
 
   const removeBook = async (bookId: string): Promise<void> => {
-    const deletedBook = await bookClient.deleteBook(bookId);
+    try {
+      const deletedBook = await bookClient.deleteBook(bookId);
 
-    const action = deleteBookActionCreator({ deletedBook });
+      const action = deleteBookActionCreator({ deletedBook });
 
-    dispatch(action);
+      dispatch(action);
+    } catch {
+      showModal(`Error removing book from your bookshelf`, true);
+    }
   };
 
   return {
