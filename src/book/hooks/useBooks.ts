@@ -6,15 +6,16 @@ import {
   deleteBookActionCreator,
   loadBookByIdActionCreator,
   loadBooksActionCreator,
-  startLoading,
-  startSlowLoading,
 } from "../slice/bookSlice";
 import BookClient from "../client/bookClient";
 import type { BookSendData } from "../types";
+import useLoading from "../../hooks/useLoading";
+import useModal from "../../hooks/useModal";
 
 const useBooks = () => {
+  const { startLoading, stopLoading } = useLoading();
+  const { showModal } = useModal();
   const books = useAppSelector((state) => state.books.booksInfo);
-  const isLoading = useAppSelector((state) => state.books.isLoading);
 
   const dispatch = useAppDispatch();
 
@@ -22,38 +23,39 @@ const useBooks = () => {
 
   const loadBooks = useCallback(
     async (pageNumber?: number): Promise<void> => {
-      dispatch(startLoading());
+      const loadingDelay = setTimeout(() => {
+        startLoading();
+      }, 200);
 
-      const timeout = setTimeout(() => {
-        dispatch(startSlowLoading());
-      }, 500);
+      try {
+        const booksInfo = await bookClient.getBooks(pageNumber);
 
-      const booksInfo = await bookClient.getBooks(pageNumber);
+        const action = loadBooksActionCreator(booksInfo);
 
-      clearTimeout(timeout);
-      const action = loadBooksActionCreator(booksInfo);
+        dispatch(action);
+      } catch {
+        showModal("Error fetching your bookshelf", true);
+      } finally {
+        clearTimeout(loadingDelay);
+      }
 
-      dispatch(action);
+      stopLoading();
     },
-    [bookClient, dispatch],
+    [bookClient, dispatch, startLoading, stopLoading, showModal],
   );
 
   const loadBookById = useCallback(
     async (bookId: string): Promise<void> => {
-      dispatch(startLoading());
-
-      const timeout = setTimeout(() => {
-        dispatch(startSlowLoading());
-      }, 500);
+      startLoading();
 
       const book = await bookClient.getBookById(bookId);
 
-      clearTimeout(timeout);
       const action = loadBookByIdActionCreator({ book });
 
       dispatch(action);
+      stopLoading();
     },
-    [bookClient, dispatch],
+    [bookClient, dispatch, startLoading, stopLoading],
   );
 
   const updateBook = async (
@@ -95,7 +97,6 @@ const useBooks = () => {
     updateBook,
     createBook,
     removeBook,
-    isLoading,
   };
 };
 

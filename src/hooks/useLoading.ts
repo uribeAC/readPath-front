@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import {
   startLoadingActionCreator,
   stopLoadingActionCreator,
@@ -9,17 +10,17 @@ const useLoading = () => {
 
   const dispatch = useAppDispatch();
 
-  const startLoading = () => {
+  const startLoading = useCallback(() => {
     const startLoading = startLoadingActionCreator();
 
     dispatch(startLoading);
-  };
+  }, [dispatch]);
 
-  const stopLoading = () => {
+  const stopLoading = useCallback(() => {
     const stopLoading = stopLoadingActionCreator();
 
     dispatch(stopLoading);
-  };
+  }, [dispatch]);
 
   return {
     loading,
