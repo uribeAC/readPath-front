@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import Loading from "../../../components/Loading/Loading";
 import { transformDescriptionDtoToDescriptionPreview } from "../../dto/transformers";
 import Button from "../../../components/Button/Button";
+import useLoading from "../../../hooks/useLoading";
 import Rating from "../../components/Rating/Rating";
 import useBooks from "../../hooks/useBooks";
 import "./BookDetailPage.css";
-import useLoading from "../../../hooks/useLoading";
 
 const BookDetailPage: React.FC = () => {
   const { loadBookById, books, updateBook } = useBooks();
