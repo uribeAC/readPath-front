@@ -8,17 +8,15 @@ import useLoading from "../../../hooks/useLoading";
 import Rating from "../../components/Rating/Rating";
 import useBooks from "../../hooks/useBooks";
 import "./BookDetailPage.css";
+import { useAppSelector } from "../../../store/hooks";
 
 const BookDetailPage: React.FC = () => {
-  const { loadBookById, books, updateBook } = useBooks();
+  const { loadBookById, updateBook } = useBooks();
   const {
     loading: { isLoading },
   } = useLoading();
-  const { books: loadBooks } = books;
 
   const { bookId } = useParams<{ bookId: string }>();
-
-  const book = loadBooks[0];
 
   const [isDescriptionExpanded, setIsDescriptionExpanded] =
     useState<boolean>(false);
@@ -28,6 +26,10 @@ const BookDetailPage: React.FC = () => {
 
     loadBookById(bookId!);
   }, [loadBookById, bookId]);
+
+  const book = useAppSelector((state) =>
+    state.books.booksInfo.books.find((book) => book.id === bookId),
+  );
 
   if (isLoading) {
     return <Loading />;
