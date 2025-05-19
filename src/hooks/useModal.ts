@@ -1,7 +1,8 @@
+import { useCallback } from "react";
 import {
   hideModalActionCreator,
   showModalActionCreator,
-} from "../slice/modalSlice";
+} from "../slices/slices/modalSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 const useModal = () => {
@@ -9,14 +10,17 @@ const useModal = () => {
 
   const dispatch = useAppDispatch();
 
-  const showModal = (modalText: string, isError: boolean) => {
-    const showModal = showModalActionCreator({
-      modalText,
-      isError,
-    });
+  const showModal = useCallback(
+    (modalText: string, isError: boolean) => {
+      const showModal = showModalActionCreator({
+        modalText,
+        isError,
+      });
 
-    dispatch(showModal);
-  };
+      dispatch(showModal);
+    },
+    [dispatch],
+  );
 
   const hideModal = () => {
     const hideModal = hideModalActionCreator();

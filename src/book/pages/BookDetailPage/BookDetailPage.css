@@ -1,3 +1,16 @@
+.page-container {
+  height: 100%;
+}
+
+.page-container--background {
+  background: linear-gradient(
+    180deg,
+    rgba(249, 247, 244, 1) 0%,
+    rgba(249, 247, 244, 1) 10%,
+    rgba(239, 229, 213, 1) 100%
+  );
+}
+
 .book-detail {
   position: relative;
   display: flex;

@@ -73,7 +73,7 @@ describe("Given the BookDetailPage component", () => {
       );
     });
 
-    test("Then it should show the date started as 'Started: 2021-05-10'", async () => {
+    test("Then it should show the date started as 'Started: May 10, 2021'", async () => {
       const expectedDate = /started: May 10, 2021/i;
 
       render(

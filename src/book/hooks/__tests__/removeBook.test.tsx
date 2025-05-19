@@ -20,7 +20,6 @@ describe("Given the removeBook function", () => {
               booksToRead: 0,
             },
           },
-          isLoading: "false",
         },
         modal: {
           isError: false,

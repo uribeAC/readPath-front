@@ -4,7 +4,6 @@ import type { Book } from "../types";
 
 export type BookState = {
   booksInfo: BooksInfo;
-  isLoading: "true" | "true-slow" | "false";
 };
 
 const initialState: BookState = {
@@ -16,22 +15,12 @@ const initialState: BookState = {
       booksToRead: 0,
     },
   },
-  isLoading: "false",
 };
 
 const bookSlice = createSlice({
   name: "books",
   initialState,
   reducers: {
-    startLoading: (currentState): BookState => {
-      return {
-        ...currentState,
-        isLoading: "true",
-      };
-    },
-    startSlowLoading: (currentState): void => {
-      currentState.isLoading = "true-slow";
-    },
     loadBooks: (
       currentState,
       { payload: { books, totals } }: PayloadAction<BooksInfo>,
@@ -42,7 +31,6 @@ const bookSlice = createSlice({
           books: [...books],
           totals,
         },
-        isLoading: "false",
       };
     },
     loadBookById: (
@@ -55,7 +43,6 @@ const bookSlice = createSlice({
           books: [book],
           totals: currentState.booksInfo.totals,
         },
-        isLoading: "false",
       };
     },
     changeBookState: (
@@ -84,7 +71,6 @@ const bookSlice = createSlice({
                 : totals.booksToRead - 1,
           },
         },
-        isLoading: "false",
       };
     },
     addBook: (
@@ -108,7 +94,6 @@ const bookSlice = createSlice({
               state === "to read" ? booksToRead + 1 : booksToRead - 1,
           },
         },
-        isLoading: "false",
       };
     },
     deleteBook: (
@@ -133,7 +118,6 @@ const bookSlice = createSlice({
             booksToRead: state === "to read" ? booksToRead - 1 : booksToRead,
           },
         },
-        isLoading: "false",
       };
     },
   },
@@ -147,6 +131,4 @@ export const {
   changeBookState: changeBookStateActionCreator,
   addBook: addBookActionCreator,
   deleteBook: deleteBookActionCreator,
-  startLoading,
-  startSlowLoading,
 } = bookSlice.actions;

@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { booksReducer, type BookState } from "../book/slice/bookSlice";
 import type { ModalState } from "../types";
-import { modalReducer } from "../slice/modalSlice";
+import { modalReducer } from "../slices/slices/modalSlice";
+import { loadingReducer } from "../slices/slices/loadingSlice";
 
 type RootPreloadedState = {
   books: BookState;
@@ -10,7 +11,11 @@ type RootPreloadedState = {
 
 const setupStore = (preloadedState?: RootPreloadedState) => {
   const store = configureStore({
-    reducer: { books: booksReducer, modal: modalReducer },
+    reducer: {
+      books: booksReducer,
+      modal: modalReducer,
+      loading: loadingReducer,
+    },
     preloadedState,
   });
 
