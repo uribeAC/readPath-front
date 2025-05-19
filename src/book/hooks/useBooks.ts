@@ -46,16 +46,25 @@ const useBooks = () => {
 
   const loadBookById = useCallback(
     async (bookId: string): Promise<void> => {
-      startLoading();
+      const loadingDelay = setTimeout(() => {
+        startLoading();
+      }, 200);
 
-      const book = await bookClient.getBookById(bookId);
+      try {
+        const book = await bookClient.getBookById(bookId);
 
-      const action = loadBookByIdActionCreator({ book });
+        const action = loadBookByIdActionCreator({ book });
 
-      dispatch(action);
+        dispatch(action);
+      } catch {
+        showModal("Error fetching the book", true);
+      } finally {
+        clearTimeout(loadingDelay);
+      }
+
       stopLoading();
     },
-    [bookClient, dispatch, startLoading, stopLoading],
+    [bookClient, dispatch, startLoading, stopLoading, showModal],
   );
 
   const updateBook = async (
