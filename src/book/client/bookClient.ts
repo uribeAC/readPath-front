@@ -105,6 +105,30 @@ class BookClient implements BookClientStructure {
 
     return deletedBook;
   };
+
+  public modifyBook = async (
+    bookId: string,
+    bookData: BookSendData,
+  ): Promise<Book> => {
+    const fetchUrl = `${this.apiUrl}/books/${bookId}`;
+
+    const response = await fetch(fetchUrl, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ book: bookData }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Error modifying book");
+    }
+
+    const { book: modifiedBookDto } =
+      (await response.json()) as ResponseBookDto;
+
+    const modifiedBook = transformBookDtoToBook(modifiedBookDto);
+
+    return modifiedBook;
+  };
 }
 
 export default BookClient;
