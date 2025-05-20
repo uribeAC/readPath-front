@@ -129,8 +129,8 @@ const useBooks = () => {
   };
 
   const editBook = async (
-    bookId: string,
     bookData: BookSendData,
+    bookId: string,
   ): Promise<void> => {
     try {
       const modifiedBook = await bookClient.modifyBook(bookId, bookData);

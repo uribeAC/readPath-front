@@ -2,6 +2,7 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ContextProvider from "../../../test-utils/ContextProvider";
 import BookForm from "./BookForm";
+import type { BookFormData } from "../../types";
 
 const user = userEvent.setup();
 
@@ -13,12 +14,35 @@ describe("Given the BookForm component", () => {
       action.mockClear();
     });
 
+    const initialBookData: BookFormData = {
+      title: "",
+      author: "",
+      description: "",
+      saga: "",
+      coverImageUrl: "",
+      genres: "",
+      firstPublished: "",
+      pages: 0,
+      state: "to read",
+      readDates: {
+        dateFinished: "",
+        dateStarted: "",
+        readYear: 0,
+      },
+      yourRating: "",
+    };
+
     test("Then it should show a 'Title' text box", () => {
       const expectedLabel = /title/i;
 
       render(
         <ContextProvider>
-          <BookForm action={action} />
+          <BookForm
+            createAction={action}
+            isCreate={true}
+            initialBookData={initialBookData}
+            initialSelectedGenres={[]}
+          />
         </ContextProvider>,
       );
       const titleTextBox = screen.getByLabelText(expectedLabel);
@@ -31,7 +55,12 @@ describe("Given the BookForm component", () => {
 
       render(
         <ContextProvider>
-          <BookForm action={action} />
+          <BookForm
+            createAction={action}
+            isCreate={true}
+            initialBookData={initialBookData}
+            initialSelectedGenres={[]}
+          />
         </ContextProvider>,
       );
 
@@ -45,7 +74,12 @@ describe("Given the BookForm component", () => {
 
       render(
         <ContextProvider>
-          <BookForm action={action} />
+          <BookForm
+            createAction={action}
+            isCreate={true}
+            initialBookData={initialBookData}
+            initialSelectedGenres={[]}
+          />
         </ContextProvider>,
       );
 
@@ -59,7 +93,12 @@ describe("Given the BookForm component", () => {
 
       render(
         <ContextProvider>
-          <BookForm action={action} />
+          <BookForm
+            createAction={action}
+            isCreate={true}
+            initialBookData={initialBookData}
+            initialSelectedGenres={[]}
+          />
         </ContextProvider>,
       );
       const genresSelectedTitle = screen.queryByRole("heading", {
@@ -74,7 +113,12 @@ describe("Given the BookForm component", () => {
 
       render(
         <ContextProvider>
-          <BookForm action={action} />
+          <BookForm
+            createAction={action}
+            isCreate={true}
+            initialBookData={initialBookData}
+            initialSelectedGenres={[]}
+          />
         </ContextProvider>,
       );
 
@@ -93,7 +137,12 @@ describe("Given the BookForm component", () => {
 
         render(
           <ContextProvider>
-            <BookForm action={action} />
+            <BookForm
+              createAction={action}
+              isCreate={true}
+              initialBookData={initialBookData}
+              initialSelectedGenres={[]}
+            />
           </ContextProvider>,
         );
 
@@ -112,7 +161,12 @@ describe("Given the BookForm component", () => {
 
         render(
           <ContextProvider>
-            <BookForm action={action} />
+            <BookForm
+              createAction={action}
+              isCreate={true}
+              initialBookData={initialBookData}
+              initialSelectedGenres={[]}
+            />
           </ContextProvider>,
         );
 
@@ -133,7 +187,12 @@ describe("Given the BookForm component", () => {
 
         render(
           <ContextProvider>
-            <BookForm action={action} />
+            <BookForm
+              createAction={action}
+              isCreate={true}
+              initialBookData={initialBookData}
+              initialSelectedGenres={[]}
+            />
           </ContextProvider>,
         );
 
@@ -164,7 +223,12 @@ describe("Given the BookForm component", () => {
 
           render(
             <ContextProvider>
-              <BookForm action={action} />
+              <BookForm
+                createAction={action}
+                isCreate={true}
+                initialBookData={initialBookData}
+                initialSelectedGenres={[]}
+              />
             </ContextProvider>,
           );
 
@@ -206,7 +270,12 @@ describe("Given the BookForm component", () => {
 
             render(
               <ContextProvider>
-                <BookForm action={action} />
+                <BookForm
+                  createAction={action}
+                  isCreate={true}
+                  initialBookData={initialBookData}
+                  initialSelectedGenres={[]}
+                />
               </ContextProvider>,
             );
 
@@ -243,7 +312,12 @@ describe("Given the BookForm component", () => {
       test("Then it should show 'read' as the check state", async () => {
         render(
           <ContextProvider>
-            <BookForm action={action} />
+            <BookForm
+              createAction={action}
+              isCreate={true}
+              initialBookData={initialBookData}
+              initialSelectedGenres={[]}
+            />
           </ContextProvider>,
         );
 
@@ -259,7 +333,12 @@ describe("Given the BookForm component", () => {
       test("Then it should show 'Add book' button enabled and it should call the button action", async () => {
         render(
           <ContextProvider>
-            <BookForm action={action} />
+            <BookForm
+              createAction={action}
+              isCreate={true}
+              initialBookData={initialBookData}
+              initialSelectedGenres={[]}
+            />
           </ContextProvider>,
         );
 
