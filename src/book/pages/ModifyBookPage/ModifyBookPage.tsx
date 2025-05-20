@@ -1,5 +1,6 @@
 import BookForm from "../../components/BookForm/BookForm";
 import useBooks from "../../hooks/useBooks";
+import "./ModifyBookPage.css";
 
 const ModifyBookPage: React.FC = () => {
   const { createBook } = useBooks();
