@@ -1,5 +1,6 @@
 import { http, HttpResponse } from "msw";
 import {
+  dragonBallModifiedDto,
   dragonBallReadDto,
   dragonBallToReadDto,
   mangaFixtures,
@@ -84,6 +85,12 @@ export const handlers = [
   http.delete(`${apiUrl}/books/${vinlandSagaVol1._id}`, () => {
     return HttpResponse.json<{ book: BookDto }>({
       book: vinlandSagaVol1,
+    });
+  }),
+
+  http.put(`${apiUrl}/books/${dragonBallReadDto._id}`, () => {
+    return HttpResponse.json<{ book: BookDto }>({
+      book: dragonBallModifiedDto,
     });
   }),
 ];
