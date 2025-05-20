@@ -132,6 +132,43 @@ const bookSlice = createSlice({
         },
       };
     },
+    modifyBook: (
+      {
+        booksInfo: {
+          books,
+          totals: { books: booksTotal, booksRead, booksToRead },
+        },
+      },
+      {
+        payload: { modifiedBook, bookId },
+      }: PayloadAction<{ modifiedBook: Book; bookId: string }>,
+    ) => {
+      const previewBook = books.find((book) => book.id === bookId)!;
+
+      const modifiedState = modifiedBook.state;
+      const previewState = previewBook.state;
+
+      const isStateModified = modifiedState !== previewState;
+      const booksReadTotal =
+        modifiedState === "read" ? booksRead + 1 : booksRead - 1;
+      const booksToReadTotal =
+        modifiedState === "to read" ? booksToRead + 1 : booksToRead - 1;
+
+      return {
+        booksInfo: {
+          books: books.map((book) => {
+            const actionModifiedBook = book.id === bookId ? modifiedBook : book;
+
+            return actionModifiedBook;
+          }),
+          totals: {
+            books: booksTotal + 1,
+            booksRead: isStateModified ? booksReadTotal : booksRead,
+            booksToRead: isStateModified ? booksToReadTotal : booksToRead,
+          },
+        },
+      };
+    },
   },
 });
 
@@ -144,4 +181,5 @@ export const {
   changeBookState: changeBookStateActionCreator,
   addBook: addBookActionCreator,
   deleteBook: deleteBookActionCreator,
+  modifyBook: modifyBookActionCreator,
 } = bookSlice.actions;

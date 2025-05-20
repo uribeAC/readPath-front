@@ -7,6 +7,7 @@ import {
   deleteBookActionCreator,
   loadBookByIdActionCreator,
   loadBooksActionCreator,
+  modifyBookActionCreator,
 } from "../slice/bookSlice";
 import BookClient from "../client/bookClient";
 import type { BookSendData } from "../types";
@@ -108,7 +109,7 @@ const useBooks = () => {
 
       dispatch(action);
     } catch {
-      showModal(`Error new book to your bookshelf`, true);
+      showModal(`Error adding new book to your bookshelf`, true);
     }
   };
 
@@ -127,6 +128,26 @@ const useBooks = () => {
     }
   };
 
+  const editBook = async (
+    bookId: string,
+    bookData: BookSendData,
+  ): Promise<void> => {
+    try {
+      const modifiedBook = await bookClient.modifyBook(bookId, bookData);
+
+      showModal("Book modified correctly", false);
+
+      const action = modifyBookActionCreator({
+        modifiedBook,
+        bookId: modifiedBook.id,
+      });
+
+      dispatch(action);
+    } catch {
+      showModal(`Error modifying the book`, true);
+    }
+  };
+
   return {
     books,
     loadBooks,
@@ -134,6 +155,7 @@ const useBooks = () => {
     updateBook,
     createBook,
     removeBook,
+    editBook,
   };
 };
 
