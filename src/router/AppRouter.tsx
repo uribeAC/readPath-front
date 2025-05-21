@@ -4,6 +4,7 @@ import {
   LazyAddBookPage,
   LazyBookDetailPage,
   LazyBooksPage,
+  LazyModifyBookPage,
   LazyNotFoundPage,
 } from "./components/LazyLoaders";
 
@@ -15,6 +16,7 @@ const AppRouter: React.FC = () => {
         <Route path="books" element={<LazyBooksPage />} />
         <Route path="add-book" element={<LazyAddBookPage />} />
         <Route path="book/:bookId" element={<LazyBookDetailPage />} />
+        <Route path="modify-book/:bookId" element={<LazyModifyBookPage />} />
         <Route path="*" element={<LazyNotFoundPage />} />
       </Route>
     </Routes>

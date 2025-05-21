@@ -6,32 +6,27 @@ import type { BookFormData, BookSendData } from "../../types";
 import { bookGenres } from "../../data/genres";
 import { transfromBookFormDataToBookSendData } from "../../dto/transformers";
 import "./BookForm.css";
-
 interface BookFormProps {
-  action: (bookData: BookSendData) => Promise<void>;
+  createAction?: (bookData: BookSendData) => Promise<void>;
+  modifyAction?: (bookData: BookSendData, bookId: string) => Promise<void>;
+  initialBookData: BookFormData;
+  initialSelectedGenres: string[];
+  isCreate: boolean;
+  bookId?: string;
 }
 
-const BookForm: React.FC<BookFormProps> = ({ action }) => {
-  const initialBookData: BookFormData = {
-    title: "",
-    author: "",
-    description: "",
-    saga: "",
-    coverImageUrl: "",
-    genres: "",
-    firstPublished: "",
-    pages: 0,
-    state: "to read",
-    readDates: {
-      dateFinished: "",
-      dateStarted: "",
-      readYear: 0,
-    },
-    yourRating: "",
-  };
-
+const BookForm: React.FC<BookFormProps> = ({
+  createAction,
+  modifyAction,
+  initialBookData,
+  initialSelectedGenres,
+  isCreate,
+  bookId,
+}) => {
   const [bookData, setBookData] = useState<BookFormData>(initialBookData);
-  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const [selectedGenres, setSelectedGenres] = useState<string[]>(
+    initialSelectedGenres,
+  );
 
   const isToRead = bookData.state === "to read";
 
@@ -124,7 +119,7 @@ const BookForm: React.FC<BookFormProps> = ({ action }) => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [titleErrorMessage, setTitleErrorMessage] = useState<string>("");
 
-  const onSubmitForm = async (
+  const onSubmitAddForm = async (
     event: React.FormEvent<HTMLFormElement>,
   ): Promise<void> => {
     event.preventDefault();
@@ -137,7 +132,7 @@ const BookForm: React.FC<BookFormProps> = ({ action }) => {
     );
 
     try {
-      await action(toSendBook);
+      await createAction!(toSendBook);
 
       navigate("/books");
     } catch {
@@ -145,6 +140,30 @@ const BookForm: React.FC<BookFormProps> = ({ action }) => {
       setTitleErrorMessage("This book title is already in your bookshelf");
     }
   };
+
+  const onSubmitModifyForm = async (
+    event: React.FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
+    event.preventDefault();
+    setErrorMessage("");
+    setTitleErrorMessage("");
+
+    const toSendBook = transfromBookFormDataToBookSendData(
+      bookData,
+      selectedGenres,
+    );
+
+    try {
+      await modifyAction!(toSendBook, bookId!);
+
+      navigate("/books");
+    } catch {
+      setErrorMessage("Error modifying book");
+    }
+  };
+
+  const onSubmitForm = isCreate ? onSubmitAddForm : onSubmitModifyForm;
+  const buttonMessage = isCreate ? "add book" : "modify book";
 
   return (
     <form onSubmit={onSubmitForm} className="book-form">
@@ -380,7 +399,7 @@ const BookForm: React.FC<BookFormProps> = ({ action }) => {
         isDisabled={!isFormValid}
         classModifierName={formClass}
       >
-        add book
+        {buttonMessage}
       </Button>
     </form>
   );

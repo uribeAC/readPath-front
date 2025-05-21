@@ -222,7 +222,6 @@ export const demonSlayerVol1: BookDto = {
   _id: "12",
   title: "Demon Slayer: Kimetsu no Yaiba Vol. 1",
   author: "Koyoharu Gotouge",
-  saga: { name: "Demon Slayer", bookNumber: 1 },
   description:
     "Tanjiro Kamado's peaceful life is shattered when demons attack his family, leading him on a quest to save his sister and hunt demons.",
   genres: ["Action", "Supernatural", "Adventure"],

@@ -41,8 +41,8 @@ describe("Given the editBook function", () => {
 
       await act(() => {
         result.current.editBook(
-          dragonBallModifiedDto._id,
           dragonBallModifiedDto,
+          dragonBallModifiedDto._id,
         );
       });
 
