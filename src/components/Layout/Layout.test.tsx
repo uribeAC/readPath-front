@@ -7,6 +7,7 @@ import AppTestRouter from "../../router/AppTestRouter";
 import Layout from "./Layout";
 import type { BooksInfoDto } from "../../book/client/types";
 import { demonSlayerVol1 } from "../../book/fixtures/fixturesDto";
+import { dragonBallRead } from "../../book/fixtures/fixtures";
 
 const user = userEvent.setup();
 window.scrollTo = vitest.fn();
@@ -337,7 +338,7 @@ describe("Given the Layout component", () => {
     });
 
     describe("And the user fills the form and submits the book", () => {
-      test("Then it should show the 'Bookshelf' inside a heading", async () => {
+      test("Then it should show the 'Book added to bookshelf' message", async () => {
         render(
           <ContextProvider initialEntries={["/add-book"]}>
             <Layout />
@@ -382,5 +383,55 @@ describe("Given the Layout component", () => {
         expect(modalMessage).toBeInTheDocument();
       });
     }, 7000);
+  });
+
+  describe("When it renders in path /modify-book/:dragonBallId", async () => {
+    test("Then it should show 'Modify: Dragon Ball, Vol. 1' inside a heading", async () => {
+      const expectedPageTitle = /modify: dragon ball, vol. 1/i;
+
+      render(
+        <ContextProvider initialEntries={[`/modify-book/${dragonBallRead.id}`]}>
+          <Layout />
+          <AppTestRouter />
+        </ContextProvider>,
+      );
+
+      const pageTitle = await screen.findByRole("heading", {
+        name: expectedPageTitle,
+      });
+
+      expect(pageTitle).toBeInTheDocument();
+    });
+
+    describe("And the user modifies the title to 'Dragon Ball, Vol. 12' and submits it", () => {
+      test("Then it should show the 'Book modified correctly' message", async () => {
+        const expectedMessage = /book modified correctly/i;
+        const bookModifiedTitle = "Dragon Ball, Vol. 12";
+        const expectedLabel = /title/i;
+
+        render(
+          <ContextProvider
+            initialEntries={[`/modify-book/${dragonBallRead.id}`]}
+          >
+            <Layout />
+            <AppTestRouter />
+          </ContextProvider>,
+        );
+
+        const titleTextBox = await screen.findByLabelText(expectedLabel);
+
+        await user.clear(titleTextBox);
+        await user.type(titleTextBox, bookModifiedTitle);
+
+        const submitButton = await screen.findByRole("button", {
+          name: /modify book/i,
+        });
+        await user.click(submitButton);
+
+        const modalMessage = await screen.findByText(expectedMessage);
+
+        expect(modalMessage).toBeInTheDocument();
+      });
+    });
   });
 });
