@@ -4,7 +4,8 @@
 }
 
 .page-header__title,
-.page-header__counter {
+.page-header__counter,
+.page-header__filter {
   font-family: var(--title-font);
   color: var(--dark-color);
   font-weight: 400;
@@ -16,6 +17,15 @@
   border-bottom: 1px solid var(--dark-color);
 }
 
+.page-header__subtitle {
+  display: flex;
+  justify-content: space-between;
+}
+
 .page-header__counter {
   font-size: 1rem;
+}
+
+.page-header__filter {
+  text-decoration: underline;
 }
