@@ -30,7 +30,7 @@ const useBooks = () => {
   }, [dispatch]);
 
   const loadBooks = useCallback(
-    async (pageNumber?: number): Promise<void> => {
+    async (pageNumber: number, state: string, genre: string): Promise<void> => {
       clearBooks();
 
       const loadingDelay = setTimeout(() => {
@@ -38,7 +38,7 @@ const useBooks = () => {
       }, 200);
 
       try {
-        const booksInfo = await bookClient.getBooks(pageNumber);
+        const booksInfo = await bookClient.getBooks(pageNumber, state, genre);
 
         const action = loadBooksActionCreator(booksInfo);
 
@@ -122,7 +122,7 @@ const useBooks = () => {
       const action = deleteBookActionCreator({ deletedBook });
 
       dispatch(action);
-      loadBooks(page);
+      loadBooks(page!, "", "");
     } catch {
       showModal(`Error removing book from your bookshelf`, true);
     }

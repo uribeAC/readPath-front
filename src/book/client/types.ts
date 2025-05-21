@@ -2,7 +2,11 @@ import type { BookDto } from "../dto/types";
 import type { Book, BookSendData } from "../types";
 
 export interface BookClientStructure {
-  getBooks: (pageNumber?: number) => Promise<BooksInfo>;
+  getBooks: (
+    pageNumber: number,
+    state: string,
+    genre: string,
+  ) => Promise<BooksInfo>;
   getBookById: (bookId: string) => Promise<Book>;
   changeBookState: (
     actionState: "read" | "toread",

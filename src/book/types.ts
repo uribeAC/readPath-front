@@ -48,3 +48,8 @@ export type Star = {
   starUrl: string;
   starAlt: string;
 };
+
+export type BookFilters = {
+  state?: string;
+  genre?: string;
+};
