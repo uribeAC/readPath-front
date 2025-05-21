@@ -1,5 +1,6 @@
 import { http, HttpResponse } from "msw";
 import {
+  demonSlayerVol1,
   dragonBallModifiedDto,
   dragonBallReadDto,
   dragonBallToReadDto,
@@ -47,6 +48,18 @@ export const handlers = [
   http.get(`${apiUrl}/books/${narutoVol1._id}`, () => {
     return HttpResponse.json<{ book: BookDto }>({
       book: narutoVol1,
+    });
+  }),
+
+  http.get(`${apiUrl}/books/${dragonBallReadDto._id}`, () => {
+    return HttpResponse.json<{ book: BookDto }>({
+      book: dragonBallReadDto,
+    });
+  }),
+
+  http.get(`${apiUrl}/books/${demonSlayerVol1._id}`, () => {
+    return HttpResponse.json<{ book: BookDto }>({
+      book: demonSlayerVol1,
     });
   }),
 
