@@ -49,7 +49,7 @@ export type Star = {
   starAlt: string;
 };
 
-export type BookFilter = {
-  state: string;
-  genre: string;
+export type BookFilters = {
+  state?: string;
+  genre?: string;
 };
