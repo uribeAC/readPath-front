@@ -28,4 +28,8 @@
 
 .page-header__filter {
   text-decoration: underline;
+
+  &:focus {
+    font-weight: 600;
+  }
 }
