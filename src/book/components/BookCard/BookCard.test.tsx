@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
+import ContextProvider from "../../../test-utils/ContextProvider";
 import { narutoBook } from "../../fixtures/fixtures";
 import BookCard from "./BookCard";
-import ContextProvider from "../../../test-utils/ContextProvider";
 
 describe("Given the BookCard component", () => {
   describe("When it receives Naruto Vol. 1 book", () => {
@@ -59,6 +59,38 @@ describe("Given the BookCard component", () => {
       });
 
       expect(deleteButton).toBeInTheDocument();
+    });
+
+    test("Then it should show a modify book button", () => {
+      const expectedButtonLabel = /modify book/i;
+
+      render(
+        <ContextProvider>
+          <BookCard book={narutoBook} index={1} />
+        </ContextProvider>,
+      );
+
+      const modifyButton = screen.getByRole("link", {
+        name: expectedButtonLabel,
+      });
+
+      expect(modifyButton).toBeInTheDocument();
+    });
+
+    test("Then it should show a see book details button", () => {
+      const expectedButtonLabel = /see book details/i;
+
+      render(
+        <ContextProvider>
+          <BookCard book={narutoBook} index={1} />
+        </ContextProvider>,
+      );
+
+      const detailsButton = screen.getByRole("link", {
+        name: expectedButtonLabel,
+      });
+
+      expect(detailsButton).toBeInTheDocument();
     });
   });
 });

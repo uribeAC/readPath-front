@@ -88,6 +88,15 @@ const BookCard: React.FC<BookCardProps> = ({
               className="book__icon"
             />
           </button>
+          <Link to={`/modify-book/${id}`} className="book__button">
+            <img
+              src="/Pencil.svg"
+              alt="modify book"
+              width={24}
+              height={24}
+              className="book__icon"
+            />
+          </Link>
           <Link to={`/book/${id}`} className="book__button">
             <img
               src="/Information.svg"
