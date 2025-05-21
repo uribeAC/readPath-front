@@ -13,12 +13,26 @@ import type {
 class BookClient implements BookClientStructure {
   private readonly apiUrl = import.meta.env.VITE_API_URL;
 
-  public getBooks = async (pageNumber?: number): Promise<BooksInfo> => {
-    const fetchUrl = !pageNumber
-      ? `${this.apiUrl}/books`
-      : `${this.apiUrl}/books?page=${pageNumber}`;
+  public getBooks = async (
+    pageNumber: number,
+    state: string,
+    genre: string,
+  ): Promise<BooksInfo> => {
+    const fetchUrl = new URL(`${this.apiUrl}/books`);
 
-    const response = await fetch(fetchUrl);
+    if (pageNumber) {
+      fetchUrl.searchParams.set("page", pageNumber.toString());
+    }
+
+    if (state) {
+      fetchUrl.searchParams.set("state", state);
+    }
+
+    if (genre) {
+      fetchUrl.searchParams.set("genre", genre);
+    }
+
+    const response = await fetch(fetchUrl.toString());
 
     if (!response.ok) {
       throw new Error("Error fetching books");
