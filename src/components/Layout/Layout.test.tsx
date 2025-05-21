@@ -6,7 +6,7 @@ import { server } from "../../book/mocks/node";
 import AppTestRouter from "../../router/AppTestRouter";
 import Layout from "./Layout";
 import type { BooksInfoDto } from "../../book/client/types";
-import { demonSlayerVol1 } from "../../book/fixtures/fixturesDto";
+import { demonSlayerVol1, onePieceVol1 } from "../../book/fixtures/fixturesDto";
 import { dragonBallRead } from "../../book/fixtures/fixtures";
 
 const user = userEvent.setup();
@@ -159,6 +159,69 @@ describe("Given the Layout component", () => {
         expect(demonTitle).toBeInTheDocument();
 
         expect(narutoTitle).not.toBeInTheDocument();
+      });
+    });
+
+    describe("And the user click's the 'see book details' button of One Piece Vol. 1", () => {
+      test("Then it should show the book description of One Piece Vol. 1", async () => {
+        const expectedOnePieceTitle = /one piece vol. 1/i;
+        const detailsButtonText = /see book details/i;
+
+        render(
+          <ContextProvider initialEntries={["/books"]}>
+            <Layout />
+            <AppTestRouter />
+          </ContextProvider>,
+        );
+
+        const onePieceTitle = await screen.findByRole("heading", {
+          name: expectedOnePieceTitle,
+        });
+        const onePieceCard = onePieceTitle.closest("article");
+
+        const detailsButton = within(onePieceCard!).getByRole("link", {
+          name: detailsButtonText,
+        });
+
+        await user.click(detailsButton);
+
+        const onePieceDescription = await screen.findByText(
+          onePieceVol1.description,
+        );
+
+        expect(onePieceDescription).toBeInTheDocument();
+      });
+    });
+
+    describe("And the user click's the 'modify' button of One Piece Vol. 1", () => {
+      test("Then it should show 'Modify: One Piece Vol. 1'", async () => {
+        const expectedOnePieceTitle = /one piece vol. 1/i;
+        const expectedPageTitle = /modify: one piece vol. 1/i;
+        const modifyButtonText = /modify book/i;
+
+        render(
+          <ContextProvider initialEntries={["/books"]}>
+            <Layout />
+            <AppTestRouter />
+          </ContextProvider>,
+        );
+
+        const onePieceTitle = await screen.findByRole("heading", {
+          name: expectedOnePieceTitle,
+        });
+        const onePieceCard = onePieceTitle.closest("article");
+
+        const modifyButton = within(onePieceCard!).getByRole("link", {
+          name: modifyButtonText,
+        });
+
+        await user.click(modifyButton);
+
+        const pageTitle = await screen.findByRole("heading", {
+          name: expectedPageTitle,
+        });
+
+        expect(pageTitle).toBeInTheDocument();
       });
     });
   });

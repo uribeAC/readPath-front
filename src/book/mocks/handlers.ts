@@ -57,6 +57,12 @@ export const handlers = [
     });
   }),
 
+  http.get(`${apiUrl}/books/${onePieceVol1._id}`, () => {
+    return HttpResponse.json<{ book: BookDto }>({
+      book: onePieceVol1,
+    });
+  }),
+
   http.get(`${apiUrl}/books/${demonSlayerVol1._id}`, () => {
     return HttpResponse.json<{ book: BookDto }>({
       book: demonSlayerVol1,
