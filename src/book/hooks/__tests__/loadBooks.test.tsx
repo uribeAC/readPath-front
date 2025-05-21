@@ -18,7 +18,7 @@ describe("Given the loadBooks function", () => {
       const { result } = renderHook(() => useBooks(), { wrapper });
 
       await act(() => {
-        result.current.loadBooks(2);
+        result.current.loadBooks(2, "", "");
       });
 
       const books = result.current.books.books;

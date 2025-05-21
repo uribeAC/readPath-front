@@ -12,7 +12,7 @@ describe("Given the getBooks method of bookClient", () => {
       );
       const bookClient = new BookClient();
 
-      const { books } = await bookClient.getBooks();
+      const { books } = await bookClient.getBooks(1, "", "");
 
       expect(books.at(0)!.title).toBe("Naruto Vol. 1");
 
@@ -24,7 +24,7 @@ describe("Given the getBooks method of bookClient", () => {
     test("Then it should return 12 as the total number of books with 7 read and 5 to read", async () => {
       const bookClient = new BookClient();
 
-      const { totals: booksTotals } = await bookClient.getBooks();
+      const { totals: booksTotals } = await bookClient.getBooks(1, "", "");
 
       expect(booksTotals.books).toBe(12);
       expect(booksTotals.booksRead).toBe(7);
@@ -44,7 +44,7 @@ describe("Given the getBooks method of bookClient", () => {
 
       const bookClient = new BookClient();
 
-      const books = bookClient.getBooks();
+      const books = bookClient.getBooks(1, "", "");
 
       await expect(books).rejects.toThrow("Error fetching books");
     });
