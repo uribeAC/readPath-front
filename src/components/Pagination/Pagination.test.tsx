@@ -1,14 +1,16 @@
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
+import ContextProvider from "../../test-utils/ContextProvider";
 import Pagination from "./Pagination";
 import { mangaFixtures } from "../../book/fixtures/fixturesDto";
 
 describe("Given the Pagination component", () => {
   describe("When it renders", () => {
     test("Then it should show a '<' and '>' link", () => {
-      render(<Pagination booksTotal={mangaFixtures.length} currentPage={1} />, {
-        wrapper: MemoryRouter,
-      });
+      render(
+        <ContextProvider>
+          <Pagination booksTotal={mangaFixtures.length} currentPage={1} />
+        </ContextProvider>,
+      );
 
       const previousLink = screen.getByLabelText(/previous page/i);
       const nextLink = screen.getByLabelText(/next page/i);
