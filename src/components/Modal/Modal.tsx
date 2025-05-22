@@ -18,7 +18,7 @@ const Modal: React.FC<ModalProps> = ({ action, text, isError }) => {
         onClick={action}
         aria-label="cerrar modal"
       />
-      <main className={`modal__content${errorClass}`}>
+      <div className={`modal__content${errorClass}`}>
         <span className="modal__text">{text}</span>
         <button className="modal__close" onClick={action}>
           <img
@@ -29,7 +29,7 @@ const Modal: React.FC<ModalProps> = ({ action, text, isError }) => {
             className={iconErrorClass}
           />
         </button>
-      </main>
+      </div>
     </dialog>
   );
 };

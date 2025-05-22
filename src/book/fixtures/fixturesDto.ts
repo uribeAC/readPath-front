@@ -256,7 +256,6 @@ export const dragonBallReadDto: BookDto = {
   yourRating: 5,
   readDates: {
     dateStarted: "2021-03-15",
-    dateFinished: "2021-03-17",
     readYear: 2021,
   },
   coverImageUrlSmall:
