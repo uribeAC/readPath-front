@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ContextProvider from "../test-utils/ContextProvider";
 import AppRouter from "./AppRouter";
+import { dragonBallRead } from "../book/fixtures/fixtures";
 
 const user = userEvent.setup();
 
@@ -106,6 +107,82 @@ describe("Given the AppRouter component", () => {
           expect(tokyoGhoulTitle).toBeInTheDocument();
           expect(narutoTitle).not.toBeInTheDocument();
         });
+      });
+    });
+  });
+
+  describe("When it renders in path /book/:bookId of Dragon Ball book id", () => {
+    describe("And the user clicks the 'to read' button", () => {
+      test("Then it should show the to read button disabled", async () => {
+        const expectedToReadButton = /^to read/i;
+
+        render(
+          <ContextProvider initialEntries={[`/book/${dragonBallRead.id}`]}>
+            <AppRouter />
+          </ContextProvider>,
+        );
+
+        const toReadButton = await screen.findByRole("button", {
+          name: expectedToReadButton,
+        });
+
+        await user.click(toReadButton);
+
+        expect(toReadButton).toBeDisabled();
+      });
+
+      describe("And the user clicks the 'read' button", () => {
+        test("Then it should show the read button disabled", async () => {
+          const expectedToReadButton = /^to read/i;
+          const expectedReadButton = /^read/i;
+
+          render(
+            <ContextProvider initialEntries={[`/book/${dragonBallRead.id}`]}>
+              <AppRouter />
+            </ContextProvider>,
+          );
+
+          const toReadButton = await screen.findByRole("button", {
+            name: expectedToReadButton,
+          });
+
+          await user.click(toReadButton);
+
+          expect(toReadButton).toBeDisabled();
+
+          const readButton = await screen.findByRole("button", {
+            name: expectedReadButton,
+          });
+
+          await user.click(readButton);
+
+          expect(readButton).toBeDisabled();
+        });
+      });
+    });
+
+    describe("And the user clicks the 'modify book' button", () => {
+      test("Then it should show 'Modify: Dragon Ball Vol. 1' inside a heading", async () => {
+        const expectedModifyButton = /modify book/i;
+        const expectedTitle = /modify: dragon ball, vol. 1/i;
+
+        render(
+          <ContextProvider initialEntries={[`/book/${dragonBallRead.id}`]}>
+            <AppRouter />
+          </ContextProvider>,
+        );
+
+        const modifyButton = await screen.findByRole("link", {
+          name: expectedModifyButton,
+        });
+
+        await user.click(modifyButton);
+
+        const modifyTitle = await screen.findByRole("heading", {
+          name: expectedTitle,
+        });
+
+        expect(modifyTitle).toBeInTheDocument();
       });
     });
   });

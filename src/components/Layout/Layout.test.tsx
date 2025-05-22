@@ -327,7 +327,7 @@ describe("Given the Layout component", () => {
 
           expect(modalMessage).toBeInTheDocument();
 
-          const modal = modalMessage.closest("main")!;
+          const modal = modalMessage.closest("div")!;
 
           const closeModalButton = await within(modal).getByRole("button", {
             name: expectedModalButton,
