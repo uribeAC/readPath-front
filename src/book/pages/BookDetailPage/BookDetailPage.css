@@ -1,11 +1,9 @@
-.page-container {
+.detail-page-container {
   height: 100%;
   display: flex;
+  padding: 20px;
   flex-direction: column;
   gap: 25px;
-}
-
-.page-container--background {
   background: linear-gradient(
     180deg,
     rgba(249, 247, 244, 1) 0%,

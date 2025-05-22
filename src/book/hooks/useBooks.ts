@@ -113,7 +113,12 @@ const useBooks = () => {
     }
   };
 
-  const removeBook = async (bookId: string, page?: number): Promise<void> => {
+  const removeBook = async (
+    bookId: string,
+    page: number,
+    state: string,
+    genre: string,
+  ): Promise<void> => {
     try {
       const deletedBook = await bookClient.deleteBook(bookId);
 
@@ -122,7 +127,7 @@ const useBooks = () => {
       const action = deleteBookActionCreator({ deletedBook });
 
       dispatch(action);
-      loadBooks(page!, "", "");
+      loadBooks(page, state, genre);
     } catch {
       showModal(`Error removing book from your bookshelf`, true);
     }

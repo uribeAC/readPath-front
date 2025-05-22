@@ -54,9 +54,9 @@ const ModifyBookPage: React.FC = () => {
     const initialSelectedGenres: string[] = book.genres;
 
     return (
-      <main className="page-container">
-        <header className="page-header">
-          <h2 className="page-header__title">Modify: {book.title}</h2>
+      <main className="modify-page-container">
+        <header>
+          <h2 className="modify-page-header__title">Modify: {book.title}</h2>
         </header>
         <BookForm
           modifyAction={editBook}

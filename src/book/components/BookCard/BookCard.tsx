@@ -1,10 +1,11 @@
 import type React from "react";
 import { Link, useSearchParams } from "react-router";
-import type { Book } from "../../types";
+import type { Book, BookFilters } from "../../types";
 import Button from "../../../components/Button/Button.tsx";
 import useBooks from "../../hooks/useBooks.ts";
 import Rating from "../Rating/Rating.tsx";
 import "./BookCard.css";
+import { useMemo } from "react";
 
 interface BookCardProps {
   book: Book;
@@ -26,8 +27,23 @@ const BookCard: React.FC<BookCardProps> = ({
   index,
 }) => {
   const { updateBook, removeBook } = useBooks();
-  const [page] = useSearchParams();
-  const pageNumber = page.get("page") ? Number(page.get("page")) : 1;
+
+  const [searchParams] = useSearchParams();
+  const pageNumber = searchParams.get("page")
+    ? Number(searchParams.get("page"))
+    : 1;
+
+  const filters: BookFilters = useMemo(() => {
+    const booksFilter: BookFilters = {};
+
+    const state = searchParams.get("state");
+    const genre = searchParams.get("genre");
+
+    if (state) booksFilter.state = state;
+    if (genre) booksFilter.genre = genre;
+
+    return booksFilter;
+  }, [searchParams]);
 
   const isRead = state === "read";
   const isToRead = state === "to read";
@@ -77,7 +93,9 @@ const BookCard: React.FC<BookCardProps> = ({
         </div>
         <div className="book__buttons">
           <button
-            onClick={() => removeBook(id, pageNumber)}
+            onClick={() =>
+              removeBook(id, pageNumber, filters.state!, filters.genre!)
+            }
             className="book__button"
           >
             <img
