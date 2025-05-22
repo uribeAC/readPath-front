@@ -1,5 +1,8 @@
 .page-container {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
 .page-container--background {
@@ -18,7 +21,6 @@
   align-items: center;
   padding: 135px 20px 0 20px;
   margin-top: 124px;
-  margin-bottom: 25px;
   color: var(--dark-color);
   border: 1px solid var(--dark-color);
   border-radius: 5px;
@@ -99,4 +101,31 @@
   gap: 2px;
   font-size: 1rem;
   font-weight: 300;
+}
+
+.book-detail__button {
+  align-self: flex-end;
+  padding: 5px 10px;
+  font-size: 1rem;
+  line-height: 0.875rem;
+  color: var(--light-color);
+  background-color: var(--dark-color);
+  border: 1px solid var(--dark-color);
+  border-radius: 7px;
+
+  &:hover {
+    transition: 0.5s;
+    color: var(--light-color);
+    background-color: #777;
+  }
+
+  &:active {
+    transition: 0.1s;
+    scale: 1.01;
+  }
+
+  &:focus {
+    font-weight: bold;
+    outline: 2px solid var(--brand-color);
+  }
 }

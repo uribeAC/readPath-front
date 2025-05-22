@@ -1,5 +1,5 @@
 import type React from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import Loading from "../../../components/Loading/Loading";
 import { transformDescriptionDtoToDescriptionPreview } from "../../dto/transformers";
@@ -148,6 +148,9 @@ const BookDetailPage: React.FC = () => {
             )}
           </div>
         </article>
+        <Link to={`/modify-book/${id}`} className="book-detail__button">
+          Modify book
+        </Link>
       </main>
     );
   }
