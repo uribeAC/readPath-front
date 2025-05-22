@@ -154,7 +154,7 @@ const chainsawManVol1: BookDto = {
   },
 };
 
-const tokyoGhoulVol1: BookDto = {
+export const tokyoGhoulVol1: BookDto = {
   _id: "8",
   title: "Tokyo Ghoul Vol. 1",
   author: "Sui Ishida",

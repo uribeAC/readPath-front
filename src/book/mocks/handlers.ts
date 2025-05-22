@@ -7,6 +7,7 @@ import {
   mangaFixtures,
   narutoVol1,
   onePieceVol1,
+  tokyoGhoulVol1,
   vinlandSagaVol1,
 } from "../fixtures/fixturesDto";
 import type { BooksInfoDto } from "../client/types";
@@ -23,6 +24,7 @@ export const handlers = [
   http.get(`${apiUrl}/books`, ({ request }) => {
     const url = new URL(request.url);
     const currentPage = url.searchParams.get("page");
+    const currentGenre = url.searchParams.get("genre");
 
     if (currentPage === "2") {
       return HttpResponse.json<BooksInfoDto>({
@@ -31,6 +33,17 @@ export const handlers = [
           books: 12,
           booksRead: 7,
           booksToRead: 5,
+        },
+      });
+    }
+
+    if (currentGenre === "Horror") {
+      return HttpResponse.json<BooksInfoDto>({
+        books: [tokyoGhoulVol1],
+        totals: {
+          books: 1,
+          booksRead: 0,
+          booksToRead: 1,
         },
       });
     }

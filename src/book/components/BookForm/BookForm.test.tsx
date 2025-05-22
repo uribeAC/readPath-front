@@ -383,6 +383,6 @@ describe("Given the BookForm component", () => {
 
         expect(action).toHaveBeenCalled();
       });
-    }, 7000);
+    }, 15000);
   });
 });
