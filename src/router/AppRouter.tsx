@@ -6,7 +6,7 @@ import {
   LazyBooksPage,
   LazyModifyBookPage,
   LazyNotFoundPage,
-} from "./components/LazyLoaders";
+} from "./LazyPages";
 
 const AppRouter: React.FC = () => {
   return (

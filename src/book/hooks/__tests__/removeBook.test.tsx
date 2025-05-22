@@ -55,7 +55,7 @@ describe("Given the removeBook function", () => {
       );
 
       await act(() => {
-        result.current.removeBook(narutoBook.id);
+        result.current.removeBook(narutoBook.id, 1, "", "");
       });
 
       const books = result.current.books.books;

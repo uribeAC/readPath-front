@@ -25,9 +25,9 @@ const AddBookPage: React.FC = () => {
   };
 
   return (
-    <main className="page-container">
-      <header className="page-header">
-        <h2 className="page-header__title">Add a new book</h2>
+    <main className="add-page-container">
+      <header>
+        <h2 className="add-page-header__title">Add a new book</h2>
       </header>
       <BookForm
         createAction={createBook}

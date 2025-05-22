@@ -2,6 +2,7 @@ import type React from "react";
 import { Link, useSearchParams } from "react-router";
 import type { Book } from "../../types";
 import Button from "../../../components/Button/Button.tsx";
+import useFilter from "../../../hooks/useFilter.ts";
 import useBooks from "../../hooks/useBooks.ts";
 import Rating from "../Rating/Rating.tsx";
 import "./BookCard.css";
@@ -26,8 +27,15 @@ const BookCard: React.FC<BookCardProps> = ({
   index,
 }) => {
   const { updateBook, removeBook } = useBooks();
-  const [page] = useSearchParams();
-  const pageNumber = page.get("page") ? Number(page.get("page")) : 1;
+  const { filter } = useFilter();
+
+  const [searchParams] = useSearchParams();
+  const pageNumber = searchParams.get("page")
+    ? Number(searchParams.get("page"))
+    : 1;
+
+  const searchState = filter.state === "All" ? "" : filter.state;
+  const searchGenre = filter.genre === "All" ? "" : filter.genre;
 
   const isRead = state === "read";
   const isToRead = state === "to read";
@@ -77,7 +85,7 @@ const BookCard: React.FC<BookCardProps> = ({
         </div>
         <div className="book__buttons">
           <button
-            onClick={() => removeBook(id, pageNumber)}
+            onClick={() => removeBook(id, pageNumber, searchState, searchGenre)}
             className="book__button"
           >
             <img
