@@ -22,15 +22,17 @@ ChartJS.register(
 interface BookYearsChartProps {
   firstDataset: number[];
   firstLabel: string;
+  labels: string[];
+  ariaLabel: string;
   secondDataset?: number[];
   secondLabel?: string;
-  labels: string[];
 }
 
 const BookYearsChart: React.FC<BookYearsChartProps> = ({
   firstDataset,
   firstLabel,
   labels,
+  ariaLabel,
   secondDataset,
   secondLabel,
 }) => {
@@ -63,7 +65,7 @@ const BookYearsChart: React.FC<BookYearsChartProps> = ({
     });
   }
 
-  return <Bar options={options} data={data} />;
+  return <Bar options={options} data={data} aria-label={ariaLabel} />;
 };
 
 export default BookYearsChart;

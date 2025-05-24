@@ -1,0 +1,132 @@
+.stats-page {
+  height: 100%;
+  padding: 20px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stats-page__title {
+  font-family: var(--title-font);
+  color: var(--dark-color);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.25rem;
+  border-bottom: 1px solid var(--dark-color);
+}
+
+.stats-page__summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 5px 8px;
+  margin-bottom: 20px;
+  border: 1px solid var(--dark-color);
+  background-color: var(--main-color);
+}
+
+.stats-page__stats {
+  font-family: var(--title-font);
+  color: var(--dark-color);
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.charts {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.chart {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--dark-color);
+}
+
+.chart--last {
+  border-bottom: none;
+}
+
+.chart__title {
+  font-family: var(--title-font);
+  color: var(--dark-color);
+  text-align: center;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.chart__legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  @media (width < 400px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (width < 350px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart__tag {
+  padding: 5px 25px 5px 8px;
+  width: fit-content;
+  color: var(--dark-color);
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.chart__tag--orange {
+  background-color: rgba(255, 159, 64, 0.8);
+}
+
+.chart__tag--yellow {
+  background-color: rgba(255, 202, 40, 0.8);
+}
+
+.chart__tag--0 {
+  background-color: rgba(255, 159, 64, 0.8);
+}
+
+.chart__tag--1 {
+  background-color: rgba(255, 111, 64, 0.8);
+}
+
+.chart__tag--2 {
+  background-color: rgba(255, 189, 89, 0.8);
+}
+
+.chart__tag--3 {
+  background-color: rgba(255, 140, 40, 0.8);
+}
+
+.chart__tag--4 {
+  background-color: rgba(255, 99, 71, 0.8);
+}
+
+.chart__tag--5 {
+  background-color: rgba(230, 126, 34, 0.8);
+}
+
+.chart__tag--6 {
+  background-color: rgba(245, 171, 53, 0.8);
+}
+
+.chart__tag--7 {
+  background-color: rgba(255, 204, 92, 0.8);
+}
+
+.chart__tag--8 {
+  background-color: rgba(255, 118, 85, 0.8);
+}
+
+.chart__tag--9 {
+  background-color: rgba(255, 186, 120, 0.8);
+}

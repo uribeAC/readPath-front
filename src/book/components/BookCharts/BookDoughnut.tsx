@@ -8,12 +8,14 @@ interface BookPieProps {
   labels: string[];
   labelTitle: string;
   dataNumbers: number[];
+  ariaLabel: string;
 }
 
 const BookDoughnut: React.FC<BookPieProps> = ({
   dataNumbers,
   labelTitle,
   labels,
+  ariaLabel,
 }) => {
   const slicedData = dataNumbers.slice(0, 10);
   const slicedLabels = labels.slice(0, 10);
@@ -61,7 +63,7 @@ const BookDoughnut: React.FC<BookPieProps> = ({
     },
   };
 
-  return <Doughnut data={data} options={options} className="book-pie" />;
+  return <Doughnut data={data} options={options} aria-label={ariaLabel} />;
 };
 
 export default BookDoughnut;
