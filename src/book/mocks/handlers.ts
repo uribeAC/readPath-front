@@ -11,8 +11,13 @@ import {
   vinlandSagaVol1,
 } from "../fixtures/fixturesDto";
 import type { BooksInfoDto } from "../client/types";
-import { dragonBallRead, dragonBallToRead } from "../fixtures/fixtures";
+import {
+  dragonBallRead,
+  dragonBallToRead,
+  mangaStats,
+} from "../fixtures/fixtures";
 import type { BookDto } from "../dto/types";
+import type { BookStats } from "../types";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -80,6 +85,10 @@ export const handlers = [
     return HttpResponse.json<{ book: BookDto }>({
       book: demonSlayerVol1,
     });
+  }),
+
+  http.get(`${apiUrl}/books/stats`, () => {
+    return HttpResponse.json<BookStats>(mangaStats);
   }),
 
   http.patch(`${apiUrl}/books/mark-as-read/${dragonBallToRead.id}`, () => {

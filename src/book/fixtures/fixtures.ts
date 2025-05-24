@@ -1,5 +1,5 @@
 import { transformBooksDtoToBooks } from "../dto/transformers";
-import type { Book, BookSendData } from "../types";
+import type { Book, BookSendData, BookStats } from "../types";
 import { shonenFixturesDto } from "./fixturesDto";
 
 export const shonenFixtures = transformBooksDtoToBooks(shonenFixturesDto);
@@ -72,4 +72,104 @@ export const dragonBallData: BookSendData = {
   coverImageUrlBig:
     "https://images-na.ssl-images-amazon.com/images/I/51Ypye1bxBL.jpg",
   imageAlt: "Dragon Ball Volume 1 cover featuring young Goku riding a cloud",
+};
+
+export const mangaStats: BookStats = {
+  totals: {
+    read: 10,
+    pages: 12265,
+    authors: 8,
+  },
+  genres: {
+    total: 13,
+    genres: [
+      {
+        genre: "Fiction",
+        booksTotal: 14,
+      },
+      {
+        genre: "Fantasy",
+        booksTotal: 13,
+      },
+      {
+        genre: "Science Fiction",
+        booksTotal: 11,
+      },
+      {
+        genre: "Dystopia",
+        booksTotal: 6,
+      },
+      {
+        genre: "Adventure",
+        booksTotal: 6,
+      },
+      {
+        genre: "Epic Fantasy",
+        booksTotal: 5,
+      },
+      {
+        genre: "High Fantasy",
+        booksTotal: 5,
+      },
+      {
+        genre: "LitRPG",
+        booksTotal: 2,
+      },
+      {
+        genre: "Young Adult",
+        booksTotal: 2,
+      },
+      {
+        genre: "Mystery",
+        booksTotal: 2,
+      },
+
+      {
+        genre: "Thriller",
+        booksTotal: 1,
+      },
+      {
+        genre: "Anthropomorphic",
+        booksTotal: 1,
+      },
+      {
+        genre: "Humor",
+        booksTotal: 1,
+      },
+    ],
+  },
+  booksYear: [
+    {
+      year: 2022,
+      totals: {
+        read: 4,
+        pages: 2364,
+        authors: 1,
+      },
+    },
+    {
+      year: 2023,
+      totals: {
+        read: 6,
+        pages: 5686,
+        authors: 2,
+      },
+    },
+    {
+      year: 2024,
+      totals: {
+        read: 2,
+        pages: 1068,
+        authors: 2,
+      },
+    },
+    {
+      year: 2025,
+      totals: {
+        read: 2,
+        pages: 1949,
+        authors: 2,
+      },
+    },
+  ],
 };
