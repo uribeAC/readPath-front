@@ -7,6 +7,7 @@ import {
   LazyModifyBookPage,
   LazyNotFoundPage,
 } from "./LazyPages";
+import StatsPage from "../book/pages/StatsPage/StatsPage";
 
 const AppRouter: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const AppRouter: React.FC = () => {
         <Route path="add-book" element={<LazyAddBookPage />} />
         <Route path="book/:bookId" element={<LazyBookDetailPage />} />
         <Route path="modify-book/:bookId" element={<LazyModifyBookPage />} />
+        <Route path="bookshelf-stats" element={<StatsPage />} />
         <Route path="*" element={<LazyNotFoundPage />} />
       </Route>
     </Routes>
