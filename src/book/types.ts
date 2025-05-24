@@ -53,3 +53,24 @@ export type BookFilters = {
   state?: string;
   genre?: string;
 };
+
+export interface BookStats {
+  totals: BookStatsTotals;
+  genres: {
+    total: number;
+    genres: {
+      genre: string;
+      booksTotal: number;
+    }[];
+  };
+  booksYear: {
+    year: number;
+    totals: BookStatsTotals;
+  }[];
+}
+
+export type BookStatsTotals = {
+  read: number;
+  pages: number;
+  authors: number;
+};

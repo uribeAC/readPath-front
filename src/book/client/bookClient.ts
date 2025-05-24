@@ -2,7 +2,7 @@ import {
   transformBookDtoToBook,
   transformBooksInfoDtoToBooksInfo,
 } from "../dto/transformers";
-import type { Book, BookSendData } from "../types";
+import type { Book, BookSendData, BookStats } from "../types";
 import type {
   BookClientStructure,
   BooksInfo,
@@ -59,6 +59,20 @@ class BookClient implements BookClientStructure {
     const book = transformBookDtoToBook(bookDto);
 
     return book;
+  };
+
+  public getBookshelfStats = async (): Promise<BookStats> => {
+    const fetchUrl = `${this.apiUrl}/books/stats`;
+
+    const response = await fetch(fetchUrl);
+
+    if (!response.ok) {
+      throw new Error("Error fetching bookshelf stats");
+    }
+
+    const bookshelfStats = (await response.json()) as BookStats;
+
+    return bookshelfStats;
   };
 
   public changeBookState = async (
