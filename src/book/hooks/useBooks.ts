@@ -10,14 +10,16 @@ import {
   modifyBookActionCreator,
 } from "../slice/bookSlice";
 import BookClient from "../client/bookClient";
-import type { BookSendData, BookStats } from "../types";
+import type { BookSendData } from "../types";
 import useLoading from "../../hooks/useLoading";
 import useModal from "../../hooks/useModal";
+import { loadStatsActionCreator } from "../slice/statsSlice";
 
 const useBooks = () => {
   const { startLoading, stopLoading } = useLoading();
   const { showModal } = useModal();
   const books = useAppSelector((state) => state.books.booksInfo);
+  const stats = useAppSelector((state) => state.stats);
 
   const dispatch = useAppDispatch();
 
@@ -79,7 +81,7 @@ const useBooks = () => {
     [bookClient, dispatch, startLoading, stopLoading, showModal, clearBooks],
   );
 
-  const loadStats = useCallback(async (): Promise<BookStats | undefined> => {
+  const loadStats = useCallback(async (): Promise<void> => {
     const loadingDelay = setTimeout(() => {
       startLoading();
     }, 200);
@@ -87,7 +89,9 @@ const useBooks = () => {
     try {
       const stats = await bookClient.getBookshelfStats();
 
-      return stats;
+      const action = loadStatsActionCreator(stats);
+
+      dispatch(action);
     } catch {
       showModal("Error fetching the books stats", true);
     } finally {
@@ -95,9 +99,7 @@ const useBooks = () => {
     }
 
     stopLoading();
-
-    return undefined;
-  }, [bookClient, startLoading, stopLoading, showModal]);
+  }, [bookClient, startLoading, stopLoading, showModal, dispatch]);
 
   const updateBook = async (
     actionState: "read" | "toread",
@@ -175,6 +177,7 @@ const useBooks = () => {
 
   return {
     books,
+    stats,
     loadBooks,
     loadBookById,
     loadStats,
