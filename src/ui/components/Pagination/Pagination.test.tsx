@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import ContextProvider from "../../test-utils/ContextProvider";
+import ContextProvider from "../../../test-utils/ContextProvider";
 import Pagination from "./Pagination";
-import { mangaFixtures } from "../../book/fixtures/fixturesDto";
+import { mangaFixtures } from "../../../book/fixtures/fixturesDto";
 
 describe("Given the Pagination component", () => {
   describe("When it renders", () => {

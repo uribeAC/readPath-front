@@ -1,7 +1,7 @@
 import type React from "react";
 import { Link, useSearchParams } from "react-router";
 import type { Book } from "../../types";
-import Button from "../../../components/Button/Button.tsx";
+import Button from "../../../ui/components/Button/Button.tsx";
 import useFilter from "../../../hooks/useFilter.ts";
 import useBooks from "../../hooks/useBooks.ts";
 import Rating from "../Rating/Rating.tsx";

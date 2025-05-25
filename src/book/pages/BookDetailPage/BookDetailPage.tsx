@@ -1,10 +1,10 @@
 import type React from "react";
 import { Link, useParams } from "react-router";
 import { useEffect, useState } from "react";
-import Loading from "../../../components/Loading/Loading";
+import Loading from "../../../ui/components/Loading/Loading";
 import { transformDescriptionDtoToDescriptionPreview } from "../../dto/transformers";
 import { useAppSelector } from "../../../store/hooks";
-import Button from "../../../components/Button/Button";
+import Button from "../../../ui/components/Button/Button";
 import useLoading from "../../../hooks/useLoading";
 import Rating from "../../components/Rating/Rating";
 import useBooks from "../../hooks/useBooks";
