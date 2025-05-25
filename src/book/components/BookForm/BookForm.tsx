@@ -253,7 +253,9 @@ const BookForm: React.FC<BookFormProps> = ({
           onChange={changeMultilpleGenres}
           required
         >
-          <option hidden>Choose genres</option>
+          <option hidden value="">
+            Choose genres
+          </option>
           {bookGenres.map((genre) => (
             <option key={genre}>{genre}</option>
           ))}

@@ -178,7 +178,7 @@ describe("Given the BookForm component", () => {
       });
     });
 
-    describe("And the use selects 'Fiction' and 'Non-fiction' in 'Genres' options select", () => {
+    describe("And the user selects 'Fiction' and 'Non-fiction' in 'Genres' options select", () => {
       test("Then it should show 'Fiction' and 'Non-fiction' as genres selected", async () => {
         const genresSelected = /genres selected/i;
         const fictionGenre = "Fiction";
@@ -302,7 +302,7 @@ describe("Given the BookForm component", () => {
             await user.click(fictionDeleteButton);
 
             expect(fiction).not.toBeInTheDocument();
-            expect(genresSelect).toHaveValue("Choose genres");
+            expect(genresSelect).toHaveValue("");
           });
         });
       });

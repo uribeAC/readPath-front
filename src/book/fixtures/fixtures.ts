@@ -16,7 +16,7 @@ export const dragonBallRead: Book = {
   },
   description:
     "Follow the adventures of a young monkey-tailed boy named Goku as he embarks on a journey to collect the seven mystical Dragon Balls. Along the way, he meets Bulma, Master Roshi, and other unforgettable characters in the beginning of this legendary manga series.",
-  genres: ["Manga", "Action", "Adventure", "Comedy"],
+  genres: ["Adventure", "Manga", "Action", "Comedy"],
   pages: 192,
   firstPublished: "2003-05-06",
   state: "read",
