@@ -472,6 +472,7 @@ describe("Given the Layout component", () => {
     describe("And the user modifies the title to 'Dragon Ball, Vol. 12' and submits it", () => {
       test("Then it should show the 'Book modified correctly' message", async () => {
         const expectedMessage = /book modified correctly/i;
+        const expectedSelectLabel = /genres/i;
         const bookModifiedTitle = "Dragon Ball, Vol. 12";
         const expectedLabel = /title/i;
 
@@ -485,9 +486,12 @@ describe("Given the Layout component", () => {
         );
 
         const titleTextBox = await screen.findByLabelText(expectedLabel);
+        const genresSelect = screen.getByLabelText(expectedSelectLabel);
 
         await user.clear(titleTextBox);
         await user.type(titleTextBox, bookModifiedTitle);
+
+        await user.selectOptions(genresSelect, "Fantasy");
 
         const submitButton = await screen.findByRole("button", {
           name: /modify book/i,
