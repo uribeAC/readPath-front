@@ -3,27 +3,41 @@ import { useEffect } from "react";
 import BookYearsChart from "../../components/BookCharts/BookYearsChart";
 import BookDoughnut from "../../components/BookCharts/BookDoughnut";
 import useBooks from "../../hooks/useBooks";
+import Loading from "../../../components/Loading/Loading";
+import useLoading from "../../../hooks/useLoading";
 import "./StatsPage.css";
 
 const StatsPage: React.FC = () => {
-  const { loadStats, stats } = useBooks();
+  const {
+    loadStats,
+    stats: {
+      booksYear,
+      genres,
+      totals: { authors, pages, read },
+    },
+  } = useBooks();
+  const {
+    loading: { isLoading },
+  } = useLoading();
 
-  const { authors, pages, read } = stats.totals;
-
-  const genresLabels = stats.genres.genres.map((genre) => genre.genre);
-  const genreData = stats.genres.genres.map((genre) => genre.booksTotal);
+  const genresLabels = genres.genres.map((genre) => genre.genre);
+  const genreData = genres.genres.map((genre) => genre.booksTotal);
   const genresSliced = genresLabels.slice(0, 10);
 
-  const yearsLabels = stats.booksYear.map((year) => year.year.toString());
-  const yearsReadTotal = stats.booksYear.map((year) => year.totals.read);
-  const yearsPagesTotal = stats.booksYear.map((year) => year.totals.pages);
-  const yearsAuthorsTotal = stats.booksYear.map((year) => year.totals.authors);
+  const yearsLabels = booksYear.map((year) => year.year.toString());
+  const yearsReadTotal = booksYear.map((year) => year.totals.read);
+  const yearsPagesTotal = booksYear.map((year) => year.totals.pages);
+  const yearsAuthorsTotal = booksYear.map((year) => year.totals.authors);
 
   useEffect(() => {
     loadStats();
   }, [loadStats]);
 
-  if (stats.totals.read > 0) {
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (read > 0) {
     return (
       <main className="stats-page">
         <header>
@@ -81,13 +95,7 @@ const StatsPage: React.FC = () => {
     );
   }
 
-  return (
-    <main className="add-page-container">
-      <header>
-        <h2 className="add-page-header__title">Add a new book</h2>
-      </header>
-    </main>
-  );
+  return <></>;
 };
 
 export default StatsPage;
