@@ -210,5 +210,28 @@ describe("Given the AppRouter component", () => {
         expect(modifyTitle).toBeInTheDocument();
       });
     });
+
+    describe("And the user clicks the 'Delete book' button", () => {
+      test("Then it should show 'Book deleted from bookshelf' message", async () => {
+        const expectedDeleteButton = /delete book/i;
+        const expectedMessage = /book deleted from bookshelf/i;
+
+        render(
+          <ContextProvider initialEntries={[`/book/${dragonBallRead.id}`]}>
+            <AppRouter />
+          </ContextProvider>,
+        );
+
+        const deleteButton = await screen.findByRole("button", {
+          name: expectedDeleteButton,
+        });
+
+        await user.click(deleteButton);
+
+        const modal = await screen.findByText(expectedMessage);
+
+        expect(modal).toBeInTheDocument();
+      });
+    });
   });
 });
