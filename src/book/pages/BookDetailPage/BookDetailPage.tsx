@@ -11,7 +11,7 @@ import useBooks from "../../hooks/useBooks";
 import "./BookDetailPage.css";
 
 const BookDetailPage: React.FC = () => {
-  const { loadBookById, updateBook } = useBooks();
+  const { loadBookById, updateBook, books } = useBooks();
   const {
     loading: { isLoading },
   } = useLoading();
@@ -21,11 +21,15 @@ const BookDetailPage: React.FC = () => {
   const [isDescriptionExpanded, setIsDescriptionExpanded] =
     useState<boolean>(false);
 
+  const hasStateBook = books.books.some((book) => book.id === bookId);
+
   useEffect(() => {
     window.scrollTo({ top: 0 });
 
-    loadBookById(bookId!);
-  }, [loadBookById, bookId]);
+    if (!hasStateBook) {
+      loadBookById(bookId!);
+    }
+  }, [loadBookById, bookId, hasStateBook]);
 
   const book = useAppSelector((state) =>
     state.books.booksInfo.books.find((book) => book.id === bookId),
