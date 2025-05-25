@@ -1,7 +1,7 @@
 import type React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import Button from "../../../components/Button/Button";
+import Button from "../../../ui/components/Button/Button";
 import type { BookFormData, BookSendData } from "../../types";
 import { bookGenres } from "../../data/genres";
 import { transfromBookFormDataToBookSendData } from "../../dto/transformers";

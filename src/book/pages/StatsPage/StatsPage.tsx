@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import BookYearsChart from "../../components/BookCharts/BookYearsChart";
 import BookDoughnut from "../../components/BookCharts/BookDoughnut";
 import useBooks from "../../hooks/useBooks";
-import Loading from "../../../components/Loading/Loading";
+import Loading from "../../../ui/components/Loading/Loading";
 import useLoading from "../../../hooks/useLoading";
 import "./StatsPage.css";
 

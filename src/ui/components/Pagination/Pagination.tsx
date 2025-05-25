@@ -1,6 +1,6 @@
 import type React from "react";
 import { Link } from "react-router";
-import useFilter from "../../hooks/useFilter";
+import useFilter from "../../../hooks/useFilter";
 import "./Pagination.css";
 
 interface PaginationProps {

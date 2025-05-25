@@ -1,13 +1,13 @@
 import { Navigate, Route, Routes } from "react-router";
-import App from "../components/App/App";
+import App from "../ui/components/App/App";
 import {
   LazyAddBookPage,
   LazyBookDetailPage,
   LazyBooksPage,
   LazyModifyBookPage,
   LazyNotFoundPage,
+  LazyStatsPage,
 } from "./LazyPages";
-import StatsPage from "../book/pages/StatsPage/StatsPage";
 
 const AppRouter: React.FC = () => {
   return (
@@ -18,7 +18,7 @@ const AppRouter: React.FC = () => {
         <Route path="add-book" element={<LazyAddBookPage />} />
         <Route path="book/:bookId" element={<LazyBookDetailPage />} />
         <Route path="modify-book/:bookId" element={<LazyModifyBookPage />} />
-        <Route path="book-stats" element={<StatsPage />} />
+        <Route path="book-stats" element={<LazyStatsPage />} />
         <Route path="*" element={<LazyNotFoundPage />} />
       </Route>
     </Routes>
