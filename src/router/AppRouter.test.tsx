@@ -23,6 +23,31 @@ describe("Given the AppRouter component", () => {
 
       expect(pageTitle).toBeInTheDocument();
     });
+
+    describe("And the user clicks the Book stats link", () => {
+      test("Then it should show 'Bookshelf stats' inside a heading", async () => {
+        const expectedLinkName = /book stats/i;
+        const expectedPageTitle = /bookshelf stats/i;
+
+        render(
+          <ContextProvider initialEntries={["/mangas"]}>
+            <AppRouter />
+          </ContextProvider>,
+        );
+
+        const statsLink = screen.getByRole("link", {
+          name: expectedLinkName,
+        });
+
+        await user.click(statsLink);
+
+        const pageTitle = await screen.findByRole("heading", {
+          name: expectedPageTitle,
+        });
+
+        expect(pageTitle).toBeInTheDocument();
+      });
+    });
   });
 
   describe("When it renders in path /books", () => {

@@ -47,5 +47,27 @@ describe("Given the Navigation component", () => {
 
       expect(addBookIcon).toBeInTheDocument();
     });
+
+    test("Then it should show a 'Book stats' link", () => {
+      const expectedLinkName = /book stats/i;
+
+      render(<Navigation />, { wrapper: MemoryRouter });
+
+      const statsLink = screen.getByRole("link", {
+        name: expectedLinkName,
+      });
+
+      expect(statsLink).toBeInTheDocument();
+    });
+
+    test("Then it should show an icon of a stats graph", () => {
+      const expectedImageAlt = /icon of a stats graph/i;
+
+      render(<Navigation />, { wrapper: MemoryRouter });
+
+      const statsIcon = screen.getByAltText(expectedImageAlt);
+
+      expect(statsIcon).toBeInTheDocument();
+    });
   });
 });
