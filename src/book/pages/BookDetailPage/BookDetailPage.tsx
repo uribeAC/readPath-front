@@ -1,5 +1,5 @@
 import type React from "react";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import Loading from "../../../ui/components/Loading/Loading";
 import { transformDescriptionDtoToDescriptionPreview } from "../../dto/transformers";
@@ -11,10 +11,11 @@ import useBooks from "../../hooks/useBooks";
 import "./BookDetailPage.css";
 
 const BookDetailPage: React.FC = () => {
-  const { loadBookById, updateBook, books } = useBooks();
+  const { loadBookById, updateBook, books, removeBook } = useBooks();
   const {
     loading: { isLoading },
   } = useLoading();
+  const navigate = useNavigate();
 
   const { bookId } = useParams<{ bookId: string }>();
 
@@ -75,6 +76,11 @@ const BookDetailPage: React.FC = () => {
       : previewDescription;
 
     const isLongDescription = description !== previewDescription;
+
+    const deleteBook = (bookId: string) => {
+      navigate("/books");
+      removeBook(bookId, 1, "", "");
+    };
 
     return (
       <main className="detail-page-container detail-page-container--background">
@@ -152,9 +158,19 @@ const BookDetailPage: React.FC = () => {
             )}
           </div>
         </article>
-        <Link to={`/modify-book/${id}`} className="book-detail__button">
-          Modify book
-        </Link>
+        <div className="detail-page__buttons">
+          <Button
+            action={() => deleteBook(bookId!)}
+            isDisabled={false}
+            isSelected={true}
+            classModifierName="detail-delete"
+          >
+            Delete book
+          </Button>
+          <Link to={`/modify-book/${id}`} className="book-detail__button">
+            Modify book
+          </Link>
+        </div>
       </main>
     );
   }

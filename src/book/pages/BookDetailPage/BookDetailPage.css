@@ -101,6 +101,11 @@
   font-weight: 300;
 }
 
+.detail-page__buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
 .book-detail__button {
   align-self: flex-end;
   padding: 5px 10px;
@@ -126,4 +131,8 @@
     font-weight: bold;
     outline: 2px solid var(--brand-color);
   }
+}
+
+.button--detail-delete {
+  align-self: flex-start;
 }
