@@ -18,7 +18,7 @@ const AppRouter: React.FC = () => {
         <Route path="add-book" element={<LazyAddBookPage />} />
         <Route path="book/:bookId" element={<LazyBookDetailPage />} />
         <Route path="modify-book/:bookId" element={<LazyModifyBookPage />} />
-        <Route path="bookshelf-stats" element={<StatsPage />} />
+        <Route path="book-stats" element={<StatsPage />} />
         <Route path="*" element={<LazyNotFoundPage />} />
       </Route>
     </Routes>

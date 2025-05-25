@@ -23,7 +23,7 @@
 
   &:focus {
     font-weight: bold;
-    border-bottom: 2px solid var(--light-color);
+    text-decoration: underline;
   }
 }
 

@@ -5,7 +5,7 @@ import { MemoryRouter } from "react-router";
 describe("Given the Navigation component", () => {
   describe("When it renders", () => {
     test("Then it should show a 'Bookshelf' link", () => {
-      const expectedLinkName = /bookshelf/i;
+      const expectedLinkName = /^bookshelf/i;
 
       render(<Navigation />, { wrapper: MemoryRouter });
 
