@@ -5,7 +5,7 @@ import { MemoryRouter } from "react-router";
 describe("Given the Navigation component", () => {
   describe("When it renders", () => {
     test("Then it should show a 'Bookshelf' link", () => {
-      const expectedLinkName = /^bookshelf/i;
+      const expectedLinkName = /bookshelf/i;
 
       render(<Navigation />, { wrapper: MemoryRouter });
 
@@ -46,6 +46,28 @@ describe("Given the Navigation component", () => {
       const addBookIcon = screen.getByAltText(expectedImageAlt);
 
       expect(addBookIcon).toBeInTheDocument();
+    });
+
+    test("Then it should show a 'Book stats' link", () => {
+      const expectedLinkName = /book stats/i;
+
+      render(<Navigation />, { wrapper: MemoryRouter });
+
+      const statsLink = screen.getByRole("link", {
+        name: expectedLinkName,
+      });
+
+      expect(statsLink).toBeInTheDocument();
+    });
+
+    test("Then it should show an icon of a stats graph", () => {
+      const expectedImageAlt = /icon of a stats graph/i;
+
+      render(<Navigation />, { wrapper: MemoryRouter });
+
+      const statsIcon = screen.getByAltText(expectedImageAlt);
+
+      expect(statsIcon).toBeInTheDocument();
     });
   });
 });
