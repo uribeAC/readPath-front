@@ -129,6 +129,12 @@ export const handlers = [
     });
   }),
 
+  http.delete(`${apiUrl}/books/${dragonBallRead.id}`, () => {
+    return HttpResponse.json<{ book: BookDto }>({
+      book: dragonBallReadDto,
+    });
+  }),
+
   http.put(`${apiUrl}/books/${dragonBallReadDto._id}`, () => {
     return HttpResponse.json<{ book: BookDto }>({
       book: dragonBallModifiedDto,
