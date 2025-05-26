@@ -132,6 +132,60 @@ describe("Given the AppRouter component", () => {
           expect(tokyoGhoulTitle).toBeInTheDocument();
           expect(narutoTitle).not.toBeInTheDocument();
         });
+
+        describe("And the user clicks the 'Clear' button and then the 'Search' button", () => {
+          test("Then it should show Naruto Vol. 1 inside a heading", async () => {
+            const expectedButton = /add filter/i;
+            const expectedStateLabel = /state/i;
+            const expectedGenreLabel = /genre/i;
+            const expectedClearButton = /clear/i;
+            const expectedSearchButton = /search/i;
+            const expectedGhoulBookTitle = /tokyo ghoul vol. 1/i;
+            const expectedNaurotBookTitle = /naruto vol. 1/i;
+
+            render(
+              <ContextProvider initialEntries={["/books"]}>
+                <AppRouter />
+              </ContextProvider>,
+            );
+
+            const addFilterButton = await screen.findByRole("button", {
+              name: expectedButton,
+            });
+            await user.click(addFilterButton);
+
+            const stateSelect =
+              await screen.findByLabelText(expectedStateLabel);
+            const genreSelect =
+              await screen.findByLabelText(expectedGenreLabel);
+
+            await user.selectOptions(stateSelect, "to read");
+            await user.selectOptions(genreSelect, "Horror");
+
+            const searchButton = await screen.findByRole("link", {
+              name: expectedSearchButton,
+            });
+
+            await user.click(searchButton);
+
+            const clearButton = await screen.findByRole("button", {
+              name: expectedClearButton,
+            });
+
+            await user.click(clearButton);
+            await user.click(searchButton);
+
+            const tokyoGhoulTitle = await screen.findByRole("heading", {
+              name: expectedGhoulBookTitle,
+            });
+            const narutoTitle = await screen.findByRole("heading", {
+              name: expectedNaurotBookTitle,
+            });
+
+            expect(tokyoGhoulTitle).toBeInTheDocument();
+            expect(narutoTitle).toBeInTheDocument();
+          });
+        });
       });
     });
   });

@@ -1,4 +1,5 @@
 import { renderHook } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { Provider } from "react-redux";
 import { act } from "react";
 import { dragonBallData } from "../../fixtures/fixtures";
@@ -12,7 +13,9 @@ describe("Given the createBook function", () => {
       const expectedBooksTotal = 1;
 
       const wrapper = ({ children }: { children: React.ReactNode }) => (
-        <Provider store={store}>{children}</Provider>
+        <MemoryRouter>
+          <Provider store={store}>{children}</Provider>
+        </MemoryRouter>
       );
 
       const { result } = renderHook(() => useBooks(), { wrapper });

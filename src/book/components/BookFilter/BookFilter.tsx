@@ -2,6 +2,7 @@ import type React from "react";
 import { Link, useLocation } from "react-router";
 import { bookGenres } from "../../data/genres";
 import useFilter from "../../../hooks/useFilter";
+import Button from "../../../ui/components/Button/Button";
 import "./BookFilter.css";
 
 const BookFilter: React.FC = () => {
@@ -30,6 +31,11 @@ const BookFilter: React.FC = () => {
   if (filter.genre !== "All") {
     newUrl.searchParams.set("genre", filter.genre);
   }
+
+  const clearFilters = () => {
+    setStateFilter("All");
+    setGenreFilter("All");
+  };
 
   return (
     <div className="filter">
@@ -69,9 +75,14 @@ const BookFilter: React.FC = () => {
           </div>
         </div>
       </div>
-      <Link to={"/books" + newUrl.search} className="filter__button">
-        Search
-      </Link>
+      <div className="filter__buttons">
+        <Button action={clearFilters} isDisabled={false} isSelected={false}>
+          Clear
+        </Button>
+        <Link to={"/books" + newUrl.search} className="filter__button">
+          Search
+        </Link>
+      </div>
     </div>
   );
 };

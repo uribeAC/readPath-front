@@ -67,6 +67,12 @@
   }
 }
 
+.filter__buttons {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
 .filter__button {
   align-self: flex-end;
   padding: 5px 10px;

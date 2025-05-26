@@ -1,15 +1,18 @@
 import { renderHook } from "@testing-library/react";
 import { Provider } from "react-redux";
+import { MemoryRouter } from "react-router";
 import store from "../../../store/store";
+import { act } from "react";
 import useBooks from "../useBooks";
 import { mangaStats } from "../../fixtures/fixtures";
-import { act } from "react";
 
 describe("Given the loadStats function", () => {
   describe("When it's called", () => {
     test("Then it should set manga stats: total of 2 books read, 2 authors and 464 pages as BookStats", async () => {
       const wrapper = ({ children }: { children: React.ReactNode }) => (
-        <Provider store={store}>{children}</Provider>
+        <MemoryRouter>
+          <Provider store={store}>{children}</Provider>
+        </MemoryRouter>
       );
 
       const { result } = renderHook(() => useBooks(), { wrapper });

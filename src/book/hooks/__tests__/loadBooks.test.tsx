@@ -3,6 +3,7 @@ import useBooks from "../useBooks";
 import { act } from "react";
 import { Provider } from "react-redux";
 import store from "../../../store/store";
+import { MemoryRouter } from "react-router";
 
 describe("Given the loadBooks function", () => {
   describe("When it's called with page number 2", () => {
@@ -12,13 +13,15 @@ describe("Given the loadBooks function", () => {
       const expectedBooksTotal = 12;
 
       const wrapper = ({ children }: { children: React.ReactNode }) => (
-        <Provider store={store}>{children}</Provider>
+        <MemoryRouter initialEntries={["/books?page=2"]}>
+          <Provider store={store}>{children}</Provider>
+        </MemoryRouter>
       );
 
       const { result } = renderHook(() => useBooks(), { wrapper });
 
       await act(() => {
-        result.current.loadBooks(2, "", "");
+        result.current.loadBooks();
       });
 
       const books = result.current.books.books;
