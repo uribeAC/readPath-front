@@ -2,8 +2,8 @@ import type React from "react";
 import { Link, useLocation } from "react-router";
 import { bookGenres } from "../../data/genres";
 import useFilter from "../../../hooks/useFilter";
-import "./BookFilter.css";
 import Button from "../../../ui/components/Button/Button";
+import "./BookFilter.css";
 
 const BookFilter: React.FC = () => {
   const { filter, setStateFilter, setGenreFilter } = useFilter();

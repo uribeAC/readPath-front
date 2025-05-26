@@ -79,7 +79,7 @@ const BookDetailPage: React.FC = () => {
 
     const deleteBook = (bookId: string) => {
       navigate("/books");
-      removeBook(bookId, 1, "", "");
+      removeBook(bookId);
     };
 
     return (
