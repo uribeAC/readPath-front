@@ -60,17 +60,22 @@ const bookSlice = createSlice({
     changeBookState: (
       { booksInfo: { books, totals } },
       {
-        payload: { updatedBook, actionState },
-      }: PayloadAction<{ updatedBook: Book; actionState: string }>,
+        payload: { bookId, actionState },
+      }: PayloadAction<{ bookId: string; actionState: string }>,
     ): BookState => {
+      const newBooks = books.map<Book>((book) => {
+        if (book.id === bookId) {
+          const newState = actionState === "toread" ? "to read" : "read";
+
+          return { ...book, state: newState };
+        }
+
+        return book;
+      });
+
       return {
         booksInfo: {
-          books: books.map((book) => {
-            const actionUpdatedBook =
-              book.id === updatedBook.id ? updatedBook : book;
-
-            return actionUpdatedBook;
-          }),
+          books: newBooks,
           totals: {
             books: totals.books,
             booksRead:
