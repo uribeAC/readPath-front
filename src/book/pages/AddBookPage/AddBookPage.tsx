@@ -2,7 +2,7 @@ import type React from "react";
 import BookForm from "../../components/BookForm/BookForm";
 import type { BookFormData } from "../../types";
 import useBooks from "../../hooks/useBooks";
-import "./AddBookPage.css";
+import "../styles/pages.css";
 
 const AddBookPage: React.FC = () => {
   const { createBook } = useBooks();
@@ -25,9 +25,9 @@ const AddBookPage: React.FC = () => {
   };
 
   return (
-    <main className="add-page-container">
+    <main className="page-container">
       <header>
-        <h2 className="add-page-header__title">Add a new book</h2>
+        <h2 className="page-title">Add a new book</h2>
       </header>
       <BookForm
         createAction={createBook}

@@ -26,6 +26,7 @@
 
 .book-detail__cover {
   position: absolute;
+  object-fit: cover;
   top: -123px;
 }
 

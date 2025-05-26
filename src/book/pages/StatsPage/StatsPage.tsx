@@ -6,6 +6,7 @@ import useBooks from "../../hooks/useBooks";
 import Loading from "../../../ui/components/Loading/Loading";
 import useLoading from "../../../hooks/useLoading";
 import "./StatsPage.css";
+import "../styles/pages.css";
 
 const StatsPage: React.FC = () => {
   const {
@@ -41,7 +42,7 @@ const StatsPage: React.FC = () => {
     return (
       <main className="stats-page">
         <header>
-          <h2 className="stats-page__title">Bookshelf stats</h2>
+          <h2 className="page-title">Bookshelf stats</h2>
         </header>
         <div className="stats-page__summary">
           <span className="stats-page__stats">Books read: {read}</span>

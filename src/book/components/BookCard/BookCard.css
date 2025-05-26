@@ -6,6 +6,10 @@
   border-bottom: 1px solid var(--dark-color);
 }
 
+.book__cover {
+  object-fit: cover;
+}
+
 .book__display {
   display: flex;
   gap: 15px;
