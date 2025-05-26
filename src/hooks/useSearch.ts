@@ -39,7 +39,25 @@ const useSearch = () => {
     return newUrl.toString();
   };
 
-  return { getSearchParams, getUrl };
+  const getPath = (page: number): string => {
+    const newUrl = new URL(`${origin}/books?page=${page}`);
+
+    const { state, genre } = getSearchParams();
+
+    if (state !== "") {
+      newUrl.searchParams.set("state", state);
+    }
+
+    if (genre !== "") {
+      newUrl.searchParams.set("genre", genre);
+    }
+
+    const path = newUrl.toString().replace(origin, "");
+
+    return path;
+  };
+
+  return { getSearchParams, getUrl, getPath };
 };
 
 export default useSearch;

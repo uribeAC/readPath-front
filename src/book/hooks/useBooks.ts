@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import { useCallback, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
@@ -18,7 +19,8 @@ import { loadStatsActionCreator } from "../slice/statsSlice";
 
 const useBooks = () => {
   const { startLoading, stopLoading } = useLoading();
-  const { getSearchParams } = useSearch();
+  const { getSearchParams, getPath } = useSearch();
+  const navigate = useNavigate();
   const { showModal } = useModal();
   const books = useAppSelector((state) => state.books.booksInfo);
   const stats = useAppSelector((state) => state.stats);
@@ -152,7 +154,15 @@ const useBooks = () => {
       const action = deleteBookActionCreator({ deletedBook });
 
       dispatch(action);
-      loadBooks();
+
+      if (books.books.length === 1) {
+        const { page } = getSearchParams();
+        const path = getPath(page - 1);
+
+        navigate(path);
+      } else {
+        loadBooks();
+      }
     } catch {
       showModal(`Error removing book from your bookshelf`, true);
     }
