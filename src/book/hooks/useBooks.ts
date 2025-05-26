@@ -114,10 +114,10 @@ const useBooks = () => {
     bookId: string,
   ): Promise<void> => {
     try {
-      const updatedBook = await bookClient.changeBookState(actionState, bookId);
+      await bookClient.changeBookState(actionState, bookId);
 
       const actionInfo = {
-        updatedBook,
+        bookId,
         actionState,
       };
 
