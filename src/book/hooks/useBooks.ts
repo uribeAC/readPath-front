@@ -13,10 +13,12 @@ import BookClient from "../client/bookClient";
 import type { BookSendData } from "../types";
 import useLoading from "../../hooks/useLoading";
 import useModal from "../../hooks/useModal";
+import useSearch from "../../hooks/useSearch";
 import { loadStatsActionCreator } from "../slice/statsSlice";
 
 const useBooks = () => {
   const { startLoading, stopLoading } = useLoading();
+  const { getSearchParams } = useSearch();
   const { showModal } = useModal();
   const books = useAppSelector((state) => state.books.booksInfo);
   const stats = useAppSelector((state) => state.stats);
@@ -31,30 +33,36 @@ const useBooks = () => {
     dispatch(clearAction);
   }, [dispatch]);
 
-  const loadBooks = useCallback(
-    async (pageNumber: number, state: string, genre: string): Promise<void> => {
-      clearBooks();
+  const loadBooks = useCallback(async (): Promise<void> => {
+    clearBooks();
+    const { page, state, genre } = getSearchParams();
 
-      const loadingDelay = setTimeout(() => {
-        startLoading();
-      }, 200);
+    const loadingDelay = setTimeout(() => {
+      startLoading();
+    }, 200);
 
-      try {
-        const booksInfo = await bookClient.getBooks(pageNumber, state, genre);
+    try {
+      const booksInfo = await bookClient.getBooks(page, state, genre);
 
-        const action = loadBooksActionCreator(booksInfo);
+      const action = loadBooksActionCreator(booksInfo);
 
-        dispatch(action);
-      } catch {
-        showModal("Error fetching your bookshelf", true);
-      } finally {
-        clearTimeout(loadingDelay);
-      }
+      dispatch(action);
+    } catch {
+      showModal("Error fetching your bookshelf", true);
+    } finally {
+      clearTimeout(loadingDelay);
+    }
 
-      stopLoading();
-    },
-    [bookClient, dispatch, startLoading, stopLoading, showModal, clearBooks],
-  );
+    stopLoading();
+  }, [
+    bookClient,
+    dispatch,
+    startLoading,
+    stopLoading,
+    showModal,
+    clearBooks,
+    getSearchParams,
+  ]);
 
   const loadBookById = useCallback(
     async (bookId: string): Promise<void> => {
@@ -135,12 +143,7 @@ const useBooks = () => {
     }
   };
 
-  const removeBook = async (
-    bookId: string,
-    page: number,
-    state: string,
-    genre: string,
-  ): Promise<void> => {
+  const removeBook = async (bookId: string): Promise<void> => {
     try {
       const deletedBook = await bookClient.deleteBook(bookId);
 
@@ -149,7 +152,7 @@ const useBooks = () => {
       const action = deleteBookActionCreator({ deletedBook });
 
       dispatch(action);
-      loadBooks(page, state, genre);
+      loadBooks();
     } catch {
       showModal(`Error removing book from your bookshelf`, true);
     }

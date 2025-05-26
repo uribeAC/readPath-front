@@ -7,6 +7,7 @@ import setupStore from "../../../store/setupStore";
 import type { BookState } from "../../slice/bookSlice";
 import { dragonBallToRead } from "../../fixtures/fixtures";
 import { dragonBallModifiedDto } from "../../fixtures/fixturesDto";
+import { MemoryRouter } from "react-router";
 
 describe("Given the editBook function", () => {
   describe("When it's called with Dragon Ball modified book and his id", () => {
@@ -34,7 +35,9 @@ describe("Given the editBook function", () => {
       const expectedDragonBallTitle = dragonBallModifiedDto.title;
 
       const wrapper = ({ children }: { children: React.ReactNode }) => (
-        <Provider store={testStore}>{children}</Provider>
+        <MemoryRouter>
+          <Provider store={testStore}>{children}</Provider>
+        </MemoryRouter>
       );
 
       const { result } = renderHook(() => useBooks(), { wrapper });

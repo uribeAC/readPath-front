@@ -1,6 +1,6 @@
 import type React from "react";
 import { Link } from "react-router";
-import useFilter from "../../../hooks/useFilter";
+import useSearch from "../../../hooks/useSearch";
 import "./Pagination.css";
 
 interface PaginationProps {
@@ -9,8 +9,7 @@ interface PaginationProps {
 }
 
 const Pagination: React.FC<PaginationProps> = ({ booksTotal, currentPage }) => {
-  const { filter } = useFilter();
-  const origin = window.location.origin;
+  const { getUrl } = useSearch();
 
   const pagesTotal = Math.ceil(booksTotal / 10);
   const previousPage = currentPage - 1;
@@ -20,18 +19,8 @@ const Pagination: React.FC<PaginationProps> = ({ booksTotal, currentPage }) => {
   const firstPageClass = currentPage > 1 ? "" : hiddenClass;
   const lastPageClass = currentPage < pagesTotal ? "" : hiddenClass;
 
-  const previousUrl = new URL(`${origin}/books?page=${previousPage}`);
-  const nextUrl = new URL(`${origin}/books?page=${nextPage}`);
-
-  if (filter.state !== "All") {
-    previousUrl.searchParams.set("state", filter.state);
-    nextUrl.searchParams.set("state", filter.state);
-  }
-
-  if (filter.genre !== "All") {
-    previousUrl.searchParams.set("genre", filter.genre);
-    nextUrl.searchParams.set("genre", filter.genre);
-  }
+  const previousUrl = getUrl(previousPage);
+  const nextUrl = getUrl(nextPage);
 
   return (
     <nav className="paginator">

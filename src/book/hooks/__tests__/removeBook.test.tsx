@@ -9,6 +9,7 @@ import { narutoBook } from "../../fixtures/fixtures";
 import type { BooksInfoDto } from "../../client/types";
 import type { BookState } from "../../slice/bookSlice";
 import useBooks from "../useBooks";
+import { MemoryRouter } from "react-router";
 
 describe("Given the removeBook function", () => {
   describe("When it's called with Naruto Vol. 1 book id", () => {
@@ -36,7 +37,9 @@ describe("Given the removeBook function", () => {
       const testStore = setupStore(initialState);
 
       const wrapper = ({ children }: { children: React.ReactNode }) => (
-        <Provider store={testStore}>{children}</Provider>
+        <MemoryRouter>
+          <Provider store={testStore}>{children}</Provider>
+        </MemoryRouter>
       );
 
       const { result } = renderHook(() => useBooks(), { wrapper });
@@ -55,7 +58,7 @@ describe("Given the removeBook function", () => {
       );
 
       await act(() => {
-        result.current.removeBook(narutoBook.id, 1, "", "");
+        result.current.removeBook(narutoBook.id);
       });
 
       const books = result.current.books.books;

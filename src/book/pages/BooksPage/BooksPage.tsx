@@ -1,5 +1,5 @@
 import type React from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import useBooks from "../../hooks/useBooks";
 import useLoading from "../../../hooks/useLoading";
@@ -7,7 +7,6 @@ import Bookshelf from "../../components/Bookshelf/Bookshelf";
 import Pagination from "../../../ui/components/Pagination/Pagination";
 import Loading from "../../../ui/components/Loading/Loading";
 import BookFilter from "../../components/BookFilter/BookFilter";
-import type { BookFilters } from "../../types";
 import "./BooksPage.css";
 
 const BooksPage: React.FC = () => {
@@ -22,18 +21,6 @@ const BooksPage: React.FC = () => {
     ? Number(searchParams.get("page"))
     : 1;
 
-  const filters: BookFilters = useMemo(() => {
-    const booksFilter: BookFilters = {};
-
-    const state = searchParams.get("state");
-    const genre = searchParams.get("genre");
-
-    if (state) booksFilter.state = state;
-    if (genre) booksFilter.genre = genre;
-
-    return booksFilter;
-  }, [searchParams]);
-
   const [isFilter, setIsFilter] = useState<boolean>(false);
   const toogleFilter = () => {
     setIsFilter((isFilter) => !isFilter);
@@ -42,8 +29,8 @@ const BooksPage: React.FC = () => {
   useEffect(() => {
     window.scrollTo({ top: 0 });
 
-    loadBooks(pageNumber, filters.state!, filters.genre!);
-  }, [loadBooks, pageNumber, filters]);
+    loadBooks();
+  }, [loadBooks]);
 
   if (isLoading) {
     return <Loading />;

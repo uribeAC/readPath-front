@@ -1,6 +1,7 @@
 import { Provider } from "react-redux";
 import React, { act } from "react";
 import { renderHook } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import type { BookState } from "../../slice/bookSlice";
 import setupStore from "../../../store/setupStore";
 import useBooks from "../useBooks";
@@ -31,7 +32,9 @@ describe("Given the updateBook function", () => {
       const testStore = setupStore(initialState);
 
       const wrapper = ({ children }: { children: React.ReactNode }) => (
-        <Provider store={testStore}>{children}</Provider>
+        <MemoryRouter>
+          <Provider store={testStore}>{children}</Provider>
+        </MemoryRouter>
       );
 
       const { result } = renderHook(() => useBooks(), { wrapper });
