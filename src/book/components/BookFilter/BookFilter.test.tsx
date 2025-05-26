@@ -46,5 +46,19 @@ describe("Given the BookFilter component", () => {
 
       expect(button).toBeInTheDocument();
     });
+
+    test("Then it should show a 'Clear' button", () => {
+      const expectedButton = /clear/i;
+
+      render(
+        <ContextProvider>
+          <BookFilter />
+        </ContextProvider>,
+      );
+
+      const button = screen.getByRole("button", { name: expectedButton });
+
+      expect(button).toBeInTheDocument();
+    });
   });
 });

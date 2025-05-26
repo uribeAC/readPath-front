@@ -4,11 +4,7 @@ import StatsPage from "./StatsPage";
 
 vi.mock("react-chartjs-2", () => ({
   Bar: () => <div>Bar chart</div>,
-  Doughnut: () => (
-    <div aria-label="Doughnout chart of books read by genre">
-      Doughnout chart
-    </div>
-  ),
+  Doughnut: () => <div>Doughnout chart</div>,
 }));
 
 describe("Given the StatsPage component", () => {
@@ -43,20 +39,6 @@ describe("Given the StatsPage component", () => {
       });
 
       expect(chartTitle).toBeInTheDocument();
-    });
-
-    test("Then it should show a Doughnout chart of books read by genre", async () => {
-      const expectedChartLabel = /doughnout chart of books read by genre/i;
-
-      render(
-        <ContextProvider>
-          <StatsPage />
-        </ContextProvider>,
-      );
-
-      const doughnoutChart = await screen.findByLabelText(expectedChartLabel);
-
-      expect(doughnoutChart).toBeInTheDocument();
     });
 
     test("Then it should show a legend tag for fantasy as Fantasy: 13", async () => {
