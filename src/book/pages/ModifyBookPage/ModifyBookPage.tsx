@@ -4,7 +4,7 @@ import BookForm from "../../components/BookForm/BookForm";
 import useBooks from "../../hooks/useBooks";
 import { useAppSelector } from "../../../store/hooks";
 import type { BookFormData } from "../../types";
-import "./ModifyBookPage.css";
+import "../styles/pages.css";
 
 const ModifyBookPage: React.FC = () => {
   const { bookId } = useParams<{ bookId: string }>();
@@ -54,9 +54,9 @@ const ModifyBookPage: React.FC = () => {
     const initialSelectedGenres: string[] = book.genres;
 
     return (
-      <main className="modify-page-container">
+      <main className="page-container">
         <header>
-          <h2 className="modify-page-header__title">Modify: {book.title}</h2>
+          <h2 className="page-title">Modify: {book.title}</h2>
         </header>
         <BookForm
           modifyAction={editBook}

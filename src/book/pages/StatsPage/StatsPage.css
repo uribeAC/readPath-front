@@ -1,18 +1,9 @@
 .stats-page {
   height: 100%;
-  padding: 20px 20px 20px 20px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-}
-
-.stats-page__title {
-  font-family: var(--title-font);
-  color: var(--dark-color);
-  font-weight: 400;
-  font-size: 1.25rem;
-  line-height: 1.25rem;
-  border-bottom: 1px solid var(--dark-color);
 }
 
 .stats-page__summary {

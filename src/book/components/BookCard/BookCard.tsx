@@ -36,6 +36,7 @@ const BookCard: React.FC<BookCardProps> = ({
   return (
     <article className="book">
       <img
+        className="book__cover"
         src={coverImageUrlSmall}
         alt={imageAlt}
         width={86}
