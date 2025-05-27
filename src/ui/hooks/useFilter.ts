@@ -3,8 +3,9 @@ import {
   setGenreFilterActionCreator,
   setStateFilterActionCreator,
 } from "../slices/slices/filterSlice";
+import type { FilterContext } from "./types";
 
-const useFilter = () => {
+const useFilter = (): FilterContext => {
   const filter = useAppSelector((state) => state.filer);
 
   const dispatch = useAppDispatch();

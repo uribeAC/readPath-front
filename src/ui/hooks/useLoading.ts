@@ -4,8 +4,9 @@ import {
   startLoadingActionCreator,
   stopLoadingActionCreator,
 } from "../slices/slices/uiSlice";
+import type { LoadingContext } from "./types";
 
-const useLoading = () => {
+const useLoading = (): LoadingContext => {
   const loadingState = useAppSelector((state) => state.ui);
 
   const dispatch = useAppDispatch();

@@ -4,8 +4,9 @@ import {
   hideModalActionCreator,
   showModalActionCreator,
 } from "../slices/slices/uiSlice";
+import type { ModalContext } from "./types";
 
-const useModal = () => {
+const useModal = (): ModalContext => {
   const modalState = useAppSelector((state) => state.ui);
 
   const dispatch = useAppDispatch();
