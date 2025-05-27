@@ -2,6 +2,7 @@ import {
   transformBookDtoToBook,
   transformBooksInfoDtoToBooksInfo,
 } from "../dto/transformers";
+import type { BookDto } from "../dto/types";
 import type { Book, BookSendData, BookStats } from "../types";
 import type {
   BookClientStructure,
@@ -139,11 +140,15 @@ class BookClient implements BookClientStructure {
     bookData: BookSendData,
   ): Promise<Book> => {
     const fetchUrl = `${this.apiUrl}/books/${bookId}`;
+    const book: BookDto = {
+      ...bookData,
+      _id: bookId,
+    };
 
     const response = await fetch(fetchUrl, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ book: bookData }),
+      body: JSON.stringify({ book: book }),
     });
 
     if (!response.ok) {
