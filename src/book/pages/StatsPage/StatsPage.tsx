@@ -11,14 +11,14 @@ import "../styles/pages.css";
 const StatsPage: React.FC = () => {
   const {
     loadStats,
-    stats: {
+    statsState: {
       booksYear,
       genres,
       totals: { authors, pages, read },
     },
   } = useBooks();
   const {
-    loading: { isLoading },
+    loadingState: { isLoading },
   } = useLoading();
 
   const genresLabels = genres.genres.map((genre) => genre.genre);

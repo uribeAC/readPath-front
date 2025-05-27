@@ -22,8 +22,8 @@ const useBooks = () => {
   const { getSearchParams, getPath } = useSearch();
   const navigate = useNavigate();
   const { showModal } = useModal();
-  const books = useAppSelector((state) => state.books.booksInfo);
-  const stats = useAppSelector((state) => state.stats);
+  const booksState = useAppSelector((state) => state.books.booksInfo);
+  const statsState = useAppSelector((state) => state.stats);
 
   const dispatch = useAppDispatch();
 
@@ -155,7 +155,7 @@ const useBooks = () => {
 
       dispatch(action);
 
-      if (books.books.length === 1) {
+      if (booksState.books.length === 1) {
         const { page } = getSearchParams();
         const path = getPath(page - 1);
 
@@ -189,8 +189,8 @@ const useBooks = () => {
   };
 
   return {
-    books,
-    stats,
+    booksState,
+    statsState,
     loadBooks,
     loadBookById,
     loadStats,

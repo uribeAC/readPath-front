@@ -4,7 +4,6 @@ import { act } from "react";
 import { server } from "../../mocks/node";
 import { http, HttpResponse } from "msw";
 import setupStore from "../../../store/setupStore";
-import type { ModalState } from "../../../types";
 import { narutoBook } from "../../fixtures/fixtures";
 import type { BooksInfoDto } from "../../client/types";
 import type { BookState } from "../../slice/bookSlice";
@@ -16,7 +15,7 @@ describe("Given the removeBook function", () => {
     test("Then it should remove the book Naruto Vol. 1 from booksInfo", async () => {
       const apiUrl = import.meta.env.VITE_API_URL;
 
-      const initialState: { books: BookState; modal: ModalState } = {
+      const initialState: { books: BookState } = {
         books: {
           booksInfo: {
             books: [narutoBook],
@@ -26,11 +25,6 @@ describe("Given the removeBook function", () => {
               booksToRead: 0,
             },
           },
-        },
-        modal: {
-          isError: false,
-          isModalActive: false,
-          modalText: "",
         },
       };
 
@@ -61,8 +55,8 @@ describe("Given the removeBook function", () => {
         result.current.removeBook(narutoBook.id);
       });
 
-      const books = result.current.books.books;
-      const totals = result.current.books.totals;
+      const { books } = result.current.booksState;
+      const { totals } = result.current.booksState;
 
       expect(books).not.toContainEqual(
         expect.objectContaining({

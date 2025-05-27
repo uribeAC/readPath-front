@@ -17,7 +17,7 @@ describe("Given the startLoading function", () => {
         result.current.startLoading();
       });
 
-      const isLoading = result.current.loading.isLoading;
+      const isLoading = result.current.loadingState.isLoading;
 
       expect(isLoading).toBe(true);
     });

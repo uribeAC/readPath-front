@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useSearchParams } from "react-router";
-import type { SearchParams } from "../types";
+import type { SearchParams } from "../../types";
 
 const useSearch = () => {
   const [searchParams] = useSearchParams();

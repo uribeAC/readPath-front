@@ -9,7 +9,7 @@ import "./Layout.css";
 const Layout: React.FC = () => {
   const {
     hideModal,
-    modal: {
+    modalState: {
       modal: { isError, modalText, isModalActive },
     },
   } = useModal();

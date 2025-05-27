@@ -4,14 +4,12 @@ import { MemoryRouter } from "react-router";
 import { Provider } from "react-redux";
 import type React from "react";
 import type { BookState } from "../book/slice/bookSlice";
-import type { ModalState } from "../types";
 import store from "../store/store";
 
 interface ContextProviderStructure {
   initialEntries?: string[];
   preloadedStore?: Store<{
     books: BookState;
-    modal: ModalState;
   }>;
 }
 

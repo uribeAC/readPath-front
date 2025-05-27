@@ -19,8 +19,8 @@ describe("Given the hideModal function", () => {
         result.current.hideModal();
       });
 
-      const modalText = result.current.modal.modal.modalText;
-      const isModalActive = result.current.modal.modal.isModalActive;
+      const modalText = result.current.modalState.modal.modalText;
+      const isModalActive = result.current.modalState.modal.isModalActive;
 
       expect(modalText).toBe(expectedMessage);
       expect(isModalActive).toBe(false);

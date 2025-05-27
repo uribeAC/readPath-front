@@ -6,7 +6,7 @@ import {
 } from "../slices/slices/uiSlice";
 
 const useModal = () => {
-  const modal = useAppSelector((state) => state.ui);
+  const modalState = useAppSelector((state) => state.ui);
 
   const dispatch = useAppDispatch();
 
@@ -29,7 +29,7 @@ const useModal = () => {
   };
 
   return {
-    modal,
+    modalState,
     showModal,
     hideModal,
   };

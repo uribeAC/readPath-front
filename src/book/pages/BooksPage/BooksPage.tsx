@@ -11,11 +11,11 @@ import "./BooksPage.css";
 import "../styles/pages.css";
 
 const BooksPage: React.FC = () => {
-  const { loadBooks, books } = useBooks();
+  const { loadBooks, booksState } = useBooks();
   const {
-    loading: { isLoading },
+    loadingState: { isLoading },
   } = useLoading();
-  const { books: pageBooks, totals } = books;
+  const { books: pageBooks, totals } = booksState;
 
   const [searchParams] = useSearchParams();
   const pageNumber = searchParams.get("page")

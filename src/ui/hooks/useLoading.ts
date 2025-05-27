@@ -6,7 +6,7 @@ import {
 } from "../slices/slices/uiSlice";
 
 const useLoading = () => {
-  const loading = useAppSelector((state) => state.ui);
+  const loadingState = useAppSelector((state) => state.ui);
 
   const dispatch = useAppDispatch();
 
@@ -23,7 +23,7 @@ const useLoading = () => {
   }, [dispatch]);
 
   return {
-    loading,
+    loadingState,
     startLoading,
     stopLoading,
   };

@@ -23,7 +23,7 @@ describe("Given the loadBookById function", () => {
         result.current.loadBookById(narutoVol1._id);
       });
 
-      const books = result.current.books.books;
+      const { books } = result.current.booksState;
 
       expect(books).toContainEqual(
         expect.objectContaining({

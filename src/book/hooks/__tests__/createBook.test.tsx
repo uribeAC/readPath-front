@@ -24,7 +24,7 @@ describe("Given the createBook function", () => {
         result.current.createBook(dragonBallData);
       });
 
-      const { books, totals } = result.current.books;
+      const { books, totals } = result.current.booksState;
 
       expect(books).toContainEqual(
         expect.objectContaining({
