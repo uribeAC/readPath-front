@@ -17,39 +17,22 @@ const Navigation: React.FC = () => {
 
   return (
     <nav className="navigation">
-      <NavLink
-        className="navigation__link"
-        to={bookshelfPath}
-        aria-label="Bookshelf"
-      >
+      <NavLink className="navigation__link" to={bookshelfPath}>
         <img
           src={bookshelfImageUrl}
-          alt="Icon of an open book"
+          alt=""
           height={40}
           width={40}
+          aria-hidden
         />
         <span className="navigation__text">Bookshelf</span>
       </NavLink>
-      <NavLink className="navigation__link" to={formPath} aria-label="Add book">
-        <img
-          src={formImageUrl}
-          alt="Icon of writting a book"
-          height={40}
-          width={40}
-        />
+      <NavLink className="navigation__link" to={formPath}>
+        <img src={formImageUrl} alt="" height={40} width={40} aria-hidden />
         <span className="navigation__text">Add book</span>
       </NavLink>
-      <NavLink
-        className="navigation__link"
-        to={bookshelfStatsPath}
-        aria-label="Book stats"
-      >
-        <img
-          src={statsImageUrl}
-          alt="Icon of a stats graph"
-          height={40}
-          width={40}
-        />
+      <NavLink className="navigation__link" to={bookshelfStatsPath}>
+        <img src={statsImageUrl} alt="" height={40} width={40} aria-hidden />
         <span className="navigation__text">Book stats</span>
       </NavLink>
     </nav>

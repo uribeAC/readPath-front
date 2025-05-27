@@ -75,31 +75,46 @@ const BookCard: React.FC<BookCardProps> = ({
           </footer>
         </div>
         <div className="book__buttons">
-          <button onClick={() => removeBook(id)} className="book__button">
+          <button
+            onClick={() => removeBook(id)}
+            className="book__button"
+            aria-label="Delete book"
+          >
             <img
               src="/Remove-Bold.svg"
-              alt="delete book"
+              alt=""
               width={24}
               height={24}
               className="book__icon"
+              aria-hidden
             />
           </button>
-          <Link to={`/modify-book/${id}`} className="book__button">
+          <Link
+            to={`/modify-book/${id}`}
+            className="book__button"
+            aria-label="Modify book data"
+          >
             <img
               src="/Pencil.svg"
-              alt="modify book"
+              alt=""
               width={24}
               height={24}
               className="book__icon"
+              aria-hidden
             />
           </Link>
-          <Link to={`/book/${id}`} className="book__button">
+          <Link
+            to={`/book/${id}`}
+            className="book__button"
+            aria-label="Go to book details"
+          >
             <img
               src="/Information.svg"
-              alt="see book details"
+              alt=""
               width={24}
               height={24}
               className="book__icon"
+              aria-hidden
             />
           </Link>
         </div>

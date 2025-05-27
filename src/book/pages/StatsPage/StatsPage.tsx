@@ -30,6 +30,19 @@ const StatsPage: React.FC = () => {
   const yearsPagesTotal = booksYear.map((year) => year.totals.pages);
   const yearsAuthorsTotal = booksYear.map((year) => year.totals.authors);
 
+  const booksAuthorsChartDescription = yearsLabels
+    .map(
+      (year, index) =>
+        `${year}: ${yearsReadTotal[index]} read books from ${yearsAuthorsTotal[index]} authors`,
+    )
+    .join(". ");
+  const pagesChartDescription = yearsLabels
+    .map((year, index) => `${year}: ${yearsPagesTotal[index]} pages read`)
+    .join(". ");
+  const genresChartDescription = genresSliced.map(
+    (genre, index) => `${genreData[index]} of ${genre}`,
+  );
+
   useEffect(() => {
     loadStats();
   }, [loadStats]);
@@ -60,9 +73,14 @@ const StatsPage: React.FC = () => {
               secondLabel="Authors"
               ariaLabel="Bar chart of read books and authors by year"
             />
+            <p className="visually-hidden">{pagesChartDescription}</p>
             <ul className="chart__legend">
-              <li className="chart__tag chart__tag--orange">Books read</li>
-              <li className="chart__tag chart__tag--yellow">Authors read</li>
+              <li className="chart__tag chart__tag--orange" aria-hidden>
+                Books read
+              </li>
+              <li className="chart__tag chart__tag--yellow" aria-hidden>
+                Authors read
+              </li>
             </ul>
           </div>
           <div className="chart">
@@ -71,9 +89,12 @@ const StatsPage: React.FC = () => {
               labels={yearsLabels}
               firstDataset={yearsPagesTotal}
               firstLabel="Pages"
-              ariaLabel="Bar chart of read pages by year"
+              ariaLabel="Doughnout chart of books read by genre"
             />
-            <span className="chart__tag chart__tag--orange">Pages read</span>
+            <p className="visually-hidden">{booksAuthorsChartDescription}</p>
+            <span className="chart__tag chart__tag--orange" aria-hidden>
+              Pages read
+            </span>
           </div>
           <div className="chart chart--last">
             <h3 className="chart__title">Books Read by Genre</h3>
@@ -83,6 +104,7 @@ const StatsPage: React.FC = () => {
               labelTitle="Genres"
               ariaLabel="Doughnout chart of books read by genre"
             />
+            <p className="visually-hidden">{genresChartDescription}</p>
             <ul className="chart__legend">
               {genresSliced.map((genre, index) => (
                 <li className={`chart__tag chart__tag--${index}`} key={genre}>
