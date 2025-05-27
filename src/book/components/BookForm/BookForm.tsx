@@ -370,7 +370,7 @@ const BookForm: React.FC<BookFormProps> = ({
       </div>
       <div className={`book-form__group${formToReadClass}`}>
         <div className="book-form__texts">
-          <label htmlFor="yourRating" className="book-form__text">
+          <label htmlFor="userRating" className="book-form__text">
             Your rating:
           </label>
           <span className="book-form__text--explanation">
@@ -380,9 +380,9 @@ const BookForm: React.FC<BookFormProps> = ({
         </div>
         <input
           type="number"
-          id="yourRating"
+          id="userRating"
           className="book-form__control"
-          value={bookData.yourRating}
+          value={bookData.userRating}
           onChange={changeBookData}
           min={0}
           step={1}

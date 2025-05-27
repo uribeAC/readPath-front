@@ -98,7 +98,7 @@ export const transfromBookFormDataToBookSendData = (
     coverImageUrl,
     title,
     saga,
-    yourRating,
+    userRating,
     readDates,
     ...bookData
   }: BookFormData,
@@ -122,7 +122,7 @@ export const transfromBookFormDataToBookSendData = (
     }),
   };
 
-  const starRating = Math.round(Number(yourRating)) as StarsRating;
+  const starRating = Math.round(Number(userRating)) as StarsRating;
 
   const sendBook: BookSendData = {
     ...bookData,
@@ -135,7 +135,7 @@ export const transfromBookFormDataToBookSendData = (
       readDates: cleanReadDates,
     }),
     ...(saga && { saga: bookSaga }),
-    ...(yourRating && { yourRating: starRating }),
+    ...(userRating && { userRating: starRating }),
   };
 
   return sendBook;

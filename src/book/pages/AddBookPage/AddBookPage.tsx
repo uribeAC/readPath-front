@@ -21,7 +21,7 @@ const AddBookPage: React.FC = () => {
       dateStarted: "",
       readYear: 0,
     },
-    yourRating: "",
+    userRating: "",
   };
 
   return (

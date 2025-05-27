@@ -46,7 +46,7 @@ const ModifyBookPage: React.FC = () => {
       pages: book.pages,
       firstPublished: formFirstPublished,
       state: book.state,
-      yourRating: book.yourRating?.toString() ?? "",
+      userRating: book.userRating?.toString() ?? "",
       readDates: {
         dateStarted: formStartDate,
         dateFinished: formFinishDate,

@@ -21,7 +21,7 @@ const BookCard: React.FC<BookCardProps> = ({
     coverImageUrlSmall,
     imageAlt,
     state,
-    yourRating,
+    userRating,
   },
   index,
 }) => {
@@ -71,7 +71,7 @@ const BookCard: React.FC<BookCardProps> = ({
                 to read
               </Button>
             </div>
-            {yourRating && <Rating rating={yourRating} />}
+            {userRating && <Rating rating={userRating} />}
           </footer>
         </div>
         <div className="book__buttons">
