@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-type FilterState = {
+export type FilterState = {
   state: string;
   genre: string;
 };

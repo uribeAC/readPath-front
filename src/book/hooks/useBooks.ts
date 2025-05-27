@@ -16,8 +16,9 @@ import useLoading from "../../ui/hooks/useLoading";
 import useSearch from "../../ui/hooks/useSearch";
 import useModal from "../../ui/hooks/useModal";
 import { loadStatsActionCreator } from "../slice/statsSlice";
+import type { BookContext } from "./types";
 
-const useBooks = () => {
+const useBooks = (): BookContext => {
   const { startLoading, stopLoading } = useLoading();
   const { getSearchParams, getPath } = useSearch();
   const navigate = useNavigate();
