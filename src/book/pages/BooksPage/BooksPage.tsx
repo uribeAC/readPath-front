@@ -1,5 +1,4 @@
-import type React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import useBooks from "../../hooks/useBooks";
 import useLoading from "../../../ui/hooks/useLoading";

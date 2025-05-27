@@ -1,6 +1,5 @@
-import React from "react";
 import { Link, useNavigate, useParams } from "react-router";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Loading from "../../../ui/components/Loading/Loading";
 import { transformDescriptionDtoToDescriptionPreview } from "../../dto/transformers";
 import { useAppSelector } from "../../../store/hooks";
