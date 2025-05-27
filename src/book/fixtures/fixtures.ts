@@ -20,7 +20,7 @@ export const dragonBallRead: Book = {
   pages: 192,
   firstPublished: "2003-05-06",
   state: "read",
-  yourRating: 5,
+  userRating: 5,
   readDates: {
     dateStarted: "2021-03-15",
     dateFinished: "2021-03-17",

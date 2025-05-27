@@ -14,7 +14,7 @@ export const narutoVol1: BookDto = {
   coverImageUrlBig: "https://example.com/naruto1-big.jpg",
   imageAlt: "Naruto Volume 1 Cover",
   state: "read",
-  yourRating: 4,
+  userRating: 4,
   readDates: {
     dateStarted: "2021-05-10",
     dateFinished: "2021-05-15",
@@ -36,7 +36,7 @@ export const onePieceVol1: BookDto = {
   coverImageUrlBig: "https://example.com/onepiece1-big.jpg",
   imageAlt: "One Piece Volume 1 Cover",
   state: "to read",
-  yourRating: 5,
+  userRating: 5,
   readDates: {
     dateStarted: "2020-08-01",
     dateFinished: "2020-08-05",
@@ -58,7 +58,7 @@ const attackOnTitanVol1: BookDto = {
   coverImageUrlBig: "https://example.com/aot1-big.jpg",
   imageAlt: "Attack on Titan Volume 1 Cover",
   state: "read",
-  yourRating: 4,
+  userRating: 4,
   readDates: {
     dateStarted: "2019-11-12",
     dateFinished: "2019-11-13",
@@ -80,7 +80,7 @@ const deathNoteVol1: BookDto = {
   coverImageUrlBig: "https://example.com/deathnote1-big.jpg",
   imageAlt: "Death Note Volume 1 Cover",
   state: "read",
-  yourRating: 5,
+  userRating: 5,
   readDates: {
     dateStarted: "2022-01-03",
     dateFinished: "2022-01-05",
@@ -102,7 +102,7 @@ const fullmetalAlchemistVol1: BookDto = {
   coverImageUrlBig: "https://example.com/fma1-big.jpg",
   imageAlt: "Fullmetal Alchemist Volume 1 Cover",
   state: "read",
-  yourRating: 4,
+  userRating: 4,
   readDates: {
     dateStarted: "2021-03-15",
     dateFinished: "2021-03-17",
@@ -124,7 +124,7 @@ const bleachVol1: BookDto = {
   coverImageUrlBig: "https://example.com/bleach1-big.jpg",
   imageAlt: "Bleach Volume 1 Cover",
   state: "read",
-  yourRating: 4,
+  userRating: 4,
   readDates: {
     dateStarted: "2020-10-10",
     dateFinished: "2020-10-12",
@@ -146,7 +146,7 @@ const chainsawManVol1: BookDto = {
   coverImageUrlBig: "https://example.com/chainsawman1-big.jpg",
   imageAlt: "Chainsaw Man Volume 1 Cover",
   state: "read",
-  yourRating: 4,
+  userRating: 4,
   readDates: {
     dateStarted: "2023-02-01",
     dateFinished: "2023-02-02",
@@ -253,7 +253,7 @@ export const dragonBallReadDto: BookDto = {
   pages: 192,
   firstPublished: "2003-05-06",
   state: "read",
-  yourRating: 5,
+  userRating: 5,
   readDates: {
     dateStarted: "2021-03-15",
     readYear: 2021,

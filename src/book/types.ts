@@ -11,7 +11,7 @@ export interface Book {
   pages: number;
   firstPublished: string;
   state: "read" | "to read";
-  yourRating?: StarsRating;
+  userRating?: StarsRating;
   readDates?: ReadDates;
   coverImageUrlSmall: string;
   coverImageUrlBig: string;
@@ -25,7 +25,7 @@ export type BookFormData = Omit<
   | "id"
   | "saga"
   | "genres"
-  | "yourRating"
+  | "userRating"
   | "coverImageUrlBig"
   | "coverImageUrlSmall"
   | "imageAlt"
@@ -33,7 +33,7 @@ export type BookFormData = Omit<
   saga?: string;
   coverImageUrl: string;
   genres: string;
-  yourRating?: string;
+  userRating?: string;
 };
 
 export type StarsRating = 0 | 1 | 2 | 3 | 4 | 5;

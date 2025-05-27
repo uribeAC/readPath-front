@@ -50,7 +50,7 @@ const BookDetailPage: React.FC = () => {
       firstPublished,
       genres,
       state,
-      yourRating,
+      userRating,
       id,
       readDates,
       coverImageUrlBig,
@@ -144,7 +144,7 @@ const BookDetailPage: React.FC = () => {
                 to read
               </Button>
             </div>
-            {yourRating && <Rating rating={yourRating} />}
+            {userRating && <Rating rating={userRating} />}
             {hasReadDates && (
               <div className="book-detail__dates">
                 Dates read:

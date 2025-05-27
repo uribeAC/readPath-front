@@ -29,7 +29,7 @@ describe("Given the BookForm component", () => {
         dateStarted: "",
         readYear: 0,
       },
-      yourRating: "",
+      userRating: "",
     };
 
     test("Then it should show a 'Title' text box", () => {
