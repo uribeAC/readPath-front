@@ -77,8 +77,8 @@ describe("Given the BookCard component", () => {
       expect(modifyButton).toBeInTheDocument();
     });
 
-    test("Then it should show a see book details button", () => {
-      const expectedButtonLabel = /see book details/i;
+    test("Then it should show a 'go to book details' button", () => {
+      const expectedButtonLabel = /go to book details/i;
 
       render(
         <ContextProvider>

@@ -15,16 +15,5 @@ describe("Given the Header component", () => {
 
       expect(appTitle).toBeInTheDocument();
     });
-
-    test("Then it should show an image of a logo with an open book and a path between the pages", () => {
-      const expectedImageAlt =
-        /logo with an open book and a path between the pages/i;
-
-      render(<Header />);
-
-      const headerImage = screen.getByAltText(expectedImageAlt);
-
-      expect(headerImage).toBeInTheDocument();
-    });
   });
 });

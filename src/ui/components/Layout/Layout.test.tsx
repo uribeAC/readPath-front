@@ -165,10 +165,10 @@ describe("Given the Layout component", () => {
       });
     });
 
-    describe("And the user click's the 'see book details' button of One Piece Vol. 1", () => {
+    describe("And the user click's the 'go to book details' button of One Piece Vol. 1", () => {
       test("Then it should show the book description of One Piece Vol. 1", async () => {
         const expectedOnePieceTitle = /one piece vol. 1/i;
-        const detailsButtonText = /see book details/i;
+        const detailsButtonText = /go to book details/i;
 
         render(
           <ContextProvider initialEntries={["/books"]}>

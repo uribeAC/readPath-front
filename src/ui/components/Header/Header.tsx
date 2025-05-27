@@ -8,10 +8,11 @@ const Header: React.FC = () => {
         read
         <img
           src="/readPath-logo.webp"
-          alt="logo with an open book and a path between the pages"
           className="main-header__logo"
+          alt=""
           height={38}
           width={38}
+          aria-hidden
         />
         Path
       </h1>
