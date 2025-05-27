@@ -5,15 +5,15 @@ import Loading from "../../../ui/components/Loading/Loading";
 import { transformDescriptionDtoToDescriptionPreview } from "../../dto/transformers";
 import { useAppSelector } from "../../../store/hooks";
 import Button from "../../../ui/components/Button/Button";
-import useLoading from "../../../hooks/useLoading";
+import useLoading from "../../../ui/hooks/useLoading";
 import Rating from "../../components/Rating/Rating";
 import useBooks from "../../hooks/useBooks";
 import "./BookDetailPage.css";
 
 const BookDetailPage: React.FC = () => {
-  const { loadBookById, updateBook, books, removeBook } = useBooks();
+  const { loadBookById, updateBook, booksState, removeBook } = useBooks();
   const {
-    loading: { isLoading },
+    loadingState: { isLoading },
   } = useLoading();
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const BookDetailPage: React.FC = () => {
   const [isDescriptionExpanded, setIsDescriptionExpanded] =
     useState<boolean>(false);
 
-  const hasStateBook = books.books.some((book) => book.id === bookId);
+  const hasStateBook = booksState.books.some((book) => book.id === bookId);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });

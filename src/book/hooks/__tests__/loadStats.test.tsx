@@ -21,7 +21,7 @@ describe("Given the loadStats function", () => {
         result.current.loadStats();
       });
 
-      const stats = result.current.stats;
+      const stats = result.current.statsState;
 
       expect(stats).toStrictEqual(mangaStats);
     });

@@ -2,12 +2,12 @@ import { renderHook } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { act } from "react";
 import useFilter from "../useFilter";
-import store from "../../store/store";
+import store from "../../../store/store";
 
-describe("Given the setGenreFilter function", () => {
-  describe("When it's called with the genre 'Fantasy'", () => {
-    test("Then it should set Filter genre as 'Fantasy'", async () => {
-      const expectedGenre = "Fantasy";
+describe("Given the setStateFilter function", () => {
+  describe("When it's called with the state 'read'", () => {
+    test("Then it should set Filter state as 'read'", async () => {
+      const expectedState = "read";
 
       const wrapper = ({ children }: { children: React.ReactNode }) => (
         <Provider store={store}>{children}</Provider>
@@ -16,12 +16,12 @@ describe("Given the setGenreFilter function", () => {
       const { result } = renderHook(() => useFilter(), { wrapper });
 
       await act(() => {
-        result.current.setGenreFilter(expectedGenre);
+        result.current.setStateFilter(expectedState);
       });
 
-      const genre = result.current.filter.genre;
+      const state = result.current.filter.state;
 
-      expect(genre).toBe(expectedGenre);
+      expect(state).toBe(expectedState);
     });
   });
 });

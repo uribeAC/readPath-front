@@ -2,7 +2,6 @@ import { renderHook } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { act } from "react";
 import useBooks from "../useBooks";
-import type { ModalState } from "../../../types";
 import setupStore from "../../../store/setupStore";
 import type { BookState } from "../../slice/bookSlice";
 import { dragonBallToRead } from "../../fixtures/fixtures";
@@ -12,7 +11,7 @@ import { MemoryRouter } from "react-router";
 describe("Given the editBook function", () => {
   describe("When it's called with Dragon Ball modified book and his id", () => {
     test("Then it should replace Dragon Ball book for the new modified book", async () => {
-      const initialState: { books: BookState; modal: ModalState } = {
+      const initialState: { books: BookState } = {
         books: {
           booksInfo: {
             books: [dragonBallToRead],
@@ -22,11 +21,6 @@ describe("Given the editBook function", () => {
               booksToRead: 1,
             },
           },
-        },
-        modal: {
-          isError: false,
-          isModalActive: false,
-          modalText: "",
         },
       };
 
@@ -49,7 +43,7 @@ describe("Given the editBook function", () => {
         );
       });
 
-      const { books } = result.current.books;
+      const { books } = result.current.booksState;
 
       expect(books).toContainEqual(
         expect.objectContaining({

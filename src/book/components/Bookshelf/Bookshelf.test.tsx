@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { shonenFixtures } from "../../fixtures/fixtures";
 import Bookshelf from "./Bookshelf";
-import ContextProvider from "../../../test-utils/ContextProvider";
+import ContextProvider from "../../../testUtils/ContextProvider";
 
 describe("Given the Bookshelf component", () => {
   describe("When it receives Naruto, One Piece and Bleach Vol. 1 books", () => {

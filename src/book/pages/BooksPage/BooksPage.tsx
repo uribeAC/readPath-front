@@ -2,7 +2,7 @@ import type React from "react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import useBooks from "../../hooks/useBooks";
-import useLoading from "../../../hooks/useLoading";
+import useLoading from "../../../ui/hooks/useLoading";
 import Bookshelf from "../../components/Bookshelf/Bookshelf";
 import Pagination from "../../../ui/components/Pagination/Pagination";
 import Loading from "../../../ui/components/Loading/Loading";
@@ -11,11 +11,11 @@ import "./BooksPage.css";
 import "../styles/pages.css";
 
 const BooksPage: React.FC = () => {
-  const { loadBooks, books } = useBooks();
+  const { loadBooks, booksState } = useBooks();
   const {
-    loading: { isLoading },
+    loadingState: { isLoading },
   } = useLoading();
-  const { books: pageBooks, totals } = books;
+  const { books: pageBooks, totals } = booksState;
 
   const [searchParams] = useSearchParams();
   const pageNumber = searchParams.get("page")

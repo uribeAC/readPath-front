@@ -4,21 +4,21 @@ import BookYearsChart from "../../components/BookCharts/BookYearsChart";
 import BookDoughnut from "../../components/BookCharts/BookDoughnut";
 import useBooks from "../../hooks/useBooks";
 import Loading from "../../../ui/components/Loading/Loading";
-import useLoading from "../../../hooks/useLoading";
+import useLoading from "../../../ui/hooks/useLoading";
 import "./StatsPage.css";
 import "../styles/pages.css";
 
 const StatsPage: React.FC = () => {
   const {
     loadStats,
-    stats: {
+    statsState: {
       booksYear,
       genres,
       totals: { authors, pages, read },
     },
   } = useBooks();
   const {
-    loading: { isLoading },
+    loadingState: { isLoading },
   } = useLoading();
 
   const genresLabels = genres.genres.map((genre) => genre.genre);

@@ -1,12 +1,12 @@
 import { useCallback } from "react";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   startLoadingActionCreator,
   stopLoadingActionCreator,
-} from "../slices/slices/loadingSlice";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+} from "../slices/slices/uiSlice";
 
 const useLoading = () => {
-  const loading = useAppSelector((state) => state.loading);
+  const loadingState = useAppSelector((state) => state.ui);
 
   const dispatch = useAppDispatch();
 
@@ -23,7 +23,7 @@ const useLoading = () => {
   }, [dispatch]);
 
   return {
-    loading,
+    loadingState,
     startLoading,
     stopLoading,
   };

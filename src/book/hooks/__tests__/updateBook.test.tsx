@@ -6,12 +6,11 @@ import type { BookState } from "../../slice/bookSlice";
 import setupStore from "../../../store/setupStore";
 import useBooks from "../useBooks";
 import { dragonBallRead, dragonBallToRead } from "../../fixtures/fixtures";
-import type { ModalState } from "../../../types";
 
 describe("Given the updateBook function", () => {
   describe("When it's called with Dragon Ball book id marked as 'to read' and an action state of 'read'", () => {
     test("Then it should update the book Dragon Ball marked as 'read' in booksInfo", async () => {
-      const initialState: { books: BookState; modal: ModalState } = {
+      const initialState: { books: BookState } = {
         books: {
           booksInfo: {
             books: [dragonBallToRead],
@@ -21,11 +20,6 @@ describe("Given the updateBook function", () => {
               booksToRead: 1,
             },
           },
-        },
-        modal: {
-          isError: false,
-          isModalActive: false,
-          modalText: "",
         },
       };
 
@@ -43,8 +37,8 @@ describe("Given the updateBook function", () => {
         result.current.updateBook("read", dragonBallRead.id);
       });
 
-      const books = result.current.books.books;
-      const totals = result.current.books.totals;
+      const { books } = result.current.booksState;
+      const { totals } = result.current.booksState;
 
       expect(books).toContainEqual(
         expect.objectContaining({

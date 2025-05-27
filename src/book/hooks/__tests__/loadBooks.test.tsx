@@ -24,8 +24,8 @@ describe("Given the loadBooks function", () => {
         result.current.loadBooks();
       });
 
-      const books = result.current.books.books;
-      const totals = result.current.books.totals;
+      const { books } = result.current.booksState;
+      const { totals } = result.current.booksState;
 
       expect(books).toContainEqual(
         expect.objectContaining({

@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { Provider } from "react-redux";
-import store from "../../store/store";
+import store from "../../../store/store";
 import useSearch from "../useSearch";
 
 describe("Given the getSearchParams function", () => {
