@@ -41,6 +41,21 @@ describe("Given the StatsPage component", () => {
       expect(chartTitle).toBeInTheDocument();
     });
 
+    test("Then it should show a description of bar chart of read books and authors by year", async () => {
+      const chartLabel =
+        "2022: 2364 pages read. 2023: 5686 pages read. 2024: 1068 pages read. 2025: 1949 pages read";
+
+      render(
+        <ContextProvider>
+          <StatsPage />
+        </ContextProvider>,
+      );
+
+      const chart = screen.getByText(chartLabel);
+
+      expect(chart).toBeInTheDocument();
+    });
+
     test("Then it should show a legend tag for fantasy as Fantasy: 13", async () => {
       const expectedTag = /fantasy: 13/i;
 
