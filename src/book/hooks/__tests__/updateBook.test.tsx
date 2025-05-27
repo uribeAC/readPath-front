@@ -10,8 +10,8 @@ import { dragonBallRead, dragonBallToRead } from "../../fixtures/fixtures";
 describe("Given the updateBook function", () => {
   describe("When it's called with Dragon Ball book id marked as 'to read' and an action state of 'read'", () => {
     test("Then it should update the book Dragon Ball marked as 'read' in booksInfo", async () => {
-      const initialState: { books: BookState } = {
-        books: {
+      const initialState: { booksState: BookState } = {
+        booksState: {
           booksInfo: {
             books: [dragonBallToRead],
             totals: {

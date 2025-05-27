@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import BookForm from "../../components/BookForm/BookForm";
 import useBooks from "../../hooks/useBooks";
@@ -7,6 +7,10 @@ import type { BookFormData } from "../../types";
 import "../styles/pages.css";
 
 const ModifyBookPage: React.FC = () => {
+  React.useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { bookId } = useParams<{ bookId: string }>();
   const { editBook, loadBookById, booksState } = useBooks();
 
@@ -21,7 +25,7 @@ const ModifyBookPage: React.FC = () => {
   }, [loadBookById, bookId, hasStateBook]);
 
   const book = useAppSelector((state) =>
-    state.books.booksInfo.books.find((book) => book.id === bookId),
+    state.booksState.booksInfo.books.find((book) => book.id === bookId),
   );
 
   if (book) {
@@ -75,8 +79,8 @@ const ModifyBookPage: React.FC = () => {
 
   return (
     <main className="page-container">
-      <header className="page-header">
-        <h2 className="page-header__title">Modify book: </h2>
+      <header>
+        <h2 className="page-title">Modify book: </h2>
       </header>
     </main>
   );

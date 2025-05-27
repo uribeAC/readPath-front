@@ -9,7 +9,7 @@ import store from "../store/store";
 interface ContextProviderStructure {
   initialEntries?: string[];
   preloadedStore?: Store<{
-    books: BookState;
+    booksState: BookState;
   }>;
 }
 

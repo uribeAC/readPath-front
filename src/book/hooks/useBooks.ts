@@ -23,8 +23,8 @@ const useBooks = (): BookContext => {
   const { getSearchParams, getPath } = useSearch();
   const navigate = useNavigate();
   const { showModal } = useModal();
-  const booksState = useAppSelector((state) => state.books.booksInfo);
-  const statsState = useAppSelector((state) => state.stats);
+  const booksState = useAppSelector((state) => state.booksState.booksInfo);
+  const statsState = useAppSelector((state) => state.statsState);
 
   const dispatch = useAppDispatch();
 

@@ -15,8 +15,8 @@ describe("Given the removeBook function", () => {
     test("Then it should remove the book Naruto Vol. 1 from booksInfo", async () => {
       const apiUrl = import.meta.env.VITE_API_URL;
 
-      const initialState: { books: BookState } = {
-        books: {
+      const initialState: { booksState: BookState } = {
+        booksState: {
           booksInfo: {
             books: [narutoBook],
             totals: {

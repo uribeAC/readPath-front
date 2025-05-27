@@ -7,7 +7,7 @@ import {
 import type { ModalContext } from "./types";
 
 const useModal = (): ModalContext => {
-  const modalState = useAppSelector((state) => state.ui);
+  const modalState = useAppSelector((state) => state.uiState);
 
   const dispatch = useAppDispatch();
 

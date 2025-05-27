@@ -5,16 +5,16 @@ import { statsReducer } from "../book/slice/statsSlice";
 import { uiReducer } from "../ui/slices/slices/uiSlice";
 
 type RootPreloadedState = {
-  books: BookState;
+  booksState: BookState;
 };
 
 const setupStore = (preloadedState?: RootPreloadedState) => {
   const store = configureStore({
     reducer: {
-      books: booksReducer,
-      stats: statsReducer,
-      ui: uiReducer,
-      filer: filterReducer,
+      booksState: booksReducer,
+      statsState: statsReducer,
+      uiState: uiReducer,
+      filterState: filterReducer,
     },
     preloadedState,
   });

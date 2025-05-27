@@ -1,10 +1,14 @@
-import type React from "react";
+import React from "react";
 import BookForm from "../../components/BookForm/BookForm";
 import type { BookFormData } from "../../types";
 import useBooks from "../../hooks/useBooks";
 import "../styles/pages.css";
 
 const AddBookPage: React.FC = () => {
+  React.useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { createBook } = useBooks();
   const initialBookData: BookFormData = {
     title: "",
