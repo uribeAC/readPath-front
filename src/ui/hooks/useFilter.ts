@@ -6,7 +6,7 @@ import {
 import type { FilterContext } from "./types";
 
 const useFilter = (): FilterContext => {
-  const filter = useAppSelector((state) => state.filer);
+  const filter = useAppSelector((state) => state.filterState);
 
   const dispatch = useAppDispatch();
 

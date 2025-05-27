@@ -7,7 +7,7 @@ import {
 import type { LoadingContext } from "./types";
 
 const useLoading = (): LoadingContext => {
-  const loadingState = useAppSelector((state) => state.ui);
+  const loadingState = useAppSelector((state) => state.uiState);
 
   const dispatch = useAppDispatch();
 

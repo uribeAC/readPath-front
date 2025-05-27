@@ -62,7 +62,7 @@ const BooksPage: React.FC = () => {
   return (
     <main className="page-container">
       <header className="page-header">
-        <h2 className="page-header__title">Bookshelf</h2>
+        <h2 className="page-title">Bookshelf</h2>
         <div className="page-header__subtitle">
           <span className="page-header__counter">
             {pageBooks.length} / {totals.books} books - Read: {totals.booksRead}{" "}

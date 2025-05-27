@@ -11,8 +11,8 @@ import { MemoryRouter } from "react-router";
 describe("Given the editBook function", () => {
   describe("When it's called with Dragon Ball modified book and his id", () => {
     test("Then it should replace Dragon Ball book for the new modified book", async () => {
-      const initialState: { books: BookState } = {
-        books: {
+      const initialState: { booksState: BookState } = {
+        booksState: {
           booksInfo: {
             books: [dragonBallToRead],
             totals: {

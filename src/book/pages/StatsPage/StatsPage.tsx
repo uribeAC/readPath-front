@@ -1,4 +1,4 @@
-import type React from "react";
+import React from "react";
 import { useEffect } from "react";
 import BookYearsChart from "../../components/BookCharts/BookYearsChart";
 import BookDoughnut from "../../components/BookCharts/BookDoughnut";
@@ -9,6 +9,10 @@ import "./StatsPage.css";
 import "../styles/pages.css";
 
 const StatsPage: React.FC = () => {
+  React.useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const {
     loadStats,
     statsState: {

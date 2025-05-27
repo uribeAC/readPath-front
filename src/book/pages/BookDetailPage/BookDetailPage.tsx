@@ -1,4 +1,4 @@
-import type React from "react";
+import React from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import Loading from "../../../ui/components/Loading/Loading";
@@ -11,6 +11,10 @@ import useBooks from "../../hooks/useBooks";
 import "./BookDetailPage.css";
 
 const BookDetailPage: React.FC = () => {
+  React.useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { loadBookById, updateBook, booksState, removeBook } = useBooks();
   const {
     loadingState: { isLoading },
@@ -33,7 +37,7 @@ const BookDetailPage: React.FC = () => {
   }, [loadBookById, bookId, hasStateBook]);
 
   const book = useAppSelector((state) =>
-    state.books.booksInfo.books.find((book) => book.id === bookId),
+    state.booksState.booksInfo.books.find((book) => book.id === bookId),
   );
 
   if (isLoading) {
