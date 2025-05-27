@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { act } from "react";
-import store from "../../store/store";
+import store from "../../../store/store";
 import useLoading from "../useLoading";
 
 describe("Given the startLoading function", () => {

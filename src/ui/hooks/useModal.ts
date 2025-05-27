@@ -1,12 +1,12 @@
 import { useCallback } from "react";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   hideModalActionCreator,
   showModalActionCreator,
-} from "../slices/slices/modalSlice";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+} from "../slices/slices/uiSlice";
 
 const useModal = () => {
-  const modal = useAppSelector((state) => state.modal);
+  const modal = useAppSelector((state) => state.ui);
 
   const dispatch = useAppDispatch();
 

@@ -1,8 +1,8 @@
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   setGenreFilterActionCreator,
   setStateFilterActionCreator,
 } from "../slices/slices/filterSlice";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 const useFilter = () => {
   const filter = useAppSelector((state) => state.filer);

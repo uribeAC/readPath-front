@@ -4,7 +4,7 @@ import BookYearsChart from "../../components/BookCharts/BookYearsChart";
 import BookDoughnut from "../../components/BookCharts/BookDoughnut";
 import useBooks from "../../hooks/useBooks";
 import Loading from "../../../ui/components/Loading/Loading";
-import useLoading from "../../../hooks/useLoading";
+import useLoading from "../../../ui/hooks/useLoading";
 import "./StatsPage.css";
 import "../styles/pages.css";
 

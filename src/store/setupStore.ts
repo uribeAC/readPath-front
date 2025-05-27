@@ -1,14 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { booksReducer, type BookState } from "../book/slice/bookSlice";
-import type { ModalState } from "../types";
-import { modalReducer } from "../slices/slices/modalSlice";
-import { loadingReducer } from "../slices/slices/loadingSlice";
-import { filterReducer } from "../slices/slices/filterSlice";
+import { filterReducer } from "../ui/slices/slices/filterSlice";
 import { statsReducer } from "../book/slice/statsSlice";
+import { uiReducer } from "../ui/slices/slices/uiSlice";
 
 type RootPreloadedState = {
   books: BookState;
-  modal: ModalState;
 };
 
 const setupStore = (preloadedState?: RootPreloadedState) => {
@@ -16,8 +13,7 @@ const setupStore = (preloadedState?: RootPreloadedState) => {
     reducer: {
       books: booksReducer,
       stats: statsReducer,
-      modal: modalReducer,
-      loading: loadingReducer,
+      ui: uiReducer,
       filer: filterReducer,
     },
     preloadedState,

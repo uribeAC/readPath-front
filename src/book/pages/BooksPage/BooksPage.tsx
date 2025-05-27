@@ -2,7 +2,7 @@ import type React from "react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import useBooks from "../../hooks/useBooks";
-import useLoading from "../../../hooks/useLoading";
+import useLoading from "../../../ui/hooks/useLoading";
 import Bookshelf from "../../components/Bookshelf/Bookshelf";
 import Pagination from "../../../ui/components/Pagination/Pagination";
 import Loading from "../../../ui/components/Loading/Loading";

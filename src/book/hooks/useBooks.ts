@@ -12,9 +12,9 @@ import {
 } from "../slice/bookSlice";
 import BookClient from "../client/bookClient";
 import type { BookSendData } from "../types";
-import useLoading from "../../hooks/useLoading";
-import useModal from "../../hooks/useModal";
-import useSearch from "../../hooks/useSearch";
+import useLoading from "../../ui/hooks/useLoading";
+import useSearch from "../../ui/hooks/useSearch";
+import useModal from "../../ui/hooks/useModal";
 import { loadStatsActionCreator } from "../slice/statsSlice";
 
 const useBooks = () => {

@@ -1,8 +1,7 @@
 import type React from "react";
 import { Link } from "react-router";
-import useSearch from "../../../hooks/useSearch";
+import useSearch from "../../hooks/useSearch";
 import "./Pagination.css";
-
 interface PaginationProps {
   booksTotal: number;
   currentPage: number;

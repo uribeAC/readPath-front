@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Route, Routes } from "react-router";
-import ContextProvider from "../../../test-utils/ContextProvider";
+import ContextProvider from "../../../testUtils/ContextProvider";
 import { narutoVol1 } from "../../fixtures/fixturesDto";
 import BookDetailPage from "./BookDetailPage";
 

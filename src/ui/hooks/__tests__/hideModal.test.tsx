@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { act } from "react";
-import store from "../../store/store";
+import store from "../../../store/store";
 import useModal from "../useModal";
 
 describe("Given the hideModal function", () => {
@@ -19,8 +19,8 @@ describe("Given the hideModal function", () => {
         result.current.hideModal();
       });
 
-      const modalText = result.current.modal.modalText;
-      const isModalActive = result.current.modal.isModalActive;
+      const modalText = result.current.modal.modal.modalText;
+      const isModalActive = result.current.modal.modal.isModalActive;
 
       expect(modalText).toBe(expectedMessage);
       expect(isModalActive).toBe(false);

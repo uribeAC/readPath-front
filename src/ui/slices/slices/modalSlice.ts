@@ -1,5 +1,5 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { ModalState } from "../../types";
+/* import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { ModalState } from "../../../types";
 import type { ModalActiveState } from "../types";
 
 const initialState: ModalState = {
@@ -38,3 +38,4 @@ export const {
   showModal: showModalActionCreator,
   hideModal: hideModalActionCreator,
 } = modalSlice.actions;
+ */

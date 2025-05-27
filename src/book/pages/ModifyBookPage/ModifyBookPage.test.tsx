@@ -1,6 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
 import { Route, Routes } from "react-router";
-import ContextProvider from "../../../test-utils/ContextProvider";
+import ContextProvider from "../../../testUtils/ContextProvider";
 import { dragonBallRead } from "../../fixtures/fixtures";
 import { demonSlayerVol1 } from "../../fixtures/fixturesDto";
 import ModifyBookPage from "./ModifyBookPage";

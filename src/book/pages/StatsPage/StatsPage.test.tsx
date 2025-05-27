@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import ContextProvider from "../../../test-utils/ContextProvider";
+import ContextProvider from "../../../testUtils/ContextProvider";
 import StatsPage from "./StatsPage";
 
 vi.mock("react-chartjs-2", () => ({

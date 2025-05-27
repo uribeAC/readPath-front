@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+/* import { createSlice } from "@reduxjs/toolkit";
 
 type LoadingState = {
   isLoading: boolean;
@@ -31,3 +31,4 @@ export const {
   startLoading: startLoadingActionCreator,
   stopLoading: stopLoadingActionCreator,
 } = loadingSlice.actions;
+ */

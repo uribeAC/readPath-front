@@ -5,7 +5,7 @@ import Loading from "../../../ui/components/Loading/Loading";
 import { transformDescriptionDtoToDescriptionPreview } from "../../dto/transformers";
 import { useAppSelector } from "../../../store/hooks";
 import Button from "../../../ui/components/Button/Button";
-import useLoading from "../../../hooks/useLoading";
+import useLoading from "../../../ui/hooks/useLoading";
 import Rating from "../../components/Rating/Rating";
 import useBooks from "../../hooks/useBooks";
 import "./BookDetailPage.css";
