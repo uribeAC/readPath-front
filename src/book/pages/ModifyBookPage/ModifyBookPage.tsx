@@ -8,13 +8,17 @@ import "../styles/pages.css";
 
 const ModifyBookPage: React.FC = () => {
   const { bookId } = useParams<{ bookId: string }>();
-  const { editBook, loadBookById } = useBooks();
+  const { editBook, loadBookById, booksState } = useBooks();
+
+  const hasStateBook = booksState.books.some((book) => book.id === bookId);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
 
-    loadBookById(bookId!);
-  }, [loadBookById, bookId]);
+    if (!hasStateBook) {
+      loadBookById(bookId!);
+    }
+  }, [loadBookById, bookId, hasStateBook]);
 
   const book = useAppSelector((state) =>
     state.books.booksInfo.books.find((book) => book.id === bookId),
