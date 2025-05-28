@@ -133,8 +133,6 @@ const BookForm: React.FC<BookFormProps> = ({
 
     try {
       await createAction!(toSendBook);
-
-      navigate("/books");
     } catch {
       setErrorMessage("Error adding new book");
       setTitleErrorMessage("This book title is already in your bookshelf");

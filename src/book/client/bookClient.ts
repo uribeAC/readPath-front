@@ -105,6 +105,10 @@ class BookClient implements BookClientStructure {
       body: JSON.stringify({ book: bookData }),
     });
 
+    if (response.status === 409) {
+      throw new Error("Book already exists");
+    }
+
     if (!response.ok) {
       throw new Error("Error adding new book");
     }

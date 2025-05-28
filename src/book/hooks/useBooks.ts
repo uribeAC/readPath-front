@@ -136,13 +136,21 @@ const useBooks = (): BookContext => {
     try {
       const newBook = await bookClient.addBook(bookData);
 
+      navigate("/books");
+
       showModal("Book added to bookshelf", false);
 
       const action = addBookActionCreator({ newBook });
 
       dispatch(action);
-    } catch {
-      showModal(`Error adding new book to your bookshelf`, true);
+    } catch (error) {
+      const newError = error as Error;
+
+      if (newError.message !== "Book already exists") {
+        showModal(`Error adding new book to your bookshelf`, true);
+      } else {
+        throw new Error("Book already exists");
+      }
     }
   };
 
