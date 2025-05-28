@@ -159,21 +159,25 @@ Data is stored in a MongoDB database.
 readPath-front/
 ├── public/                 # Static files (favicon, logo, etc.)
 ├── src/                    # Source code
-│   ├── assets/             # Images, fonts, and global styles
 │   ├── book/               # Main feature domain (books)
-│   │   ├── components/     # Reusable book components (BookCard, BookForm, BookDetail, etc.)
 │   │   ├── client/         # API client for books (get, post, delete, etc.)
+│   │   ├── components/     # Reusable book components (BookCard, BookForm, BookDetail, etc.)
+│   │   ├── fixtures/       # Book fixtures for tests
 │   │   ├── hooks/          # Custom hooks for book operations
+│   │   ├── mocks/          # MSW handlers for tests
 │   │   ├── pages/          # Book-related pages (List, Add, Modify, Stats, etc.)
 │   │   ├── slice/          # Redux slices: booksSlice, statsSlice, filtersSlice
 │   │   ├── types.ts        # Type definitions for books
 │   │   └── dto/            # Transformers for data models
-│   ├── components/         # Shared components (Button, Header, Modal, Pagination, etc.)
-│   ├── hooks/              # Global hooks (useLoading, useModal)
+│   ├── ui/                 # User interface
+│   │   ├── components/     # Reusable ui components (Layout, Header, Loading, etc.)
+│   │   ├── hooks/          # Custom hooks for ui operations
+│   │   ├── pages/          # Ui-related pages (Not found page)
+│   │   └── slice/          # Redux slices: uiSlice, filterSlice
 │   ├── router/             # React Router routes and navigation
 │   ├── store/              # Redux store configuration and hooks
-│   ├── testUtils/         # Setup for Vitest, MSW, and context testing
-│   ├── App.tsx             # Main app component
+│   ├── styles/             # CSS elements reset
+│   ├── testUtils/          # Setup for Vitest, MSW, and context testing
 │   └── main.tsx            # Vite entry point
 ├── .github/                # GitHub workflow and config files
 ├── .env                    # Environment variables (API URL, etc.)
