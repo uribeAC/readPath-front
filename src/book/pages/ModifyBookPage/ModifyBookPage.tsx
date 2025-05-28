@@ -4,6 +4,8 @@ import BookForm from "../../components/BookForm/BookForm";
 import useBooks from "../../hooks/useBooks";
 import { useAppSelector } from "../../../store/hooks";
 import type { BookFormData } from "../../types";
+import useLoading from "../../../ui/hooks/useLoading";
+import Loading from "../../../ui/components/Loading/Loading";
 import "../styles/pages.css";
 
 const ModifyBookPage: React.FC = () => {
@@ -13,8 +15,10 @@ const ModifyBookPage: React.FC = () => {
 
   const { bookId } = useParams<{ bookId: string }>();
   const { editBook, loadBookById, booksState } = useBooks();
+  const { loadingState } = useLoading();
 
   const hasStateBook = booksState.books.some((book) => book.id === bookId);
+  const loading = loadingState.isLoading;
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -27,6 +31,10 @@ const ModifyBookPage: React.FC = () => {
   const book = useAppSelector((state) =>
     state.booksState.booksInfo.books.find((book) => book.id === bookId),
   );
+
+  if (loading) {
+    return <Loading />;
+  }
 
   if (book) {
     const formFirstPublished = new Date(book.firstPublished)
